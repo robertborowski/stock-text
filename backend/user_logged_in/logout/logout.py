@@ -9,11 +9,13 @@ def logout_function():
   """
   if session['logged_in_user_email'] != 'none':
     session['logged_in_user_email'] = 'none'
-    session['logged_in_user_name'] = 'none'
+    session['logged_in_user_first_name'] = 'none'
+    session['logged_in_user_last_name'] = 'none'
     session['logged_in_user_phone_number'] = 'none'
     return render_template('templates_login_and_create_account/index.html')
   else:
     session['logged_in_user_email'] = 'none'
-    session['logged_in_user_name'] = 'none'
-    session['logged_in_phone_number'] = 'none'
+    session['logged_in_user_first_name'] = 'none'
+    session['logged_in_user_last_name'] = 'none'
+    session['logged_in_user_phone_number'] = 'none'
     return render_template('templates_login_and_create_account/index.html')

@@ -1,6 +1,6 @@
 from flask import render_template, Blueprint
 loginpage = Blueprint("loginpage", __name__, static_folder="static", template_folder="templates")
-@loginpage.route("/", methods=["POST", "GET"])
+@loginpage.route("/")
 def index_function():
   """
   Returns: Renders the login page

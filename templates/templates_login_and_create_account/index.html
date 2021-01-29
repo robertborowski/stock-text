@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <!-- For responsive screen size changes -->
@@ -8,11 +7,10 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style_all_pages_default.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles_login_and_create_account/style.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style_all_phone_size.css') }}">
-  <title>Home Page</title>
+  <title>Login</title>
 </head>
 <body>
-  <form action="{{ url_for('login_attempt.login_attempt_function') }}" method="post"
-    class="login_and_create_account_form">
+  <form action="{{ url_for('login_attempt.login_attempt_function') }}" method="post" class="login_and_create_account_form">
     <div class="imgcontainer_logo_login_and_create_account">
       <img src="/static/images/showme.jpg" alt="Logo for website." class="website_logo_login_and_create_account">
     </div>
@@ -22,9 +20,9 @@
     <div class="container_outer_login_and_create_account">
       <div class="container_login">
         <label for="email"><b>Email</b></label>
-        <input type="text" class="input_type_login_and_create_account" placeholder="Enter Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+        <input type="text" class="input_type_login_and_create_account" placeholder="Enter Email" name="email" pattern="[a-z0-9._-]{1,50}@[a-z0-9._-]{1,30}\.[a-z]{2,3}" required>
         <label for="psw"><b>Password</b></label>
-        <input type="password" class="input_type_login_and_create_account" placeholder="Enter Password" name="psw" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Minimum 8 charactes: Uppercase, Lowercase, Number, Special" required>
+        <input type="password" class="input_type_login_and_create_account" placeholder="Enter Password" name="psw" pattern="(?=^.{8,20}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Minimum 8 charactes, Maximum 20 characters: Uppercase, Lowercase, Number, Special" required>
         <button type="submit" class="button_login_and_create_account">Login</button>
         <div class='logging_in_account_error_message'>
           <p><strong>{{ error_message_from_python_to_html }}</strong></p>

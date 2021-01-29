@@ -13,4 +13,4 @@ Example Text:
 "TSLA -7% from previous close
 <link_to_google_news_article>Tesla has recall on 150k cars</link_to_google_news_article>"
 
-That's it. A simple text message that keeps the user informed on major changes to the company stocks they follow.
+That's it. A simple text message that keeps the user informed on major changes to the company stocks they follow, and all the user has to do is click a link from a text message if they would like to read more.

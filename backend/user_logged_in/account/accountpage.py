@@ -13,6 +13,7 @@ def account_page_function():
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'])
   else:
+    session['logged_in_user_uuid'] = 'none'
     session['logged_in_user_email'] = 'none'
     session['logged_in_user_first_name'] = 'none'
     session['logged_in_user_last_name'] = 'none'

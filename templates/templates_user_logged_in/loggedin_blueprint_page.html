@@ -7,7 +7,8 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style_all_pages_default.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles_user_logged_in/style.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style_all_phone_size.css') }}">
-  <title>Logged In Home Page</title>
+  {% block title %}
+  {% endblock %}
 </head>
 <body>
   <header>

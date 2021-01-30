@@ -1,3 +1,3 @@
 import uuid
-def create_user_uuid_function():
+def create_uuid_function():
   return str(uuid.uuid4())

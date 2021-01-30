@@ -63,7 +63,7 @@ main {
 }
 
 /* Loggedin Account Page */
-.account_page_title {
+.account_page_title, .loggedin_homepage_title {
   text-align: center;
   padding: 20px 0;
 }

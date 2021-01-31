@@ -13,6 +13,6 @@ def select_login_information_table_query_function(connection_postgres, cursor, e
       return email_exists
   except (Exception, psycopg2.Error) as error:
     if(connection_postgres):
-      print("Status: ", error)
+      print("Status: Email not taken, woohoo! ", error)
       email_exists = 'none'
       return email_exists

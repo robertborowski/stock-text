@@ -1,4 +1,5 @@
 from flask import render_template, Blueprint, session
+from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 homepage = Blueprint("homepage", __name__, static_folder="static", template_folder="templates")
 @homepage.route("/logged_in_home_page", methods=["POST", "GET"])
 def logged_in_home_page_function():
@@ -12,9 +13,5 @@ def logged_in_home_page_function():
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'])
   else:
-    session['logged_in_user_uuid'] = 'none'
-    session['logged_in_user_email'] = 'none'
-    session['logged_in_user_first_name'] = 'none'
-    session['logged_in_user_last_name'] = 'none'
-    session['logged_in_user_phone_number'] = 'none'
+    set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/index.html')

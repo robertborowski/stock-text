@@ -10,6 +10,7 @@ from backend.db.connect_to_database import connect_to_postgres_function
 from backend.db.queries.insert_queries.insert_login_information_table_query import insert_login_information_table_query_function
 from backend.db.queries.select_queries.select_login_information_table_query import select_login_information_table_query_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
+from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 creating_account_to_postgres = Blueprint("creating_account_to_postgres", __name__, static_folder="static", template_folder="templates")
 @creating_account_to_postgres.route("/creating_account_to_postgres", methods=["POST", "GET"])
 def creating_account_to_postgres_function():
@@ -56,10 +57,6 @@ def creating_account_to_postgres_function():
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'])
   else:
-    session['logged_in_user_uuid'] = 'none'
-    session['logged_in_user_email'] = 'none'
-    session['logged_in_user_first_name'] = 'none'
-    session['logged_in_user_last_name'] = 'none'
-    session['logged_in_user_phone_number'] = 'none'
+    set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = error_message)
   return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = error_message)

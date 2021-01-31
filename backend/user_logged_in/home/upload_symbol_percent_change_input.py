@@ -7,6 +7,7 @@ from backend.utils.create_uuid import create_uuid_function
 from backend.utils.create_timestamp import create_timestamp_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 from backend.db.queries.select_queries.select_stock_tracking_table_duplicates import select_stock_tracking_table_duplicates_function
+from backend.utils.yfinance_check_if_symbol_exists import yfinance_check_if_symbol_exists_function
 upload_symbol_percent_change_input = Blueprint("upload_symbol_percent_change_input", __name__, static_folder="static", template_folder="templates")
 @upload_symbol_percent_change_input.route("/upload_symbol_percent_change_input", methods=["POST", "GET"])
 def upload_symbol_percent_change_input_function():
@@ -15,9 +16,12 @@ def upload_symbol_percent_change_input_function():
   """
   # Sanitize/confirm user inputs
   user_symbol_from_html_form_sanitized = sanitize_symbol_input_function(request.form.get('track_symbol'))
+  does_symbol_exist = yfinance_check_if_symbol_exists_function(user_symbol_from_html_form_sanitized)
   user_symbol_percent_change_from_html_form_sanitized = sanitize_symbol_percent_change_input_function(request.form.get('track_percent_change'))
-  if user_symbol_from_html_form_sanitized == 'none' or user_symbol_percent_change_from_html_form_sanitized == 'none':
-    output_message = 'Stock Symbol must be 1-5 letters long. Minimum % Change must be 7.'
+  if user_symbol_from_html_form_sanitized == 'none' or does_symbol_exist == 'none' or user_symbol_percent_change_from_html_form_sanitized == 'none':
+    output_message = 'Stock Symbol must exist and be 1-5 letters long. Minimum % Change must be 7.'
+    connection_postgres, cursor = connect_to_postgres_function()
+    close_connection_cursor_to_database_function(connection_postgres, cursor)
     return render_template('templates_user_logged_in/loggedin_home_page.html', error_message_from_python_to_html = output_message)
   else:
     # Create uuid and timestamp for insertion

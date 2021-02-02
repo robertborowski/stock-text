@@ -1,0 +1,24 @@
+{% extends "templates_user_logged_in/loggedin_blueprint_page.html" %}
+{% block title %}
+  <title>Home</title>
+{% endblock %}
+{% block content %}
+<div class="loggedin_homepage_outer">
+  <div class="loggedin_homepage_title">
+    <h1>Symbol Tracking</h1>
+  </div>
+  <form action="{{ url_for('upload_symbol_percent_change_input.upload_symbol_percent_change_input_function') }}" method="post" class="input_symbol_and_percent_change_form">
+    <label for="track_symbol"><b>Track Symbol</b></label>
+    <input type="text" class="input_symbol_and_percent_change" placeholder="TSLA" name="track_symbol" required>
+    <label for="track_percent_change"><b>Track Min % Change (+-)</b></label>
+    <input type="text" class="input_symbol_and_percent_change" placeholder="7" name="track_percent_change" pattern="[0-9.]{1,4}" min="7" required>
+    <button type="submit" class="button_symbol_and_percent_change">Submit</button>
+    <div class="error_message_track_symbol">
+      <p>{{ error_message_from_python_to_html }}</p>
+    </div>
+  </form>
+  <div class="see_symbol_tracker_list">
+    <a href="{{ url_for('home_see_symbol_list_page.home_see_symbol_list_page_function') }}"><button type="button" class="button_login_and_create_account">See symbol tracker list</button></a>
+  </div>
+</div>
+{% endblock %}

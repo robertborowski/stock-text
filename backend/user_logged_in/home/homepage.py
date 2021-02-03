@@ -1,7 +1,7 @@
 from flask import render_template, Blueprint, session
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 homepage = Blueprint("homepage", __name__, static_folder="static", template_folder="templates")
-@homepage.route("/logged_in_home_page", methods=["POST", "GET"])
+@homepage.route("/home", methods=["POST", "GET"])
 def logged_in_home_page_function():
   """
   Returns: homepage front end template

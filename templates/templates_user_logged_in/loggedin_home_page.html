@@ -4,9 +4,6 @@
 {% endblock %}
 {% block content %}
 <div class="loggedin_homepage_outer">
-  <div class="loggedin_homepage_title">
-    <h1>Symbol Tracking</h1>
-  </div>
   <form action="{{ url_for('upload_symbol_percent_change_input.upload_symbol_percent_change_input_function') }}" method="post" class="input_symbol_and_percent_change_form">
     <label for="track_symbol"><b>Track Symbol</b></label>
     <input type="text" class="input_symbol_and_percent_change" placeholder="TSLA" name="track_symbol" required>
@@ -18,7 +15,7 @@
     </div>
   </form>
   <div class="see_symbol_tracker_list">
-    <a href="{{ url_for('home_see_symbol_list_page.home_see_symbol_list_page_function') }}"><button type="button" class="button_login_and_create_account">See symbol tracker list</button></a>
+    <a href="{{ url_for('home_see_symbol_list_page.home_see_symbol_list_page_function') }}"><button type="button" class="button_see_tracking_list">See symbol tracker</button></a>
   </div>
 </div>
 {% endblock %}

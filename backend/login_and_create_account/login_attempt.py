@@ -8,7 +8,7 @@ from backend.db.connect_to_database import connect_to_postgres_function
 from backend.db.queries.select_queries.select_password_query import select_password_query_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 login_attempt = Blueprint("login_attempt", __name__, static_folder="static", template_folder="templates")
-@login_attempt.route("/login_attempt", methods=["POST", "GET"])
+@login_attempt.route("/home/login", methods=["POST", "GET"])
 def login_attempt_function():
   """
   Returns: login attempt on index/login page

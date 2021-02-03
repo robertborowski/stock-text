@@ -7,10 +7,11 @@ from backend.utils.create_uuid import create_uuid_function
 from backend.utils.create_timestamp import create_timestamp_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 from backend.db.queries.select_queries.select_stock_tracking_table_duplicates import select_stock_tracking_table_duplicates_function
-from backend.utils.yfinance_check_if_symbol_exists import yfinance_check_if_symbol_exists_function
+from backend.utils.yfinance.yfinance_check_if_symbol_exists import yfinance_check_if_symbol_exists_function
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
+
 upload_symbol_percent_change_input = Blueprint("upload_symbol_percent_change_input", __name__, static_folder="static", template_folder="templates")
-@upload_symbol_percent_change_input.route("/upload_symbol_percent_change_input", methods=["POST", "GET"])
+@upload_symbol_percent_change_input.route("/home/uploaded", methods=["POST", "GET"])
 def upload_symbol_percent_change_input_function():
   """
   Returns: sanatizes the user input, then uploads it into the database
@@ -25,9 +26,10 @@ def upload_symbol_percent_change_input_function():
       connection_postgres, cursor = connect_to_postgres_function()
       close_connection_cursor_to_database_function(connection_postgres, cursor)
       return render_template('templates_user_logged_in/loggedin_home_page.html', error_message_from_python_to_html = output_message)
+
     else:
       # Create uuid and timestamp for insertion
-      user_table_insert_uuid = create_uuid_function()
+      user_table_insert_uuid = create_uuid_function("sym_track_")
       user_track_symbol_timestamp = create_timestamp_function()
       # Database
       connection_postgres, cursor = connect_to_postgres_function()
@@ -39,6 +41,7 @@ def upload_symbol_percent_change_input_function():
         return render_template('templates_user_logged_in/loggedin_home_page.html', error_message_from_python_to_html = output_message)
       close_connection_cursor_to_database_function(connection_postgres, cursor)
       return render_template('templates_user_logged_in/loggedin_home_page.html', error_message_from_python_to_html = output_message)
+  
   else:
     set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/index.html')

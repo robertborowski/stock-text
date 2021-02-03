@@ -26,7 +26,11 @@ header {
 .logo_container h1 {
   color:rgb(0, 0, 0);
   display: table;
-  font-size: 32px;
+  font-size: 30px;
+}
+
+.logo_container h1:hover {
+  font-weight:lighter;
 }
 
 .navigation {
@@ -40,19 +44,18 @@ header {
 .navigation a {
   display: table;
   float: left;
-  padding-left: 24px;
+  padding-left: 15px;
   text-decoration: none;
 }
 
 .navigation a li{
-  color: rgb(0, 0, 0);
+  color: rgb(6, 81, 20);
   display: table;
   font-size: 20px;
 }
 
-.settings_icon, .logout_icon {
-  width: 20px;
-  height: 20px;
+.navigation a li:hover{
+  color: rgb(0, 0, 0);
 }
 
 /* Loggedin Home Page */
@@ -60,6 +63,54 @@ main {
   padding-top: 50px;
   width: 80%;
   margin: 0 auto;
+}
+
+.loggedin_homepage_title {
+  font-size: 10px;
+}
+
+.input_symbol_and_percent_change_form {
+  width: 60%;
+  margin: 0 auto;
+  padding: 16px;
+  border: 3px solid rgb(102, 210, 100);
+  background-color: rgb(205, 255, 203);
+  margin-top: 20px;
+}
+
+input[class=input_symbol_and_percent_change] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.button_symbol_and_percent_change {
+  background-color: #2c9a30;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  -webkit-appearance: none;
+}
+
+.button_see_tracking_list {
+  background-color: #2c9a30;
+  color: white;
+  padding: 14px 20px;
+  width: 60%;
+  margin: 20px auto;
+  display:block;
+  border: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+button[class=button_symbol_and_percent_change]:hover, button[class=button_see_tracking_list]:hover {
+  opacity: 0.8;
 }
 
 /* Loggedin Account Page */

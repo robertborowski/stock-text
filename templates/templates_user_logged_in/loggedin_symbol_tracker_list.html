@@ -8,7 +8,9 @@
     <h1>Symbol Tracking</h1>
   </div>
   <div class="symbol_tracking_list_section">
-    <p>{{ symbol_tracking_list_from_python_to_html }}</p>
+    {% for row in symbol_tracking_list_from_python_to_html %}
+      <p>{{ row }}</p>
+    {% endfor %}
   </div>
   <div class="add_symbol">
     <a href="{{ url_for('homepage.logged_in_home_page_function') }}"><button type="button" class="button_login_and_create_account">Add symbol to symbol tracker list</button></a>

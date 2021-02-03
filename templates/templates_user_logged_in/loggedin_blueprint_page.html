@@ -7,6 +7,7 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style_all_pages_default.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles_user_logged_in/style.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style_all_phone_size.css') }}">
+  <!-- For font awesome icons -->
   <script src="https://kit.fontawesome.com/f23f12952c.js" crossorigin="anonymous"></script>
   {% block title %}
   {% endblock %}
@@ -15,7 +16,7 @@
   <header>
     <div class="inner_header">
       <div class="logo_container">
-        <a href="{{ url_for('homepage.logged_in_home_page_function') }}"><h1>Texting</h1></a>
+        <a href="{{ url_for('homepage.logged_in_home_page_function') }}"><h1>SymbolNews</h1></a>
       </div>
       <ul class="navigation">
         <a href="{{ url_for('accountpage.account_page_function') }}"><li><i class="fas fa-user-circle"></i></li></a>
@@ -25,10 +26,8 @@
     </div>
   </header>
   <main>
-    <div class="inner_main">
-      {% block content %}
-      {% endblock %}
-    </div>
+    {% block content %}
+    {% endblock %}
   </main>
 </body>
 </html>

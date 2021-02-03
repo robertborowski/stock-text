@@ -11,8 +11,9 @@ from backend.db.queries.insert_queries.insert_login_information_table_query impo
 from backend.db.queries.select_queries.select_login_information_table_query import select_login_information_table_query_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
+
 creating_account_to_postgres = Blueprint("creating_account_to_postgres", __name__, static_folder="static", template_folder="templates")
-@creating_account_to_postgres.route("/creating_account_to_postgres", methods=["POST", "GET"])
+@creating_account_to_postgres.route("/home/created", methods=["POST", "GET"])
 def creating_account_to_postgres_function():
   """
   Returns: Uploads new account info to Postgres database, if it does not already exist.
@@ -31,8 +32,9 @@ def creating_account_to_postgres_function():
   hashed_user_password_from_html_form = bcrypt.hashpw(user_password_from_html_form_sanitized.encode('utf-8'), bcrypt.gensalt())
   hashed_user_password_from_html_form_decoded_for_database_insert = hashed_user_password_from_html_form.decode('ascii')
   # Add the UUID and timestamp for datetime that the account was created
-  user_uuid_create_account = create_uuid_function()
+  user_uuid_create_account = create_uuid_function("user_")
   user_create_account_timestamp = create_timestamp_function()
+  
   # Connect to postgres
   connection_postgres, cursor = connect_to_postgres_function()
   # Search query if email is already in database
@@ -40,6 +42,7 @@ def creating_account_to_postgres_function():
   if email_exists == 'Account already exists':
     close_connection_cursor_to_database_function(connection_postgres, cursor)
     return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = email_exists)
+  
   # Insert query function to postgres
   success_message, error_message = insert_login_information_table_query_function(connection_postgres, cursor, user_uuid_create_account, user_create_account_timestamp, user_first_name_from_html_form_sanitized, user_last_name_from_html_form_sanitized, user_phone_number_from_html_form_sanitized, user_email_from_html_form_sanitized, hashed_user_password_from_html_form_decoded_for_database_insert)
   # Close database connection and cursor

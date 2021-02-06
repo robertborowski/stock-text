@@ -59,14 +59,23 @@ header {
 }
 
 /* Loggedin Home Page */
-main {
-  padding-top: 50px;
+.page_guidelines {
   width: 80%;
   margin: 0 auto;
 }
 
+.top_of_page {
+  padding-top: 50px;
+}
+
 .loggedin_homepage_title {
   font-size: 10px;
+}
+
+.symbol_tracking_list_section {
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .input_symbol_and_percent_change_form {
@@ -74,7 +83,7 @@ main {
   margin: 0 auto;
   padding: 16px;
   border: 3px solid rgb(102, 210, 100);
-  background-color: rgb(205, 255, 203);
+  background-color: #cdffcb;
   margin-top: 20px;
 }
 

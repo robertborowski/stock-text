@@ -8,6 +8,7 @@ from backend.utils.create_timestamp import create_timestamp_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 from backend.db.queries.select_queries.select_stock_tracking_table_duplicates import select_stock_tracking_table_duplicates_function
 from backend.utils.yfinance.yfinance_check_if_symbol_exists import yfinance_check_if_symbol_exists_function
+from backend.db.queries.select_queries.select_user_tracking_list import select_user_tracking_list_function
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 
 upload_symbol_percent_change_input = Blueprint("upload_symbol_percent_change_input", __name__, static_folder="static", template_folder="templates")
@@ -24,9 +25,11 @@ def upload_symbol_percent_change_input_function():
     if user_symbol_from_html_form_sanitized == 'none' or does_symbol_exist == 'none' or user_symbol_percent_change_from_html_form_sanitized == 'none':
       output_message = 'Stock Symbol must exist and be 1-5 letters long. Minimum % Change must be 7.'
       connection_postgres, cursor = connect_to_postgres_function()
+      symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
       close_connection_cursor_to_database_function(connection_postgres, cursor)
-      return render_template('templates_user_logged_in/loggedin_home_page.html', error_message_from_python_to_html = output_message)
-
+      return render_template('templates_user_logged_in/loggedin_home_page.html',
+                              error_message_from_python_to_html = output_message,
+                              symbol_tracking_list_from_python_to_html = symbol_tracking_list)
     else:
       # Create uuid and timestamp for insertion
       user_table_insert_uuid = create_uuid_function("sym_track_")
@@ -38,10 +41,15 @@ def upload_symbol_percent_change_input_function():
         output_message = insert_stock_tracking_table_function(connection_postgres, cursor, user_table_insert_uuid, user_track_symbol_timestamp, user_symbol_from_html_form_sanitized, user_symbol_percent_change_from_html_form_sanitized, session['logged_in_user_uuid'])
       else:
         output_message = error_message_check_if_exist
-        return render_template('templates_user_logged_in/loggedin_home_page.html', error_message_from_python_to_html = output_message)
+        symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
+        return render_template('templates_user_logged_in/loggedin_home_page.html',
+                                error_message_from_python_to_html = output_message,
+                                symbol_tracking_list_from_python_to_html = symbol_tracking_list)
+      symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
       close_connection_cursor_to_database_function(connection_postgres, cursor)
-      return render_template('templates_user_logged_in/loggedin_home_page.html', error_message_from_python_to_html = output_message)
-  
+      return render_template('templates_user_logged_in/loggedin_home_page.html',
+                              error_message_from_python_to_html = output_message,
+                              symbol_tracking_list_from_python_to_html = symbol_tracking_list)
   else:
     set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/index.html')

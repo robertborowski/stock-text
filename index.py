@@ -10,7 +10,8 @@ from backend.user_logged_in.about.aboutpage import aboutpage
 from backend.user_logged_in.account.accountpage import accountpage
 from backend.user_logged_in.logout.logout import logout
 from backend.user_logged_in.home.upload_symbol_percent_change_input import upload_symbol_percent_change_input
-from backend.user_logged_in.home.home_see_symbol_list_page import home_see_symbol_list_page
+from backend.user_logged_in.home.delete_symbols import delete_symbols
+
 # Flask constructor
 app = Flask(__name__)
 # To use a session, there has to be a secret key. The string should be something difficult to guess
@@ -25,7 +26,8 @@ app.register_blueprint(aboutpage, url_prefix="")
 app.register_blueprint(accountpage, url_prefix="")
 app.register_blueprint(logout, url_prefix="")
 app.register_blueprint(upload_symbol_percent_change_input, url_prefix="")
-app.register_blueprint(home_see_symbol_list_page, url_prefix="")
+app.register_blueprint(delete_symbols, url_prefix="")
+
 # Run the main program
 if __name__ == "__main__":
   app.run(debug = True)

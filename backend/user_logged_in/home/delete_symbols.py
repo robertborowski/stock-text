@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, session, request, redirect, url_for
+from flask import render_template, Blueprint, session, request, redirect, url_for, jsonify
 from backend.db.connect_to_database import connect_to_postgres_function
 from backend.db.queries.select_queries.select_user_tracking_list import select_user_tracking_list_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
@@ -27,12 +27,13 @@ def delete_symbols_function():
       delete_from_stock_tracking_table_function(connection_postgres, cursor, session['logged_in_user_uuid'], symbols_arr)
       symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
       close_connection_cursor_to_database_function(connection_postgres, cursor)
-      return render_template('templates_user_logged_in/loggedin_home_page.html',
+      print('fuck you idiot')
+      return jsonify('', render_template('templates_user_logged_in/loggedin_home_page_ajax_model.html',
                               user_email_from_session_to_html = session['logged_in_user_email'],
                               user_first_name_from_session_to_html = session['logged_in_user_first_name'],
                               user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                               user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
-                              symbol_tracking_list_from_python_to_html = symbol_tracking_list)
+                              symbol_tracking_list_from_python_to_html = symbol_tracking_list))
   else:
     set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/index.html')

@@ -9,6 +9,9 @@ function getSelectedDataFunction() {
     url: "/delete_symbols",
     traditional: "true",
     data: JSON.stringify({symbolsArr}),
-    dataType: "json"
+    dataType: "json",
+    success: function(data){
+      $(symbol_tracking_list_section).replaceWith(data)
+    }
     });
 }

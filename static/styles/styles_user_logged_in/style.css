@@ -76,7 +76,7 @@ header {
   font-size: 10px;
 }
 
-.symbol_tracking_list_section {
+#symbol_tracking_list_section {
   width: 80%;
   text-align: center;
   margin: 0 auto;

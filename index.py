@@ -11,6 +11,7 @@ from backend.user_logged_in.account.accountpage import accountpage
 from backend.user_logged_in.logout.logout import logout
 from backend.user_logged_in.home.upload_symbol_percent_change_input import upload_symbol_percent_change_input
 from backend.user_logged_in.home.delete_symbols import delete_symbols
+from backend.constant_run.background_run_main import pull_and_analyze_all_data_function
 
 # Flask constructor
 app = Flask(__name__)
@@ -27,6 +28,8 @@ app.register_blueprint(accountpage, url_prefix="")
 app.register_blueprint(logout, url_prefix="")
 app.register_blueprint(upload_symbol_percent_change_input, url_prefix="")
 app.register_blueprint(delete_symbols, url_prefix="")
+
+pull_and_analyze_all_data_function()
 
 # Run the main program
 if __name__ == "__main__":

@@ -10,6 +10,8 @@ from backend.db.queries.select_queries.select_stock_tracking_table_duplicates im
 from backend.utils.yfinance.yfinance_check_if_symbol_exists import yfinance_check_if_symbol_exists_function
 from backend.db.queries.select_queries.select_user_tracking_list import select_user_tracking_list_function
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
+from backend.utils.google_news.get_google_news_page import get_google_news_page_function
+from backend.utils.yfinance.get_company_short_name import get_company_short_name_function
 
 upload_symbol_percent_change_input = Blueprint("upload_symbol_percent_change_input", __name__, static_folder="static", template_folder="templates")
 @upload_symbol_percent_change_input.route("/home/uploaded", methods=["POST", "GET"])
@@ -38,7 +40,9 @@ def upload_symbol_percent_change_input_function():
       connection_postgres, cursor = connect_to_postgres_function()
       error_message_check_if_exist = select_stock_tracking_table_duplicates_function(connection_postgres, cursor, session['logged_in_user_uuid'], user_symbol_from_html_form_sanitized)
       if error_message_check_if_exist == 'none':
-        output_message = insert_stock_tracking_table_function(connection_postgres, cursor, user_table_insert_uuid, user_track_symbol_timestamp, user_symbol_from_html_form_sanitized, user_symbol_percent_change_from_html_form_sanitized, session['logged_in_user_uuid'])
+        company_short_name_without_spaces = get_company_short_name_function(user_symbol_from_html_form_sanitized)
+        google_news_url_link = get_google_news_page_function(company_short_name_without_spaces)
+        output_message = insert_stock_tracking_table_function(connection_postgres, cursor, user_table_insert_uuid, user_track_symbol_timestamp, user_symbol_from_html_form_sanitized, user_symbol_percent_change_from_html_form_sanitized, session['logged_in_user_uuid'], google_news_url_link)
       else:
         output_message = error_message_check_if_exist
         symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])

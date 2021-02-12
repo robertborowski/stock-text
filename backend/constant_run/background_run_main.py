@@ -8,6 +8,7 @@ from backend.utils.constant_run.invert_symbol_news_link_dict import invert_symbo
 from backend.db.queries.select_queries.select_all_user_phone_numbers import select_all_user_phone_numbers_function
 from backend.utils.constant_run.invert_to_user_phone_numbers_dict import invert_to_user_phone_numbers_dict_function
 from backend.utils.constant_run.create_queue_to_text_out import create_queue_to_text_out_function
+from backend.utils.constant_run.twilio.send_sms import send_sms_function
 
 def pretty(d, indent=0):
   for key, value in d.items():
@@ -35,3 +36,5 @@ def pull_and_analyze_all_data_function():
   symbol_percent_changes_dict = get_latest_symbol_info_function(unique_stocks_set)
   # Put all the information together into a queue
   queue_to_text_arr = create_queue_to_text_out_function(user_stocks_tracking_dict, user_phone_numbers_dict, symbol_percent_changes_dict, symbol_news_link_dict)
+  for i in queue_to_text_arr:
+    send_sms_function(i)

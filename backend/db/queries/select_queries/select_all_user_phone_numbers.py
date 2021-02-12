@@ -2,14 +2,14 @@ import psycopg2
 import psycopg2.extras
 from psycopg2 import Error
 
-def select_all_stock_tracking_info_function(connection_postgres, cursor):
+def select_all_user_phone_numbers_function(connection_postgres, cursor):
   """
-  Returns: Pulls all the info from the database
+  Returns: All user phone numbers
   """
   try:
     # Add this to connection in order to pull data from postgres as a dictionary instead of tuple
     cursor = connection_postgres.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cursor.execute("SELECT symbol, percent_change_to_notify, fk_user_uuid, google_news_link FROM stock_tracking_table")
+    cursor.execute("SELECT uuid, phone_number FROM login_information_table")
     result_arr = cursor.fetchall()
     result_arr_dicts = []
     for row in result_arr:

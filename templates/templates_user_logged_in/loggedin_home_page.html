@@ -19,7 +19,7 @@
     <form action="{{ url_for('upload_symbol_percent_change_input.upload_symbol_percent_change_input_function') }}" method="post" class="input_symbol_and_percent_change_form">
       <label for="track_symbol"><b>Track Symbol</b></label>
       <input type="text" class="input_symbol_and_percent_change" placeholder="TSLA" name="track_symbol" required>
-      <label for="track_percent_change"><b>Track Min % Change (+-)</b></label>
+      <label for="track_percent_change"><b>Track Min % Change (Abs +-)</b></label>
       <input type="text" class="input_symbol_and_percent_change" value=7 name="track_percent_change" pattern="[0-9.]{1,4}" min="7" required>
       <button type="submit" class="button_symbol_and_percent_change">Submit</button>
       <div class="error_message_track_symbol">

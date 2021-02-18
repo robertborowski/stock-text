@@ -14,11 +14,7 @@ def send_sms_function(input_arr):
   auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
   client = Client(account_sid, auth_token)
 
-  message = client.messages \
-                  .create(
-                      body=symbol + ' ' + percent_change + '\n' + google_link,
-                      from_='+12019774518',
-                      to=phone_number
-                  )
-
-  print(message.sid)
+  message = client.messages.create(body=symbol + ' ' + percent_change + ' from previous close.\n\nGoogle news: ' + google_link,
+                                  from_=os.environ.get('TWILIO_PHONE_NUMBER'),
+                                  to=phone_number)
+  #print(message.sid)

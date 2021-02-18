@@ -136,10 +136,31 @@ button[class=button_symbol_and_percent_change]:hover, button[class=button_see_tr
   padding: 20px 0;
 }
 
+.account_page_session_info, .account_delete_account {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .account_page_session_info p {
   padding: 10px 0;
 }
 
-.account_delete_account {
-  padding: 30px 0;
+.edit_account_info, .account_delete_account {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.account_output_message p {
+  color: rgb(255, 0, 0);
+}
+
+.delete_button {
+  background-color: #cbcbcb;
+  color: rgb(120, 120, 120);
+}
+
+.delete_button:hover {
+  background-color: #ff0000;
+  color: rgb(255, 255, 255);
 }

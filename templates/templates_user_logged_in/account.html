@@ -1,6 +1,7 @@
 {% extends "templates_user_logged_in/loggedin_blueprint_page.html" %}
 {% block title %}
   <title>Account</title>
+  <script src="https://kit.fontawesome.com/f23f12952c.js" crossorigin="anonymous"></script>
 {% endblock %}
 {% block content %}
 <div class="page_guidelines top_of_page">
@@ -12,17 +13,23 @@
       <p>Email: {{ user_email_from_session_to_html }}</p>
     </div>
     <div class="first_name_session_info">
-      <p>Name: {{ user_first_name_from_session_to_html }}</p>
+      <p>First Name: {{ user_first_name_from_session_to_html }}</p>
     </div>
     <div class="last_name_session_info">
-      <p>Name: {{ user_last_name_from_session_to_html }}</p>
+      <p>Last Name: {{ user_last_name_from_session_to_html }}</p>
     </div>
     <div class="phone_number_session_info">
       <p>Phone Number: {{ user_phone_number_from_session_to_html }}</p>
     </div>
-  </div>
-  <div class="account_delete_account">
-    <p>Delete Account</p>
+    <div class="edit_account_info">
+      <a href="{{ url_for('accountpage_edit_information.account_page_edit_information_function') }}"><button type="submit" class="button_symbol_and_percent_change">Edit Account</button></a>
+    </div>
+    <div class="account_output_message">
+      <p>{{ output_message_to_html }}</p>
+    </div>
+    <div class="account_delete_account">
+      <a href="{{ url_for('delete_account_page.delete_account_page_function') }}"><button type="submit" class="button_symbol_and_percent_change delete_button">Delete Account</button></a>
+    </div>
   </div>
 </div>
 {% endblock %}

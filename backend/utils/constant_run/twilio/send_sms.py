@@ -17,4 +17,4 @@ def send_sms_function(input_arr):
   message = client.messages.create(body=symbol + ' ' + percent_change + ' from previous close.\n' + google_link + '\n\nSymbolNews',
                                   from_=os.environ.get('TWILIO_PHONE_NUMBER'),
                                   to=phone_number)
-  #print(message.sid)
+  print(message.sid)

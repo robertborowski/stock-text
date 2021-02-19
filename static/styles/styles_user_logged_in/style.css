@@ -113,6 +113,7 @@ input[class=input_symbol_and_percent_change] {
 .div_button_delete {
   width: 50%;
   margin: 0 auto;
+  padding-bottom: 50px;
 }
 
 .button_delete_selection {

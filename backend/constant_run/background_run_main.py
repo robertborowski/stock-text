@@ -10,14 +10,6 @@ from backend.utils.constant_run.invert_to_user_phone_numbers_dict import invert_
 from backend.utils.constant_run.create_queue_to_text_out import create_queue_to_text_out_function
 from backend.utils.constant_run.twilio.send_sms import send_sms_function
 
-def pretty(d, indent=0):
-  for key, value in d.items():
-    print('\t' * indent + str(key))
-    if isinstance(value, dict):
-      pretty(value, indent+1)
-    else:
-      print('\t' * (indent+1) + str(value))
-
 def pull_and_analyze_all_data_function():
   """
   Return: user stock dict

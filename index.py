@@ -1,6 +1,6 @@
 # Imports
 from flask import Flask
-import os
+import os, time
 from backend.login_and_create_account.loginpage import loginpage
 from backend.login_and_create_account.create_account_render_page import create_account_render_page
 from backend.login_and_create_account.creating_account_to_postgres import creating_account_to_postgres
@@ -18,6 +18,9 @@ from backend.user_logged_in.account.updating_account_info_postgres import updati
 from backend.user_logged_in.account.delete_account_page import delete_account_page
 from backend.user_logged_in.account.delete_account_perm import delete_account_perm
 
+# Set the timezone of the application when user creates account is will be in US/Easterm time
+os.environ['TZ'] = 'US/Eastern'
+time.tzset()
 # Flask constructor
 app = Flask(__name__)
 # To use a session, there has to be a secret key. The string should be something difficult to guess
@@ -39,9 +42,9 @@ app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
 
 pull_and_analyze_all_data_function()
-
 #send_email_function()
 
 # Run the main program
 if __name__ == "__main__":
-  app.run(debug = True)
+  #app.run(debug = True)
+  app.run(debug = False)

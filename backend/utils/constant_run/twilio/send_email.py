@@ -15,6 +15,5 @@ def send_email_function():
     print(response.body)
     print(response.headers)
     print('SUCCESS')
-  except Exception as e:
-    print(e.message)
+  except:
     print('FAILED')

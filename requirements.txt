@@ -1,6 +1,5 @@
 flask
 bcrypt
-re
 uuid
 datetime
 psycopg2

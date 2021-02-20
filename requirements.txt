@@ -8,3 +8,4 @@ datetime
 psycopg2
 yfinance
 pyshorteners
+twilio

@@ -1,5 +1,6 @@
 import psycopg2
 from psycopg2 import Error
+
 def insert_stock_tracking_table_function(connection_postgres, cursor, uuid, submission_timestamp, stock_symbol, percent_change_to_notify, fk_user_uuid, google_news_url_link):
   """
   Returns: inserts into database table when user submits stock to track

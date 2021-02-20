@@ -1,0 +1,10 @@
+flask
+os
+time
+bcrypt
+re
+uuid
+datetime
+psycopg2
+yfinance
+pyshorteners

@@ -12,7 +12,7 @@ from backend.utils.constant_run.twilio.send_sms import send_sms_function
 
 def pull_and_analyze_all_data_function():
   """
-  Return: user stock dict
+  Return: Should run in the background automatically at intervals
   """
   # Get all data from db
   connection_postgres, cursor = connect_to_postgres_function()

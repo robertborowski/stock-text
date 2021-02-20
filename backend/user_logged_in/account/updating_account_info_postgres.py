@@ -18,6 +18,7 @@ def updating_account_info_postgres_function():
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                             output_message_to_html = output_message)
+                            
   if request.form.get("email") != session['logged_in_user_email']:
     user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get("email"))
   else:
@@ -34,6 +35,7 @@ def updating_account_info_postgres_function():
     user_phone_number_from_html_form_sanitized = sanitize_phone_number_input_create_account_function(request.form.get("phone_number"))
   else:
     user_phone_number_from_html_form_sanitized = session['logged_in_user_phone_number']
+
   if user_email_from_html_form_sanitized == 'none' or user_first_name_from_html_form_sanitized == 'none' or user_last_name_from_html_form_sanitized == 'none' or user_phone_number_from_html_form_sanitized == 'none':
     print('FAILED TO CREATE ACCOUNT!')
     return 'FAILED TO CREATE ACCOUNT!'

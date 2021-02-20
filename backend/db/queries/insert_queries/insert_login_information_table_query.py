@@ -1,5 +1,6 @@
 import psycopg2
 from psycopg2 import Error
+
 def insert_login_information_table_query_function(connection_postgres, cursor, uuid, timestamp, first_name, last_name, phone_number, email, hashed_password):
   """
   Returns: inserts into database when user creates an account

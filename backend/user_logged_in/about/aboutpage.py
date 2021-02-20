@@ -1,5 +1,6 @@
 from flask import render_template, Blueprint, session
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
+
 aboutpage = Blueprint("aboutpage", __name__, static_folder="static", template_folder="templates")
 @aboutpage.route("/about", methods=["POST", "GET"])
 def about_page_function():

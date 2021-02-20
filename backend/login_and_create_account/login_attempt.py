@@ -20,12 +20,10 @@ def login_attempt_function():
   if user_email_from_html_form_sanitized == 'none' or user_password_from_html_form_sanitized == 'none':
     print('FAILED TO LOGIN!')
     return 'FAILED TO LOGIN!'
-  # Connect to postgres
+  # Once logged in
   connection_postgres, cursor = connect_to_postgres_function()
-  # Select Query
   session['logged_in_user_uuid'], session['logged_in_user_email'], session['logged_in_user_first_name'], session['logged_in_user_last_name'], session['logged_in_user_phone_number'] = select_password_query_function(connection_postgres, cursor, user_email_from_html_form_sanitized, user_password_from_html_form_sanitized)
   symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
-  # Close connection
   close_connection_cursor_to_database_function(connection_postgres, cursor)
   if session['logged_in_user_email'] == 'none' or session['logged_in_user_first_name'] == 'none' or session['logged_in_user_last_name'] == 'none' or session['logged_in_user_phone_number'] == 'none':
     return render_template('templates_login_and_create_account/index.html', error_message_from_python_to_html = 'Incorrect Email/Password!')

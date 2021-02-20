@@ -1,6 +1,7 @@
 import psycopg2
 from psycopg2 import Error
 import os
+
 def connect_to_postgres_function():
   """
   Returns: Postgres Connection and cursor

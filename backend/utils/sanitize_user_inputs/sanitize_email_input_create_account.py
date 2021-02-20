@@ -1,4 +1,5 @@
 import re
+
 def sanitize_email_input_create_account_function(email_not_sanitized):
   """
   Returns: Checks if the user inputs are valid/sanitized

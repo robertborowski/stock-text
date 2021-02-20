@@ -1,9 +1,10 @@
 import bcrypt
 import psycopg2
 from psycopg2 import Error
+
 def select_stock_tracking_table_duplicates_function(connection_postgres, cursor, uuid_to_search, symbol_to_search):
   """
-  Returns: Looks if duplicate exists in the database table
+  Returns: Looks up if user is already tracking this symbol or not
   """
   try:
     cursor.execute("SELECT fk_user_uuid, symbol FROM stock_tracking_table WHERE fk_user_uuid=%s AND symbol=%s", [uuid_to_search, symbol_to_search])

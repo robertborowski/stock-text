@@ -1,4 +1,5 @@
 import re
+
 def sanitize_password_input_create_account_function(password_not_sanitized):
   """
   Returns: Checks if the user inputs are valid/sanitized

@@ -8,7 +8,7 @@ homepage = Blueprint("homepage", __name__, static_folder="static", template_fold
 @homepage.route("/home", methods=["POST", "GET"])
 def logged_in_home_page_function():
   """
-  Returns: homepage front end template
+  Returns: homepage front end template with user symbol tracking list
   """
   if session['logged_in_user_email'] != 'none':
     connection_postgres, cursor = connect_to_postgres_function()

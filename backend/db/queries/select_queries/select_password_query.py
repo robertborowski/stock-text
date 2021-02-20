@@ -1,9 +1,10 @@
 import bcrypt
 import psycopg2
 from psycopg2 import Error
+
 def select_password_query_function(connection_postgres, cursor, email_to_search, password_to_search):
   """
-  Returns: inserts into database when user creates an account
+  Returns: login attempt if user name password match
   """
   try:
     cursor.execute("SELECT password, first_name, last_name, phone_number, uuid FROM login_information_table WHERE email=%s", [email_to_search])
@@ -17,7 +18,7 @@ def select_password_query_function(connection_postgres, cursor, email_to_search,
     result_phone_number = result_row[3]
     salted_password = result_row[0].encode('ascii')
     if bcrypt.checkpw(password_to_search.encode('utf-8'), salted_password):
-      return result_email, result_first_name, result_last_name, result_phone_number
+      return result_uuid, result_email, result_first_name, result_last_name, result_phone_number
     else:
       result_uuid = 'none'
       result_email = 'none'

@@ -1,8 +1,9 @@
 import psycopg2
 from psycopg2 import Error
+
 def select_login_information_table_query_function(connection_postgres, cursor, email_to_search):
   """
-  Returns: inserts into database when user creates an account
+  Returns: if the email account already exists in database or not
   """
   try:
     cursor.execute("SELECT email FROM login_information_table WHERE email=%s", [email_to_search])

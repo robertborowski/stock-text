@@ -46,6 +46,7 @@ def upload_symbol_percent_change_input_function():
       else:
         output_message = error_message_check_if_exist
         symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
+        close_connection_cursor_to_database_function(connection_postgres, cursor)
         return render_template('templates_user_logged_in/loggedin_home_page.html',
                                 error_message_from_python_to_html = output_message,
                                 symbol_tracking_list_from_python_to_html = symbol_tracking_list)

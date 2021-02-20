@@ -1,5 +1,6 @@
 import psycopg2
 from psycopg2 import Error
+
 def delete_from_stock_tracking_table_function(connection_postgres, cursor, uuid, symbols_arr):
   """
   Returns: inserts into database when user creates an account

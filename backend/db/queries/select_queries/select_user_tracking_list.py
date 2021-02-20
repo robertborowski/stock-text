@@ -1,8 +1,9 @@
 import psycopg2
 from psycopg2 import Error
+
 def select_user_tracking_list_function(connection_postgres, cursor, uuid_to_search):
   """
-  Returns: Looks if duplicate exists in the database table
+  Returns: Pulls all the symbols and percentages that the user is tracking
   """
   try:
     cursor.execute("SELECT symbol, percent_change_to_notify FROM stock_tracking_table WHERE fk_user_uuid=%s", [uuid_to_search])

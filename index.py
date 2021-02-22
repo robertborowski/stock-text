@@ -12,7 +12,6 @@ from backend.user_logged_in.logout.logout import logout
 from backend.user_logged_in.home.upload_symbol_percent_change_input import upload_symbol_percent_change_input
 from backend.user_logged_in.home.delete_symbols import delete_symbols
 from backend.constant_run.background_run_main import pull_and_analyze_all_data_function
-from backend.utils.constant_run.twilio.send_email import send_email_function
 from backend.user_logged_in.account.accountpage_edit_information import accountpage_edit_information
 from backend.user_logged_in.account.updating_account_info_postgres import updating_account_info_postgres
 from backend.user_logged_in.account.delete_account_page import delete_account_page

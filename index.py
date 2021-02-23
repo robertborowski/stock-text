@@ -39,7 +39,6 @@ app.register_blueprint(accountpage_edit_information, url_prefix="")
 app.register_blueprint(updating_account_info_postgres, url_prefix="")
 app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
-
 #pull_and_analyze_all_data_function()
 #send_email_function()
 

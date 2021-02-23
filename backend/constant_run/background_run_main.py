@@ -30,7 +30,3 @@ def pull_and_analyze_all_data_function():
   queue_to_text_arr = create_queue_to_text_out_function(user_stocks_tracking_dict, user_phone_numbers_dict, symbol_percent_changes_dict, symbol_news_link_dict)
   for i in queue_to_text_arr:
     send_sms_function(i)
-
-# Run the main program
-if __name__ == "__main__":
-  pull_and_analyze_all_data_function()

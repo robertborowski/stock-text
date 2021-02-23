@@ -40,7 +40,7 @@ app.register_blueprint(updating_account_info_postgres, url_prefix="")
 app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
 
-#pull_and_analyze_all_data_function()
+pull_and_analyze_all_data_function()
 #send_email_function()
 
 # Run the main program

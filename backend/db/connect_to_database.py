@@ -6,6 +6,7 @@ def connect_to_postgres_function():
   """
   Returns: Postgres Connection and cursor
   """
+  
   # Heroku Postgres connection
   DATABASE_URL = os.environ.get('DATABASE_URL')
   connection_postgres = psycopg2.connect(DATABASE_URL, sslmode='require')

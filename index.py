@@ -40,13 +40,15 @@ app.register_blueprint(updating_account_info_postgres, url_prefix="")
 app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
 
-#pull_and_analyze_all_data_function()
+pull_and_analyze_all_data_function()
 #send_email_function()
 
 # Run the main program
 if __name__ == "__main__":
+  # Run local testing
   #app.run(debug = True)
   #app.run(debug = False)
 
+  # port and run for Heroku
   port = int(os.environ.get('PORT', 5000))
   app.run(host = '0.0.0.0', port = port)

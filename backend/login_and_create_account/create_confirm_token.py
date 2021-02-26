@@ -6,7 +6,7 @@ def create_confirm_token_function(user_email):
   """
   Returns: token for account confirmation link
   """
-  serializer_instance = URLSafeTimedSerializer(os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY'))#.encode("utf-8"))
+  serializer_instance = URLSafeTimedSerializer(os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY').encode("utf-8"))
   string_to_salt = "confirm-email".encode("utf-8")
   token = serializer_instance.dumps(user_email, salt=string_to_salt)
   session['confirm_email_token'] = token

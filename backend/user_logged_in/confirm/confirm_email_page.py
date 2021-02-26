@@ -11,9 +11,9 @@ def confirm_email_page_function():
   print('- - - - - - - - -')
   print(session['confirm_email_token'])
   print('- - - - - - - - -')
-  
+
   serializer_instance = URLSafeTimedSerializer(os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY'))#.encode("utf-8"))
-  string_to_salt = "confirm-email".encode("utf-8")
+  string_to_salt = "confirmemail".encode("utf-8")
   try:
     user_email_confirming = serializer_instance.loads(session['confirm_email_token'], salt=string_to_salt, max_age=3600)
   except:

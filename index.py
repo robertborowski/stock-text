@@ -44,9 +44,9 @@ app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
  #==================================
 # Flask constructor
-app = Flask(__name__)
+#app = Flask(__name__)
 # To use a session, there has to be a secret key. The string should be something difficult to guess
-app.secret_key = os.urandom(64)
+#app.secret_key = os.urandom(64)
 app.register_blueprint(confirm_email_page, url_prefix="")
 #==================================
 

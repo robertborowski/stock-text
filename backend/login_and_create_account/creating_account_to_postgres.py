@@ -11,6 +11,8 @@ from backend.db.queries.insert_queries.insert_login_information_table_query impo
 from backend.db.queries.select_queries.select_login_information_table_query import select_login_information_table_query_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
+from backend.utils.constant_run.twilio.send_email_confirm_account import send_email_confirm_account_function
+from backend.login_and_create_account.create_confirm_token import create_confirm_token_function
 
 creating_account_to_postgres = Blueprint("creating_account_to_postgres", __name__, static_folder="static", template_folder="templates")
 @creating_account_to_postgres.route("/home/created", methods=["POST", "GET"])
@@ -47,6 +49,9 @@ def creating_account_to_postgres_function():
   close_connection_cursor_to_database_function(connection_postgres, cursor)
   # Continue based on query insert results
   if success_message == 'success' and error_message == 'none':
+    confirm_email_token = create_confirm_token_function(user_email_from_html_form_sanitized)
+    send_email_confirm_account_function(user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_email_token)
+    output_message = 'Please confirm email (link sent to email) and phone number (link sent to phone number)'
     # Flask session variables
     session['logged_in_user_uuid'] = user_uuid_create_account
     session['logged_in_user_email'] = user_email_from_html_form_sanitized
@@ -57,7 +62,8 @@ def creating_account_to_postgres_function():
                             user_email_from_session_to_html = session['logged_in_user_email'],
                             user_first_name_from_session_to_html = session['logged_in_user_first_name'],
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
-                            user_phone_number_from_session_to_html = session['logged_in_user_phone_number'])
+                            user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
+                            output_message_to_html = output_message)
   else:
     set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = error_message)

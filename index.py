@@ -39,7 +39,6 @@ app.register_blueprint(accountpage_edit_information, url_prefix="")
 app.register_blueprint(updating_account_info_postgres, url_prefix="")
 app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
-#send_email_function()
 
 # Run the main program
 if __name__ == "__main__":

@@ -16,6 +16,7 @@
 {% block content %} 
 <div class="backdrop">
   <div class="page_guidelines top_of_page">
+    <p>{{ output_message_to_html }}</p>
     <form action="{{ url_for('upload_symbol_percent_change_input.upload_symbol_percent_change_input_function') }}" method="post" class="input_symbol_and_percent_change_form">
       <label for="track_symbol"><b>Track Symbol</b></label>
       <input type="text" class="input_symbol_and_percent_change" placeholder="TSLA" name="track_symbol" required>

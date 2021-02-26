@@ -1,5 +1,5 @@
 # Imports
-from flask import Flask
+from flask import Flask, session
 import os, time
 from backend.login_and_create_account.loginpage import loginpage
 from backend.login_and_create_account.create_account_render_page import create_account_render_page
@@ -43,10 +43,7 @@ app.register_blueprint(updating_account_info_postgres, url_prefix="")
 app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
  #==================================
-# Flask constructor
-#app = Flask(__name__)
-# To use a session, there has to be a secret key. The string should be something difficult to guess
-#app.secret_key = os.urandom(64)
+session['confirm_email_token'] = 'temp'
 app.register_blueprint(confirm_email_page, url_prefix="")
 #==================================
 

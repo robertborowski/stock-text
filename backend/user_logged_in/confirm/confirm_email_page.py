@@ -3,7 +3,7 @@ from itsdangerous import URLSafeTimedSerializer
 import os
 
 confirm_email_page = Blueprint("confirm_email_page", __name__, static_folder="static", template_folder="templates")
-@confirm_email_page.route("/confirm/token", methods=["POST", "GET"])
+@confirm_email_page.route("/confirm/<session['confirm_email_token']>", methods=["POST", "GET"])
 def confirm_email_page_function():
   """
   Returns: confirms email token link

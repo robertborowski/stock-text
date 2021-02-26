@@ -10,5 +10,4 @@ def create_confirm_token_function(user_email):
   string_to_salt = 'confirmemail'.encode("utf-8")
   token = serializer_instance.dumps(user_email, salt=string_to_salt)
   session['confirm_email_token'] = token
-
   return token

@@ -7,7 +7,7 @@ def send_email_confirm_account_function(to_email_address_outgoing, user_first_na
   from_email = Email("noreply@symbolnews.com")  # Change to your verified sender
   to_email = To(to_email_address_outgoing)  # Change to your recipient
   subject = "Account Created - Verify Email"
-  content = Content("text/plain", "Hi " + user_first_name + ",\n\n" + "Thank you for creating an account with SymbolNews!\n\n" + "Please click on the link below to verify your email address:\n" + "https://www.symbolnews.com/confirm/" + confirm_email_token + "\n\nBest,\nRob from SymbolNews")
+  content = Content("text/plain", "Hi " + user_first_name + ",\n\n" + "Thank you for creating an account with SymbolNews!\n\n" + "Please click on the link below to verify your email address:\n" + "https://www.symbolnews.com/confirm/" + confirm_email_token + "\n\nBest,\nRob from SymbolNews\n"  + "https://www.symbolnews.com/confirm/token")
   mail = Mail(from_email, to_email, subject, content)
 
   # Get a JSON-ready representation of the Mail object

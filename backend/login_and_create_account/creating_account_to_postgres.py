@@ -13,10 +13,6 @@ from backend.db.close_connection_cursor_to_database import close_connection_curs
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 from backend.utils.constant_run.twilio.send_email_confirm_account import send_email_confirm_account_function
 from backend.login_and_create_account.create_confirm_token import create_confirm_token_function
-#==================================
-import os
-from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
-#==================================
 
 creating_account_to_postgres = Blueprint("creating_account_to_postgres", __name__, static_folder="static", template_folder="templates")
 @creating_account_to_postgres.route("/home/created", methods=["POST", "GET"])
@@ -56,10 +52,6 @@ def creating_account_to_postgres_function():
     confirm_email_token = create_confirm_token_function(user_email_from_html_form_sanitized)
     #==================================
     session['confirm_email_token_session'] = confirm_email_token
-    
-    app = Flask(__name__)
-    app.secret_key = os.urandom(64)
-    app.register_blueprint(confirm_email_page, url_prefix="")
     #==================================
     send_email_confirm_account_function(user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_email_token)
     output_message = 'Please confirm email (link sent to email) and phone number (link sent to phone number)'

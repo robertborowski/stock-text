@@ -17,7 +17,7 @@ from backend.user_logged_in.account.updating_account_info_postgres import updati
 from backend.user_logged_in.account.delete_account_page import delete_account_page
 from backend.user_logged_in.account.delete_account_perm import delete_account_perm
 #==================================
-#from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
+from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
 #==================================
 
 # Set the timezone of the application when user creates account is will be in US/Easterm time
@@ -44,7 +44,8 @@ app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
 
 #==================================
-#app.register_blueprint(confirm_email_page, url_prefix="")
+app.config['data_to_pass'] = 'testing'
+app.register_blueprint(confirm_email_page, url_prefix="")
 #==================================
 
 

@@ -9,5 +9,4 @@ def create_confirm_token_function(user_email):
   serializer_instance = URLSafeTimedSerializer(os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY'))
   string_to_salt = 'confirmemail'.encode("utf-8")
   token = serializer_instance.dumps(user_email, salt=string_to_salt)
-  session['confirm_email_token'] = token
   return token

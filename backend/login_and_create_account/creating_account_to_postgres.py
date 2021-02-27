@@ -56,17 +56,18 @@ def creating_account_to_postgres_function():
     confirm_email_token = create_confirm_token_function(user_email_from_html_form_sanitized)
     send_email_confirm_account_function(user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_email_token)
     output_message = 'Please confirm email (link sent to email) and phone number (link sent to phone number)'
-    #==================================
-    app = Flask(__name__)
-    app.secret_key = os.urandom(64)
-    app.register_blueprint(confirm_email_page, url_prefix="")
-    #==================================
     # Flask session variables
     session['logged_in_user_uuid'] = user_uuid_create_account
     session['logged_in_user_email'] = user_email_from_html_form_sanitized
     session['logged_in_user_first_name'] = user_first_name_from_html_form_sanitized
     session['logged_in_user_last_name'] = user_last_name_from_html_form_sanitized
     session['logged_in_user_phone_number'] = user_phone_number_from_html_form_sanitized
+    #==================================
+    session['confirm_email_token'] = confirm_email_token
+    app = Flask(__name__)
+    app.secret_key = os.urandom(64)
+    app.register_blueprint(confirm_email_page, url_prefix="")
+    #==================================
     return render_template('templates_user_logged_in/loggedin_home_page.html',
                             user_email_from_session_to_html = session['logged_in_user_email'],
                             user_first_name_from_session_to_html = session['logged_in_user_first_name'],

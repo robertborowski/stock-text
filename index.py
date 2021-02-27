@@ -44,7 +44,7 @@ app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
 
 #==================================
-app.register_blueprint(confirm_email_page, variable_passed_in='temp', url_prefix="")
+app.register_blueprint(confirm_email_page, url_prefix="")
 #==================================
 
 

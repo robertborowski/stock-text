@@ -13,6 +13,9 @@ from backend.db.close_connection_cursor_to_database import close_connection_curs
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 from backend.utils.constant_run.twilio.send_email_confirm_account import send_email_confirm_account_function
 from backend.login_and_create_account.create_confirm_token import create_confirm_token_function
+#=================================
+from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page_function
+#=================================
 
 creating_account_to_postgres = Blueprint("creating_account_to_postgres", __name__, static_folder="static", template_folder="templates")
 @creating_account_to_postgres.route("/home/created", methods=["POST", "GET"])

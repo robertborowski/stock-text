@@ -63,7 +63,7 @@ def creating_account_to_postgres_function():
     session['logged_in_user_last_name'] = user_last_name_from_html_form_sanitized
     session['logged_in_user_phone_number'] = user_phone_number_from_html_form_sanitized
     #==================================
-    session['confirm_email_token'] = confirm_email_token
+    session['confirm_email_token_session'] = confirm_email_token
     app = Flask(__name__)
     app.secret_key = os.urandom(64)
     app.register_blueprint(confirm_email_page, url_prefix="")

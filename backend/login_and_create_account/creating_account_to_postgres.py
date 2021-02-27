@@ -56,7 +56,7 @@ def creating_account_to_postgres_function():
     confirm_email_token = create_confirm_token_function(user_email_from_html_form_sanitized)
     #==================================
     session['confirm_email_token_session'] = confirm_email_token
-    url_for('confirm_email_page', variable_passed_in = session['confirm_email_token_session'])
+    url_for('confirm_email_page.static', variable_passed_in = session['confirm_email_token_session'])
     #==================================
     send_email_confirm_account_function(user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_email_token)
     output_message = 'Please confirm email (link sent to email) and phone number (link sent to phone number)'

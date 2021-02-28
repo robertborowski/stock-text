@@ -44,7 +44,7 @@ app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
 
 #==================================
-app.register_blueprint(confirm_email_page, url_prefix="")
+app.register_blueprint(confirm_email_page, testing_url_ext = 'test', url_prefix="")
 #==================================
 
 

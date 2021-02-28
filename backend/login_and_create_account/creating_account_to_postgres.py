@@ -37,7 +37,7 @@ def creating_account_to_postgres_function():
   hashed_user_password_from_html_form = bcrypt.hashpw(user_password_from_html_form_sanitized.encode('utf-8'), bcrypt.gensalt())
   hashed_user_password_from_html_form_decoded_for_database_insert = hashed_user_password_from_html_form.decode('ascii')
   # Add the UUID and timestamp for datetime that the account was created
-  user_uuid_create_account = create_uuid_function("user_")
+  user_uuid_create_account = create_uuid_function("usr_")
   user_create_account_timestamp = create_timestamp_function()
   # Connect to postgres
   connection_postgres, cursor = connect_to_postgres_function()

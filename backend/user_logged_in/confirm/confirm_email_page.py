@@ -5,13 +5,12 @@ from backend.db.connect_to_database import connect_to_postgres_function
 from backend.db.queries.update_queries.update_to_confirmed_email import update_to_confirmed_email_function
 
 confirm_email_page = Blueprint("confirm_email_page", __name__, static_folder="static", template_folder="templates")
-@confirm_email_page.route("/confirm/<confirm_email_token_url_variable>", methods=["POST", "GET"])
+@confirm_email_page.route("/confirm/email/<confirm_email_token_url_variable>", methods=["POST", "GET"])
 def confirm_email_page_function(confirm_email_token_url_variable):
   """
   Returns: confirms email token link
   """
   serializer_instance = URLSafeTimedSerializer(os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_EMAIL'))
-  #string_to_salt = "confirmemail".encode("utf-8")
   string_to_salt = os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_EMAIL').encode("utf-8")
   try:
     user_email_confirming = serializer_instance.loads(confirm_email_token_url_variable, salt=string_to_salt, max_age=3600)

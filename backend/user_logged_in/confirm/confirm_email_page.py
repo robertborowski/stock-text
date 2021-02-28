@@ -9,7 +9,7 @@ def confirm_email_page_function():
   Returns: confirms email token link
   """
   print('- - - - - - - - -')
-  print(current_app.config['data_to_pass_variable'])
+  print(current_app.config['data_to_pass_config'])
   print('   - - -')
   print(session['confirm_email_token_session'])
   print('- - - - - - - - -')

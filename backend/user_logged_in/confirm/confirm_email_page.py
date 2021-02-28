@@ -16,7 +16,7 @@ def confirm_email_page_function(test_variable):
   serializer_instance = URLSafeTimedSerializer(os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY'))
   string_to_salt = "confirmemail".encode("utf-8")
   try:
-    user_email_confirming = serializer_instance.loads(session['confirm_email_token_session'], salt=string_to_salt, max_age=3600)
+    user_email_confirming = serializer_instance.loads(session['confirm_email_token_session'], salt=string_to_salt, max_age=5)
   except:
     print('the token is expired!')
     return render_template('templates_user_logged_in/confirmed_email_page.html',

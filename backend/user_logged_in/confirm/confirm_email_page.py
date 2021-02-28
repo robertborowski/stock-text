@@ -3,12 +3,13 @@ from itsdangerous import URLSafeTimedSerializer
 import os
 
 confirm_email_page = Blueprint("confirm_email_page", __name__, static_folder="static", template_folder="templates")
-@confirm_email_page.route("/confirm/<token>", methods=["POST", "GET"])
-def confirm_email_page_function(token):
+@confirm_email_page.route("/confirm/<test_variable>", methods=["POST", "GET"])
+def confirm_email_page_function(test_variable):
   """
   Returns: confirms email token link
   """
   print('- - - - - - - - -')
+  print(test_variable)
   print(session['confirm_email_token_session'])
   print('- - - - - - - - -')
 

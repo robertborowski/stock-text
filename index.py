@@ -1,5 +1,5 @@
 # Imports
-from flask import Flask, session
+from flask import Flask, session, url_for
 import os, time
 from backend.login_and_create_account.loginpage import loginpage
 from backend.login_and_create_account.create_account_render_page import create_account_render_page
@@ -18,6 +18,7 @@ from backend.user_logged_in.account.delete_account_page import delete_account_pa
 from backend.user_logged_in.account.delete_account_perm import delete_account_perm
 #==================================
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
+from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page_function
 #==================================
 
 # Set the timezone of the application when user creates account is will be in US/Easterm time
@@ -44,6 +45,7 @@ app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
 
 #==================================
+url_for('confirm_email_page_function', test_variable = 'test')
 app.register_blueprint(confirm_email_page, url_prefix="")
 #==================================
 

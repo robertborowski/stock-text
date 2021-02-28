@@ -16,6 +16,9 @@ from backend.utils.constant_run.twilio.send_email_confirm_account import send_em
 from backend.login_and_create_account.create_confirm_token import create_confirm_token_function
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page_function
+from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page
+from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page_function
+from backend.utils.constant_run.twilio.send_phone_number_confirm_account import send_phone_number_confirm_account_function
 
 creating_account_to_postgres = Blueprint("creating_account_to_postgres", __name__, static_folder="static", template_folder="templates")
 @creating_account_to_postgres.route("/home/created", methods=["POST", "GET"])
@@ -54,10 +57,13 @@ def creating_account_to_postgres_function():
   if success_message == 'success' and error_message == 'none':
     # Create tokens for email and phone number verification
     confirm_email_token = create_confirm_token_function(user_email_from_html_form_sanitized, os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_EMAIL'), os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_EMAIL'))
-    #confirm_phone_number_token = create_confirm_token_function(user_phone_number_from_html_form_sanitized)
+    confirm_phone_number_token = create_confirm_token_function(user_phone_number_from_html_form_sanitized, os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_PHONE'), os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_PHONE'))
     # Create the URL links for email and phone number verification
     url_for('confirm_email_page.confirm_email_page_function', confirm_email_token_url_variable = confirm_email_token)
+    url_for('confirm_phone_number_page.confirm_phone_number_page_function', confirm_phone_number_token_url_variable = confirm_phone_number_token)
+    # Send the confirmation email and text links to user
     send_email_confirm_account_function(user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_email_token)
+    send_phone_number_confirm_account_function(user_phone_number_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_phone_number_token)
     output_message = 'Please confirm email (link sent to email) and phone number (link sent to phone number)'
     # Flask session variables
     session['logged_in_user_uuid'] = user_uuid_create_account

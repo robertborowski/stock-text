@@ -2,17 +2,13 @@ from flask import Flask, redirect, url_for, render_template, request, session, B
 from itsdangerous import URLSafeTimedSerializer
 import os
 
-new_url = current_app.config['data_to_pass_config']
-
 confirm_email_page = Blueprint("confirm_email_page", __name__, static_folder="static", template_folder="templates")
-@confirm_email_page.route("/confirm/<new_url>", methods=["POST", "GET"])
-def confirm_email_page_function():
+@confirm_email_page.route("/confirm/<token>", methods=["POST", "GET"])
+def confirm_email_page_function(token):
   """
   Returns: confirms email token link
   """
   print('- - - - - - - - -')
-  print(current_app.config['data_to_pass_config'])
-  print('   - - -')
   print(session['confirm_email_token_session'])
   print('- - - - - - - - -')
 

@@ -44,7 +44,9 @@ app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
 
 #==================================
-app.register_blueprint(confirm_email_page, testing_url_ext = 'test', url_prefix="")
+data_to_pass = '******* TESTING VARIABLE PASSED IN *******'
+app.config['data_to_pass_config'] = data_to_pass
+app.register_blueprint(confirm_email_page, url_prefix="")
 #==================================
 
 

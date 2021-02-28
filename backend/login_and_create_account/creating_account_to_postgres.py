@@ -1,4 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request, session, Blueprint
+import os
 import bcrypt
 from backend.utils.sanitize_user_inputs.sanitize_name_input_create_account import sanitize_name_input_create_account_function
 from backend.utils.sanitize_user_inputs.sanitize_phone_number_input_create_account import sanitize_phone_number_input_create_account_function
@@ -52,7 +53,8 @@ def creating_account_to_postgres_function():
   # Continue based on query insert results
   if success_message == 'success' and error_message == 'none':
     # Create tokens for email and phone number verification
-    confirm_email_token = create_confirm_token_function(user_email_from_html_form_sanitized)
+    confirm_email_token = create_confirm_token_function(user_email_from_html_form_sanitized, os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_EMAIL'), os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_EMAIL'))
+    #confirm_phone_number_token = create_confirm_token_function(user_phone_number_from_html_form_sanitized)
     # Create the URL links for email and phone number verification
     url_for('confirm_email_page.confirm_email_page_function', confirm_email_token_url_variable = confirm_email_token)
     send_email_confirm_account_function(user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_email_token)

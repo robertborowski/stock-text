@@ -15,3 +15,4 @@ def send_email_confirm_account_function(to_email_address_outgoing, user_first_na
 
   # Send an HTTP POST request to /mail/send
   #response = sg.client.mail.send.post(request_body=mail_json)
+  sg.client.mail.send.post(request_body=mail_json)

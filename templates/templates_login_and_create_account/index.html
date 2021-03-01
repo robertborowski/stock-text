@@ -27,7 +27,7 @@
         <div class='logging_in_account_error_message'>
           <p><strong>{{ error_message_from_python_to_html }}</strong></p>
         </div>
-        <span class="psw"><a href="#">Forgot password?</a></span>
+        <span class="psw"><a href="{{ url_for('forgot_password_render_page.forgot_password_render_page_function') }}">Forgot password?</a></span>
       </div>
       <div class="container_create_account">
         <a href="{{ url_for('create_account_render_page.create_account_function') }}"><button type="button" class="button_login_and_create_account">Create Account</button></a>

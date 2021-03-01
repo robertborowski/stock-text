@@ -18,6 +18,9 @@ from backend.user_logged_in.account.delete_account_page import delete_account_pa
 from backend.user_logged_in.account.delete_account_perm import delete_account_perm
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
 from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page
+from backend.login_and_create_account.forgot_password_render_page import forgot_password_render_page
+from backend.login_and_create_account.forgot_password_send_token_to_email import forgot_password_send_token_to_email
+from backend.login_and_create_account.set_new_password import set_new_password
 
 # Set the timezone of the application when user creates account is will be in US/Easterm time
 os.environ['TZ'] = 'US/Eastern'
@@ -43,6 +46,9 @@ app.register_blueprint(delete_account_page, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
 app.register_blueprint(confirm_email_page, url_prefix="")
 app.register_blueprint(confirm_phone_number_page, url_prefix="")
+app.register_blueprint(forgot_password_render_page, url_prefix="")
+app.register_blueprint(forgot_password_send_token_to_email, url_prefix="")
+app.register_blueprint(set_new_password, url_prefix="")
 
 # Run the main program
 if __name__ == "__main__":

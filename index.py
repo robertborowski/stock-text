@@ -21,6 +21,7 @@ from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_pho
 from backend.login_and_create_account.forgot_password_render_page import forgot_password_render_page
 from backend.login_and_create_account.forgot_password_send_token_to_email import forgot_password_send_token_to_email
 from backend.login_and_create_account.set_new_password import set_new_password
+from backend.login_and_create_account.confirm_new_password_set import confirm_new_password_set
 
 # Set the timezone of the application when user creates account is will be in US/Easterm time
 os.environ['TZ'] = 'US/Eastern'
@@ -49,6 +50,7 @@ app.register_blueprint(confirm_phone_number_page, url_prefix="")
 app.register_blueprint(forgot_password_render_page, url_prefix="")
 app.register_blueprint(forgot_password_send_token_to_email, url_prefix="")
 app.register_blueprint(set_new_password, url_prefix="")
+app.register_blueprint(confirm_new_password_set, url_prefix="")
 
 # Run the main program
 if __name__ == "__main__":

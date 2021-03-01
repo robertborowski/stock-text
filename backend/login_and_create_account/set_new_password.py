@@ -14,10 +14,9 @@ def set_new_password_function(confirm_email_token_url_variable):
   string_to_salt = os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_EMAIL').encode("utf-8")
   try:
     user_email_confirming = serializer_instance.loads(confirm_email_token_url_variable, salt=string_to_salt, max_age=3600)
-    print('left off here')
+    session['user_email_to_change_password'] = user_email_confirming
+    return render_template('templates_login_and_create_account/new_password_page.html')
   except:
     print('the token is expired!')
-    return render_template('templates_user_logged_in/confirmed_email_page.html',
-                          error_message_to_html = 'Verification link has expired.')
-  return render_template('templates_user_logged_in/confirmed_email_page.html',
-                          user_email_confirming_to_html = user_email_confirming)
+    return render_template('templates_login_and_create_account/index.html')
+  return render_template('templates_login_and_create_account/index.html')

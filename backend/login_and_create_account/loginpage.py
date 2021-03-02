@@ -8,13 +8,7 @@ def index_function():
   """
   Returns: Renders the login page
   """
-  print('- - - - 1- - - -')
-  print(session)
-  print('- - - - 1- - - -')
   if session and 'logged_in_user_email' in session:
-    print('- - - -2 - - - -')
-    print(session['logged_in_user_email'])
-    print('- - - - 2- - - -')
     return redirect("https://www.symbolnews.com/home", code=302)
   else:
     #set_session_variables_to_none_logout_function()

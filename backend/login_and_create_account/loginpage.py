@@ -8,10 +8,13 @@ def index_function():
   """
   Returns: Renders the login page
   """
+  print('- - - - 1- - - -')
+  print(session)
+  print('- - - - 1- - - -')
   if session.get('logged_in_user_email') == True:
-    print('- - - - - - - -')
+    print('- - - -2 - - - -')
     print(session['logged_in_user_email'])
-    print('- - - - - - - -')
+    print('- - - - 2- - - -')
     return redirect(url_for('home'))
   else:
     #set_session_variables_to_none_logout_function()

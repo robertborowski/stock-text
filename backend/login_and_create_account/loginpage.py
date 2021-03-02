@@ -1,5 +1,6 @@
 from flask import render_template, Blueprint, session, url_for, redirect
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
+from backend.user_logged_in.home.homepage import homepage
 
 loginpage = Blueprint("loginpage", __name__, static_folder="static", template_folder="templates")
 @loginpage.route("/")

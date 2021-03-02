@@ -4,7 +4,7 @@ from backend.db.queries.select_queries.select_user_tracking_list import select_u
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 
-homepage = Blueprint("homepage", __name__, static_folder="static", template_folder="templates")
+homepage = Blueprint("homepage", __name__, static_folder="static", template_folder="templates", subdomain='www')
 @homepage.route("/home", methods=["POST", "GET"])
 def logged_in_home_page_function():
   """

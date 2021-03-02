@@ -71,6 +71,7 @@ def creating_account_to_postgres_function():
     session['logged_in_user_first_name'] = user_first_name_from_html_form_sanitized
     session['logged_in_user_last_name'] = user_last_name_from_html_form_sanitized
     session['logged_in_user_phone_number'] = user_phone_number_from_html_form_sanitized
+    session.permanent = True
     return render_template('templates_user_logged_in/loggedin_home_page.html',
                             user_email_from_session_to_html = session['logged_in_user_email'],
                             user_first_name_from_session_to_html = session['logged_in_user_first_name'],

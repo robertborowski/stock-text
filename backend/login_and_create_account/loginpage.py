@@ -7,8 +7,7 @@ def index_function():
   """
   Returns: Renders the login page
   """
-  if session['logged_in_user_email']:
-    return render_template('templates_user_logged_in/loggedin_home_page.html')
-  else:
-    set_session_variables_to_none_logout_function()
+  if session['logged_in_user_email'] == False:
     return render_template('templates_login_and_create_account/index.html')
+  else:
+    return render_template('templates_user_logged_in/loggedin_home_page.html')

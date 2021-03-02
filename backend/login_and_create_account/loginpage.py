@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, session
 
 loginpage = Blueprint("loginpage", __name__, static_folder="static", template_folder="templates")
 @loginpage.route("/")

@@ -11,7 +11,7 @@ def index_function():
   print('- - - - 1- - - -')
   print(session)
   print('- - - - 1- - - -')
-  if session.get('logged_in_user_email') == True:
+  if session and 'logged_in_user_email' in session:
     print('- - - -2 - - - -')
     print(session['logged_in_user_email'])
     print('- - - - 2- - - -')

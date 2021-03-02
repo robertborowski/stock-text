@@ -32,7 +32,7 @@ app = Flask(__name__)
 # To use a session, there has to be a secret key. The string should be something difficult to guess
 app.secret_key = os.urandom(64)
 # Set session variables to perm so that user can remain signed in
-app.permanent_session_lifetime = datetime.timedelta(days=365)
+#app.permanent_session_lifetime = datetime.timedelta(days=365)
 # Blue prints to run python script from multiple files
 app.register_blueprint(loginpage, url_prefix="")
 app.register_blueprint(create_account_render_page, url_prefix="")

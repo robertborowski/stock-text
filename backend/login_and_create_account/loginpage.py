@@ -9,8 +9,10 @@ def index_function():
   Returns: Renders the login page
   """
   if session.get('logged_in_user_email') == True:
+    print('- - - - - - - -')
     print(session['logged_in_user_email'])
-    return redirect(url_for('homepage.logged_in_home_page_function'))
+    print('- - - - - - - -')
+    return redirect(url_for('home'))
   else:
     #set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/index.html')

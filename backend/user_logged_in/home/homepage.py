@@ -3,9 +3,7 @@ from backend.db.connect_to_database import connect_to_postgres_function
 from backend.db.queries.select_queries.select_user_tracking_list import select_user_tracking_list_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
-#========================
-from urllib.parse import urlparse, urlunparse
-#========================
+from backend.utils.redirect_url.naked_url import naked_url_function
 
 homepage = Blueprint("homepage", __name__, static_folder="static", template_folder="templates")
 @homepage.route("/home", methods=["POST", "GET"])
@@ -14,14 +12,7 @@ def logged_in_home_page_function():
   Returns: homepage front end template with user symbol tracking list
   """
   if session['logged_in_user_email'] != 'none':
-    #========================
-    """Redirect non-www requests to www."""
-    urlparts = urlparse(request.url)
-    if urlparts.netloc == 'symbolnews.com':
-      urlparts_list = list(urlparts)
-      urlparts_list[1] = 'www.symbolnews.com'
-      return redirect(urlunparse(urlparts_list), code=301)
-    #========================
+    naked_url_function("/home")
     connection_postgres, cursor = connect_to_postgres_function()
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
     close_connection_cursor_to_database_function(connection_postgres, cursor)

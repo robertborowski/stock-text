@@ -15,7 +15,7 @@ def index_function():
     print('- - - -2 - - - -')
     print(session['logged_in_user_email'])
     print('- - - - 2- - - -')
-    return redirect(url_for('home'))
+    return redirect("https://symbolnews.com/home", code=302)
   else:
     #set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/index.html')

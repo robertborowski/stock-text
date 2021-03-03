@@ -1,13 +1,13 @@
 from flask import render_template, Blueprint, session, request, redirect
 from urllib.parse import urlparse, urlunparse
 
-def naked_url_function(ext_sub_page):
+def naked_url_function(extension_url):
   """
-  Returns: Redirect non-www requests to www.
+  Returns: Redirect www requests to non-www.
   """
+  url_to_search = 'www.symbolnews.com' + extension_url
   urlparts = urlparse(request.url)
-  if urlparts.netloc == 'symbolnews.com' + ext_sub_page:
+  if urlparts.netloc == url_to_search:
     urlparts_list = list(urlparts)
-    urlparts_list[1] = 'www.symbolnews.com' + ext_sub_page
-    return redirect(urlunparse(urlparts_list), code=301)
-  return request.url
+    urlparts_list[1] = 'symbolnews.com' + extension_url
+    redirect(urlunparse(urlparts_list), code=301)

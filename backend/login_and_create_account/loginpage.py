@@ -9,7 +9,7 @@ loginpage = Blueprint("loginpage", __name__, static_folder="static", template_fo
 @loginpage.before_request
 def before_request_function():
   print('----------------------Running the before request - /')
-  app_before_setup_strip_www_function("/")
+  app_before_setup_strip_www_function()
 
 # Load app URL
 @loginpage.route("/")

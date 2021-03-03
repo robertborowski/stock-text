@@ -15,7 +15,8 @@ login_attempt = Blueprint("login_attempt", __name__, static_folder="static", tem
 # Before loading app URL
 @login_attempt.before_request
 def before_request_function():
-  app_before_setup_strip_www_function("/home/login")
+  print('----------------------Running the before request - /home/login')
+  app_before_setup_strip_www_function()
 
 # Load app URL
 @login_attempt.route("/home/login", methods=["POST", "GET"])

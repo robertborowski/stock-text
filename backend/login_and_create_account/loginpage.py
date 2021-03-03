@@ -7,7 +7,7 @@ from backend.utils.app_before_setup_folder.app_before_setup import app_before_se
 loginpage = Blueprint("loginpage", __name__, static_folder="static", template_folder="templates")
 @loginpage.before_request
 def before_request_function():
-  return app_before_setup_function()
+  app_before_setup_function()
 @loginpage.route("/")
 def index_function():
   """

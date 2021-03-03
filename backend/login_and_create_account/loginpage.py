@@ -6,10 +6,10 @@ from backend.utils.app_before_setup_folder.app_before_setup_strip_www import app
 loginpage = Blueprint("loginpage", __name__, static_folder="static", template_folder="templates")
 
 # Before loading app URL
-@loginpage.before_request
-def before_request_function():
-  print('----------------------Running the before request - /')
-  app_before_setup_strip_www_function()
+#@loginpage.before_request
+#def before_request_function():
+#  print('----------------------Running the before request - /')
+#  app_before_setup_strip_www_function()
 
 # Load app URL
 @loginpage.route("/")

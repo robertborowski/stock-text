@@ -25,10 +25,10 @@ def logged_in_home_page_function():
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session.get('logged_in_user_uuid'))
     close_connection_cursor_to_database_function(connection_postgres, cursor)
     return render_template('templates_user_logged_in/loggedin_home_page.html',
-                            user_email_from_session_to_html = session['logged_in_user_email'],
-                            user_first_name_from_session_to_html = session['logged_in_user_first_name'],
-                            user_last_name_from_session_to_html = session['logged_in_user_last_name'],
-                            user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
+                            user_email_from_session_to_html = session.get('logged_in_user_email'), #session['logged_in_user_email'],
+                            user_first_name_from_session_to_html = session.get('logged_in_user_first_name'), #session['logged_in_user_first_name'],
+                            user_last_name_from_session_to_html = session.get('logged_in_user_last_name'), #session['logged_in_user_last_name'],
+                            user_phone_number_from_session_to_html = session.get('logged_in_user_phone_number'), #session['logged_in_user_phone_number'],
                             symbol_tracking_list_from_python_to_html = symbol_tracking_list)
   else:
     set_session_variables_to_none_logout_function()

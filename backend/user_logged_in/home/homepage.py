@@ -18,6 +18,7 @@ def logged_in_home_page_function():
   """
   Returns: homepage front end template with user symbol tracking list
   """
+  session.permanent = True
   #if session['logged_in_user_email'] != 'none':
   if session.get('logged_in_user_email') != 'none':
     connection_postgres, cursor = connect_to_postgres_function()

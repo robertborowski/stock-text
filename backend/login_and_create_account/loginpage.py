@@ -9,9 +9,11 @@ def index_function():
   """
   Returns: Renders the login page
   """
+  """
   print('- - - - - -BEFORE NAKED loginpage - - - - - - -')
   naked_url_function("/")
   print('- - - - - -AFTER NAKED loginpage - - - - - - -')
+  """
   if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
     return redirect("https://www.symbolnews.com/home", code=302)
   else:

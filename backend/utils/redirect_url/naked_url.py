@@ -1,6 +1,7 @@
 from flask import render_template, Blueprint, session, request, redirect
 from urllib.parse import urlparse, urlunparse
 
+@app.before_request
 def naked_url_function(extension_url):
   """
   Returns: Redirect www requests to non-www.

@@ -21,14 +21,8 @@ def index_function():
   """
   Returns: Renders the login page
   """
-  """
-  print('- - - - - -BEFORE NAKED loginpage - - - - - - -')
-  naked_url_function("/")
-  print('- - - - - -AFTER NAKED loginpage - - - - - - -')
-  """
-
   if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
-    return redirect("https://www.symbolnews.com/home", code=302)
+    return redirect("https://symbolnews.com/home", code=302)
   else:
     #set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/index.html')

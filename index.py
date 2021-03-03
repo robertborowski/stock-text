@@ -1,5 +1,5 @@
 # Imports
-from flask import Flask, session, url_for, request, redirect
+from flask import Flask, session, url_for
 import os, time
 import datetime
 from backend.login_and_create_account.loginpage import loginpage
@@ -23,7 +23,6 @@ from backend.login_and_create_account.forgot_password_render_page import forgot_
 from backend.login_and_create_account.forgot_password_send_token_to_email import forgot_password_send_token_to_email
 from backend.login_and_create_account.set_new_password import set_new_password
 from backend.login_and_create_account.confirm_new_password_set import confirm_new_password_set
-from urllib.parse import urlparse, urlunparse
 
 # Set the timezone of the application when user creates account is will be in US/Easterm time
 os.environ['TZ'] = 'US/Eastern'

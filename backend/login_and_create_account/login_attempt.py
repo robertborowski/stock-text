@@ -16,11 +16,6 @@ def login_attempt_function():
   """
   Returns: login attempt on index/login page
   """
-  """
-  print('- - - - - -BEFORE NAKED login_attempt - - - - - - -')
-  naked_url_function("/home/login")
-  print('- - - - - -AFTER NAKED login_attempt - - - - - - -')
-  """
 
   # Sanitize user inputs
   user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get("email"))

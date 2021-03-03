@@ -20,7 +20,7 @@ def logged_in_home_page_function():
   """
   session.permanent = True
   #if session['logged_in_user_email'] != 'none':
-  if session.get('logged_in_user_email') != 'none':
+  if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
     connection_postgres, cursor = connect_to_postgres_function()
     #symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session.get('logged_in_user_uuid'))

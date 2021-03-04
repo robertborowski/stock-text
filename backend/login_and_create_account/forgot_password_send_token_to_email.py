@@ -66,6 +66,9 @@ def forgot_password_send_token_to_email_function():
       #=============================
       # Set session variable back to None once email is sent
       session['form_data_forgot_password_email'] = None
+      print('- - - - - - - after sent - - - - - - -')
+      print(session['form_data_forgot_password_email'])
+      print('- - - - - - - after sent - - - - - - -')
       #=============================
       
       return render_template('templates_login_and_create_account/forgot_password_page.html', error_message_from_python_to_html = 'Email sent! Please check your email for the password reset link.')

@@ -4,6 +4,7 @@ from backend.db.queries.select_queries.select_user_tracking_list import select_u
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 #==========================
+from urllib.parse import urlparse, urlunparse
 from backend.utils.app_before_setup.app_before_setup_non_www import app_before_setup_non_www_function
 #==========================
 
@@ -16,7 +17,10 @@ def logged_in_home_page_function():
   """
   #=======================
   current_url = request.url
-  app_before_setup_non_www_function(current_url)
+  urlparts = urlparse(current_url)
+  if urlparts.netloc == 'www.symbolnews.com':
+    new_url = app_before_setup_non_www_function(current_url)
+    return redirect(new_url, code=301)
   #=======================
   #if session['logged_in_user_email'] != 'none':
   if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':

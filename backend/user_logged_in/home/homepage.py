@@ -13,7 +13,8 @@ def before_request_function():
   print('----------------------Running the before request - /home')
   new_url = app_before_setup_strip_www_function()
   print('new url: ' + str(new_url))
-  redirect(new_url)
+  session.permanent = True
+  return redirect(new_url, code=301)
 
 @homepage.route("/home", methods=["POST", "GET"])
 def logged_in_home_page_function():

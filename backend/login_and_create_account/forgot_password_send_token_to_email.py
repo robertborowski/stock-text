@@ -36,8 +36,15 @@ def forgot_password_send_token_to_email_function():
   
   # If no session info found
   else:
+    #=================================
+    if session.get('form_data_email') == None:
+      session['form_data_email'] = request.form.get("email")
     # Sanatize the user email
-    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get("email"))
+    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(session.get('form_data_email'))
+    #=================================
+    
+    # Sanatize the user email
+    #user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get("email"))
     
     # If user inputs not valid email
     if user_email_from_html_form_sanitized == 'none':

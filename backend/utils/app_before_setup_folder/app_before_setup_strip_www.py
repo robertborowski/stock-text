@@ -5,6 +5,7 @@ def app_before_setup_strip_www_function():
   """
   Returns: Redirect www requests to non-www.
   """
+  session.permanent = True
   url_to_search = 'www.symbolnews.com'
   urlparts = urlparse(request.url)
   print('- - - - 1 - - - - - ')

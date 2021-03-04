@@ -29,21 +29,19 @@ def forgot_password_send_token_to_email_function():
   """
   Returns: login attempt on index/login page
   """
-  # If session info found
+  # If user logged in session info found
   if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
     session.permanent = True
     return redirect("https://symbolnews.com/home", code=301)
   
-  # If no session info found
+  # If no login session info found
   else:
-    #=================================
-    if session.get('form_data_email') == None:
-      session['form_data_email'] = request.form.get("email")
-    # Sanatize the user email
-    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(session.get('form_data_email'))
-    #=================================
+    # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data
+    if session.get('form_data_forgot_password_email') == None:
+      session['form_data_forgot_password_email'] = request.form.get("email")
     
     # Sanatize the user email
+    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(session.get('form_data_forgot_password_email'))
     #user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get("email"))
     
     # If user inputs not valid email
@@ -65,8 +63,8 @@ def forgot_password_send_token_to_email_function():
       # Send the confirmation email link to user
       send_email_new_password_function(user_email_from_html_form_sanitized, confirm_email_token)
       
-      return render_template('templates_login_and_create_account/forgot_password_page.html', error_message_from_python_to_html = 'Email sent!')
+      return render_template('templates_login_and_create_account/forgot_password_page.html', error_message_from_python_to_html = 'Email sent! Please check your email for the password reset link.')
     
     # If email does not exist, just say you sent it anyway
     else:
-      return render_template('templates_login_and_create_account/forgot_password_page.html', error_message_from_python_to_html = 'Email sent!')
+      return render_template('templates_login_and_create_account/forgot_password_page.html', error_message_from_python_to_html = 'Email sent! Please check your email for the password reset link')

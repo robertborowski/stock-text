@@ -12,12 +12,12 @@ from backend.db.close_connection_cursor_to_database import close_connection_curs
 login_attempt = Blueprint("login_attempt", __name__, static_folder="static", template_folder="templates")
 
 # Load app URL
-@login_attempt.route("/home/login", methods=["POST", "GET"])
+#@login_attempt.route("/home/login", methods=["POST", "GET"])
+@login_attempt.route("/login_attempt", methods=["POST", "GET"])
 def login_attempt_function():
   """
   Returns: login attempt on index/login page
   """
-
   # Sanitize user inputs
   user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get("email"))
   user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))

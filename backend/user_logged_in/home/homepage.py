@@ -3,6 +3,9 @@ from backend.db.connect_to_database import connect_to_postgres_function
 from backend.db.queries.select_queries.select_user_tracking_list import select_user_tracking_list_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
+#==========================
+from backend.utils.app_before_setup.app_before_setup_non_www import app_before_setup_non_www_function
+#==========================
 
 homepage = Blueprint("homepage", __name__, static_folder="static", template_folder="templates")
 
@@ -11,6 +14,10 @@ def logged_in_home_page_function():
   """
   Returns: homepage front end template with user symbol tracking list
   """
+  #=======================
+  current_url = request.url
+  app_before_setup_non_www_function(current_url)
+  #=======================
   #if session['logged_in_user_email'] != 'none':
   if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
     session.permanent = True

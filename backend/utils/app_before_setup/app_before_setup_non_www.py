@@ -1,17 +1,16 @@
 from flask import render_template, Blueprint, session, request, redirect
 from urllib.parse import urlparse, urlunparse
 
-def app_before_setup_non_www_function():
+def app_before_setup_non_www_function(current_url):
   """
   Returns: Redirect www requests to non-www.
   """
-  url_to_search = 'www.symbolnews.com'
-  urlparts = urlparse(request.url)
+  urlparts = urlparse(current_url)
   print('- - - - 1 - - - - - ')
   print(type(urlparts))
   print(urlparts)
   print('- - - - 1 - - - - - ')
-  if urlparts.netloc == url_to_search:
+  if urlparts.netloc == 'www.symbolnews.com':
     urlparts_list = list(urlparts)
     urlparts_list[1] = 'symbolnews.com'
     print('- - - - 2 - - - - - ')

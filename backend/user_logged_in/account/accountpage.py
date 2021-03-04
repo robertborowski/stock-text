@@ -9,7 +9,6 @@ def account_page_function():
   """
   #if session['logged_in_user_email'] != 'none':
   if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
-    session.permanent = True
     return render_template('templates_user_logged_in/account.html',
                             user_email_from_session_to_html = session['logged_in_user_email'],
                             user_first_name_from_session_to_html = session['logged_in_user_first_name'],

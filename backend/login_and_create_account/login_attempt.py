@@ -42,8 +42,8 @@ def login_attempt_function():
       session['form_data_login_attempt_password'] = request.form.get("psw")
 
     # Sanitize user inputs
-    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get("email"))
-    user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))
+    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(session.get('form_data_login_attempt_email'))
+    user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(session.get('form_data_login_attempt_password'))
     
     # If postman invalid inputs used
     if user_email_from_html_form_sanitized == 'none' or user_password_from_html_form_sanitized == 'none':

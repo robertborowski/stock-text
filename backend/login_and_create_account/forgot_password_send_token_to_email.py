@@ -15,7 +15,6 @@ from backend.utils.app_before_setup.remove_www_from_domain import remove_www_fro
 
 forgot_password_send_token_to_email = Blueprint("forgot_password_send_token_to_email", __name__, static_folder="static", template_folder="templates")
 
-"""
 @forgot_password_send_token_to_email.before_request
 def before_request():
   # Domain Check #1 - Does it start with www.
@@ -24,7 +23,6 @@ def before_request():
     new_url = remove_www_from_domain_function(request.url)
     # Redirect page to non-www
     return redirect(new_url, code=301)
-"""
 
 @forgot_password_send_token_to_email.route("/forgot_password/send_link_attempt", methods=["POST", "GET"])
 def forgot_password_send_token_to_email_function():

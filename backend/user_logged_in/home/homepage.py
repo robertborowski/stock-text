@@ -24,8 +24,8 @@ def logged_in_home_page_function():
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                             symbol_tracking_list_from_python_to_html = symbol_tracking_list)
   else:
-    pritn('=============================')
+    print('=============================')
     print(session.get('logged_in_user_email'))
-    pritn('=============================
+    print('=============================')
     set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/index.html')

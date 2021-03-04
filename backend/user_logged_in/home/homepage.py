@@ -5,7 +5,8 @@ from backend.db.close_connection_cursor_to_database import close_connection_curs
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 #==========================
 from urllib.parse import urlparse, urlunparse
-from backend.utils.app_before_setup.app_before_setup_non_www import app_before_setup_non_www_function
+from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
+from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_function
 #==========================
 
 homepage = Blueprint("homepage", __name__, static_folder="static", template_folder="templates")
@@ -16,10 +17,10 @@ def logged_in_home_page_function():
   Returns: homepage front end template with user symbol tracking list
   """
   #=======================
-  current_url = request.url
-  urlparts = urlparse(current_url)
-  if urlparts.netloc == 'www.symbolnews.com':
-    new_url = app_before_setup_non_www_function(current_url)
+  # Domain Check #1 - Does it start with www.
+  www_start = check_if_url_www_function(request.url)
+  if www_start:
+    new_url = remove_www_from_domain_function(request.url)
     return redirect(new_url, code=301)
   #=======================
   #if session['logged_in_user_email'] != 'none':

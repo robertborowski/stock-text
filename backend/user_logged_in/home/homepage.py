@@ -13,6 +13,7 @@ def logged_in_home_page_function():
   """
   #if session['logged_in_user_email'] != 'none':
   if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
+    session.permanent = True
     connection_postgres, cursor = connect_to_postgres_function()
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
     close_connection_cursor_to_database_function(connection_postgres, cursor)
@@ -23,6 +24,8 @@ def logged_in_home_page_function():
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                             symbol_tracking_list_from_python_to_html = symbol_tracking_list)
   else:
+    pritn('=============================')
     print(session.get('logged_in_user_email'))
+    pritn('=============================
     set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/index.html')

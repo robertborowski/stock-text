@@ -18,7 +18,7 @@ def create_account_function():
   """
   Returns: Renders the create account page
   """
-  # # If session info found
+  # If session info found
   if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
     session.permanent = True
     return redirect("https://symbolnews.com/home", code=301)

@@ -1,11 +1,10 @@
 from flask import render_template, Blueprint, session, request, redirect
 from urllib.parse import urlparse, urlunparse
 
-def app_before_setup_strip_www_function():
+def app_before_setup_non_www_function():
   """
   Returns: Redirect www requests to non-www.
   """
-  session.permanent = True
   url_to_search = 'www.symbolnews.com'
   urlparts = urlparse(request.url)
   print('- - - - 1 - - - - - ')
@@ -19,5 +18,4 @@ def app_before_setup_strip_www_function():
     print(urlparts_list)
     print(urlunparse(urlparts_list))
     print('- - - - 2 - - - - - ')
-    #return redirect(urlunparse(urlparts_list), code=301)
-    return urlunparse(urlparts_list)
+    return redirect(urlunparse(urlparts_list), code=301)

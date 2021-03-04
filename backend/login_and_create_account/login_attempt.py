@@ -8,15 +8,8 @@ from backend.db.connect_to_database import connect_to_postgres_function
 from backend.db.queries.select_queries.select_password_query import select_password_query_function
 from backend.db.queries.select_queries.select_user_tracking_list import select_user_tracking_list_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
-from backend.utils.app_before_setup_folder.app_before_setup_strip_www import app_before_setup_strip_www_function
 
 login_attempt = Blueprint("login_attempt", __name__, static_folder="static", template_folder="templates")
-
-# Before loading app URL
-@login_attempt.before_request
-def before_request_function():
-  print('----------------------Running the before request - /home/login')
-  app_before_setup_strip_www_function()
 
 # Load app URL
 @login_attempt.route("/home/login", methods=["POST", "GET"])

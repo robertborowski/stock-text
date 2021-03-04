@@ -19,4 +19,5 @@ def app_before_setup_strip_www_function():
     print(urlparts_list)
     print(urlunparse(urlparts_list))
     print('- - - - 2 - - - - - ')
-    return redirect(urlunparse(urlparts_list), code=301)
+    #return redirect(urlunparse(urlparts_list), code=301)
+    return urlunparse(urlparts_list)

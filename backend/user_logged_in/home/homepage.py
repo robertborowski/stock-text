@@ -11,7 +11,9 @@ homepage = Blueprint("homepage", __name__, static_folder="static", template_fold
 @homepage.before_request
 def before_request_function():
   print('----------------------Running the before request - /home')
-  app_before_setup_strip_www_function()
+  new_url = app_before_setup_strip_www_function()
+  print('new url: ' + str(new_url))
+  redirect(new_url)
 
 @homepage.route("/home", methods=["POST", "GET"])
 def logged_in_home_page_function():

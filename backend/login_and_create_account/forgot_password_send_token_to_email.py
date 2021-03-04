@@ -10,6 +10,8 @@ from backend.login_and_create_account.create_confirm_token import create_confirm
 from backend.utils.constant_run.twilio.send_email_new_password import send_email_new_password_function
 from backend.login_and_create_account.set_new_password import set_new_password
 from backend.login_and_create_account.set_new_password import set_new_password_function
+from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_function
+from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
 
 forgot_password_send_token_to_email = Blueprint("forgot_password_send_token_to_email", __name__, static_folder="static", template_folder="templates")
 @forgot_password_send_token_to_email.route("/forgot_password/send_link_attempt", methods=["POST", "GET"])
@@ -17,6 +19,13 @@ def forgot_password_send_token_to_email_function():
   """
   Returns: login attempt on index/login page
   """
+  # Domain Check #1 - Does it start with www.
+  www_start = check_if_url_www_function(request.url)
+  if www_start:
+    new_url = remove_www_from_domain_function(request.url)
+    # Redirect page to non-www
+    return redirect(new_url, code=301)
+
   user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get("email"))
   if user_email_from_html_form_sanitized == 'none':
     print('FAILED TO LOGIN!')

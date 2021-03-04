@@ -45,7 +45,7 @@ def login_attempt_function():
     if session.get('form_data_login_attempt_password') == None:
       session['form_data_login_attempt_password'] = request.form.get("psw")
       if session.get('form_data_login_attempt_password') == None:
-        session['form_data_login_attempt_password'] = "temp_placeholder_password_123$"
+        session['form_data_login_attempt_password'] = "tempPlaceholderPassword123$"
 
     # Sanitize user inputs
     user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(session.get('form_data_login_attempt_email'))

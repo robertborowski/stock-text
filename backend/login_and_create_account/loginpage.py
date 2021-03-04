@@ -11,6 +11,7 @@ def index_function():
   Returns: Renders the login page
   """
   if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
+    session.permanent = True
     return redirect("https://symbolnews.com/home", code=301)
   else:
     #set_session_variables_to_none_logout_function()

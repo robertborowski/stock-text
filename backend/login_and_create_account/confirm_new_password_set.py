@@ -17,12 +17,14 @@ def confirm_new_password_set_function():
   """
   Returns: confirms new password was set
   """
+  """
   # Domain Check #1 - Does it start with www.
   www_start = check_if_url_www_function(request.url)
   if www_start:
     new_url = remove_www_from_domain_function(request.url)
     # Redirect page to non-www
     return redirect(new_url, code=301)
+    """
 
   # Sanitize new password
   user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))

@@ -76,6 +76,6 @@ def login_attempt_function():
                               user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                               symbol_tracking_list_from_python_to_html = symbol_tracking_list)
     # Set session variable back to None so the www to non wwww redirect works when an incorrect email is input first
-    session['form_data_login_attempt_email'] = None
-    session['form_data_login_attempt_password'] = None
+    #session['form_data_login_attempt_email'] = None
+    #session['form_data_login_attempt_password'] = None
     return render_template('templates_login_and_create_account/index.html', error_message_from_python_to_html = 'Incorrect Email/Password!')

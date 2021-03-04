@@ -16,5 +16,8 @@ def account_page_function():
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'])
   else:
+    print('= = = = = = = = ')
+    print(session['logged_in_user_email'])
+    print('= = = = = = = = ')
     set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/index.html')

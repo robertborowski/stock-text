@@ -39,6 +39,8 @@ def forgot_password_send_token_to_email_function():
     # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data
     if session.get('form_data_forgot_password_email') == None:
       session['form_data_forgot_password_email'] = request.form.get("email")
+      if session.get('form_data_forgot_password_email') == None:
+        session['form_data_forgot_password_email'] = "temp_placeholder_email"
     
     # Sanatize the user email
     user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(session.get('form_data_forgot_password_email'))

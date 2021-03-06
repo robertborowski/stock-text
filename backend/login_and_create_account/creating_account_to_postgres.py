@@ -43,72 +43,140 @@ def creating_account_to_postgres_function():
     session.permanent = True
     return redirect("https://symbolnews.com/home", code=301)
 
-  # Get and sanitize the user inputs from html form
-  user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get("user_first_name"))
-  user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get("user_last_name"))
-  user_phone_number_from_html_form_sanitized= sanitize_phone_number_input_create_account_function(request.form.get("phone_number"))
-  user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get("email"))
-  user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))
-  
-  # If none for all input variables
-  if user_first_name_from_html_form_sanitized == 'none' or user_last_name_from_html_form_sanitized == 'none' or user_phone_number_from_html_form_sanitized == 'none' or user_email_from_html_form_sanitized == 'none' or user_password_from_html_form_sanitized == 'none':
-    print('FAILED TO CREATE ACCOUNT!')
-    return 'FAILED TO CREATE ACCOUNT!'
-  
-  # Hash the user password from html form
-  hashed_user_password_from_html_form = bcrypt.hashpw(user_password_from_html_form_sanitized.encode('utf-8'), bcrypt.gensalt())
-  hashed_user_password_from_html_form_decoded_for_database_insert = hashed_user_password_from_html_form.decode('ascii')
-  
-  # Add the UUID and timestamp for datetime that the account was created
-  user_uuid_create_account = create_uuid_function("usr_")
-  user_create_account_timestamp = create_timestamp_function()
-  
-  # Connect to postgres
-  connection_postgres, cursor = connect_to_postgres_function()
-  
-  # Search query if email is already in database
-  email_exists = select_login_information_table_query_function(connection_postgres, cursor, user_email_from_html_form_sanitized)
-  
-  # If email account already exists in database 
-  if email_exists == 'Account already exists':
-    close_connection_cursor_to_database_function(connection_postgres, cursor)
-    return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = email_exists)
-  
-  # Insert query function to insert new user created data into postgres
-  success_message, error_message = insert_login_information_table_query_function(connection_postgres, cursor, user_uuid_create_account, user_create_account_timestamp, user_first_name_from_html_form_sanitized, user_last_name_from_html_form_sanitized, user_phone_number_from_html_form_sanitized, user_email_from_html_form_sanitized, hashed_user_password_from_html_form_decoded_for_database_insert)
-  
-  # Close database connection and cursor
-  close_connection_cursor_to_database_function(connection_postgres, cursor)
-  
-  # Continue based on query insert results
-  if success_message == 'success' and error_message == 'none':
-    # Create tokens for email and phone number verification
-    confirm_email_token = create_confirm_token_function(user_email_from_html_form_sanitized, os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_EMAIL'), os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_EMAIL'))
-    confirm_phone_number_token = create_confirm_token_function(user_phone_number_from_html_form_sanitized, os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_PHONE'), os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_PHONE'))
-    
-    # Create the URL links for email and phone number verification
-    url_for('confirm_email_page.confirm_email_page_function', confirm_email_token_url_variable = confirm_email_token)
-    url_for('confirm_phone_number_page.confirm_phone_number_page_function', confirm_phone_number_token_url_variable = confirm_phone_number_token)
-    
-    # Send the confirmation email and text links to user
-    send_email_confirm_account_function(user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_email_token)
-    send_phone_number_confirm_account_function(user_phone_number_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_phone_number_token)
-    output_message = 'Please confirm email (link sent to email) and phone number (link sent to phone number)'
-    
-    # Flask session variables
-    session['logged_in_user_uuid'] = user_uuid_create_account
-    session['logged_in_user_email'] = user_email_from_html_form_sanitized
-    session['logged_in_user_first_name'] = user_first_name_from_html_form_sanitized
-    session['logged_in_user_last_name'] = user_last_name_from_html_form_sanitized
-    session['logged_in_user_phone_number'] = user_phone_number_from_html_form_sanitized
-    session.permanent = True
-    return render_template('templates_user_logged_in/loggedin_home_page.html',
-                            user_email_from_session_to_html = session['logged_in_user_email'],
-                            user_first_name_from_session_to_html = session['logged_in_user_first_name'],
-                            user_last_name_from_session_to_html = session['logged_in_user_last_name'],
-                            user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
-                            output_message_to_html = output_message)
+  # If no login session info found
   else:
-    set_session_variables_to_none_logout_function()
+    #===================================
+    # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data - Email
+    if session.get('form_data_create_account_first_name') == None:
+      session['form_data_create_account_first_name'] = request.form.get("user_first_name")
+      if session.get('form_data_create_account_first_name') == None:
+        session['form_data_create_account_first_name'] = "temp"
+
+    # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data - Email
+    if session.get('form_data_create_account_last_name') == None:
+      session['form_data_create_account_last_name'] = request.form.get("user_last_name")
+      if session.get('form_data_create_account_last_name') == None:
+        session['form_data_create_account_last_name'] = "temp"
+    
+    # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data - Email
+    if session.get('form_data_create_account_phone_number') == None:
+      session['form_data_create_account_phone_number'] = request.form.get("phone_number")
+      if session.get('form_data_create_account_phone_number') == None:
+        session['form_data_create_account_phone_number'] = "1234567890"
+
+    # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data - Email
+    if session.get('form_data_create_account_email') == None:
+      session['form_data_create_account_email'] = request.form.get("email")
+      if session.get('form_data_create_account_email') == None:
+        session['form_data_create_account_email'] = "temp_placeholder_email@symbolnews.com"
+    
+    # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data - Password
+    if session.get('form_data_create_account_password') == None:
+      session['form_data_create_account_password'] = request.form.get("psw")
+      if session.get('form_data_create_account_password') == None:
+        session['form_data_create_account_password'] = "Password123!"
+    #===================================
+
+    """
+    # Get and sanitize the user inputs from html form
+    user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get("user_first_name"))
+    user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get("user_last_name"))
+    user_phone_number_from_html_form_sanitized= sanitize_phone_number_input_create_account_function(request.form.get("phone_number"))
+    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get("email"))
+    user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))
+    """
+
+    # Get and sanitize the user inputs from html form
+    user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(session.get("user_first_name"))
+    user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(session.get("user_last_name"))
+    user_phone_number_from_html_form_sanitized= sanitize_phone_number_input_create_account_function(session.get("phone_number"))
+    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(session.get("email"))
+    user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(session.get('psw'))
+
+    # If none for all input variables
+    if user_first_name_from_html_form_sanitized == 'none' or user_last_name_from_html_form_sanitized == 'none' or user_phone_number_from_html_form_sanitized == 'none' or user_email_from_html_form_sanitized == 'none' or user_password_from_html_form_sanitized == 'none':
+      print('FAILED TO CREATE ACCOUNT!')
+      session['form_data_create_account_first_name'] = None
+      session['form_data_create_account_last_name'] = None
+      session['form_data_create_account_phone_number'] = None
+      session['form_data_create_account_email'] = None
+      session['form_data_create_account_password'] = None
+      return 'FAILED TO CREATE ACCOUNT!'
+    
+    # Hash the user password from html form
+    hashed_user_password_from_html_form = bcrypt.hashpw(user_password_from_html_form_sanitized.encode('utf-8'), bcrypt.gensalt())
+    hashed_user_password_from_html_form_decoded_for_database_insert = hashed_user_password_from_html_form.decode('ascii')
+    
+    # Add the UUID and timestamp for datetime that the account was created
+    user_uuid_create_account = create_uuid_function("usr_")
+    user_create_account_timestamp = create_timestamp_function()
+    
+    # Connect to postgres
+    connection_postgres, cursor = connect_to_postgres_function()
+    
+    # Search query if email is already in database
+    email_exists = select_login_information_table_query_function(connection_postgres, cursor, user_email_from_html_form_sanitized)
+    
+    # If email account already exists in database 
+    if email_exists == 'Account already exists':
+      close_connection_cursor_to_database_function(connection_postgres, cursor)
+      session['form_data_create_account_first_name'] = None
+      session['form_data_create_account_last_name'] = None
+      session['form_data_create_account_phone_number'] = None
+      session['form_data_create_account_email'] = None
+      session['form_data_create_account_password'] = None
+      return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = email_exists)
+    
+    # Insert query function to insert new user created data into postgres
+    success_message, error_message = insert_login_information_table_query_function(connection_postgres, cursor, user_uuid_create_account, user_create_account_timestamp, user_first_name_from_html_form_sanitized, user_last_name_from_html_form_sanitized, user_phone_number_from_html_form_sanitized, user_email_from_html_form_sanitized, hashed_user_password_from_html_form_decoded_for_database_insert)
+    
+    # Close database connection and cursor
+    close_connection_cursor_to_database_function(connection_postgres, cursor)
+    
+    # Continue based on query insert results
+    if success_message == 'success' and error_message == 'none':
+      # Create tokens for email and phone number verification
+      confirm_email_token = create_confirm_token_function(user_email_from_html_form_sanitized, os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_EMAIL'), os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_EMAIL'))
+      confirm_phone_number_token = create_confirm_token_function(user_phone_number_from_html_form_sanitized, os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_PHONE'), os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_PHONE'))
+      
+      # Create the URL links for email and phone number verification
+      url_for('confirm_email_page.confirm_email_page_function', confirm_email_token_url_variable = confirm_email_token)
+      url_for('confirm_phone_number_page.confirm_phone_number_page_function', confirm_phone_number_token_url_variable = confirm_phone_number_token)
+      
+      # Send the confirmation email and text links to user
+      send_email_confirm_account_function(user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_email_token)
+      send_phone_number_confirm_account_function(user_phone_number_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_phone_number_token)
+      output_message = 'Please confirm email (link sent to email) and phone number (link sent to phone number)'
+      
+      # Flask session variables
+      session['logged_in_user_uuid'] = user_uuid_create_account
+      session['logged_in_user_email'] = user_email_from_html_form_sanitized
+      session['logged_in_user_first_name'] = user_first_name_from_html_form_sanitized
+      session['logged_in_user_last_name'] = user_last_name_from_html_form_sanitized
+      session['logged_in_user_phone_number'] = user_phone_number_from_html_form_sanitized
+      session.permanent = True
+      session['form_data_create_account_first_name'] = None
+      session['form_data_create_account_last_name'] = None
+      session['form_data_create_account_phone_number'] = None
+      session['form_data_create_account_email'] = None
+      session['form_data_create_account_password'] = None
+      return render_template('templates_user_logged_in/loggedin_home_page.html',
+                              user_email_from_session_to_html = session['logged_in_user_email'],
+                              user_first_name_from_session_to_html = session['logged_in_user_first_name'],
+                              user_last_name_from_session_to_html = session['logged_in_user_last_name'],
+                              user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
+                              output_message_to_html = output_message)
+    else:
+      set_session_variables_to_none_logout_function()
+      session['form_data_create_account_first_name'] = None
+      session['form_data_create_account_last_name'] = None
+      session['form_data_create_account_phone_number'] = None
+      session['form_data_create_account_email'] = None
+      session['form_data_create_account_password'] = None
+      return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = error_message)
+    session['form_data_create_account_first_name'] = None
+    session['form_data_create_account_last_name'] = None
+    session['form_data_create_account_phone_number'] = None
+    session['form_data_create_account_email'] = None
+    session['form_data_create_account_password'] = None
     return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = error_message)
-  return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = error_message)

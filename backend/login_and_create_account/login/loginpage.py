@@ -12,6 +12,9 @@ def index_function():
   #if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
   if session and 'logged_in_user_email' in session and (session.get('logged_in_user_email') != 'none' or session.get('logged_in_user_email') != "temp_placeholder_email@symbolnews.com" or session.get('logged_in_user_email') != None):
     session.permanent = True
+    print('- - - - - - - - -')
+    print(session.get('logged_in_user_email'))
+    print('- - - - - - - - -')
     return redirect("https://symbolnews.com/home", code=301)
   
   # If no session info found

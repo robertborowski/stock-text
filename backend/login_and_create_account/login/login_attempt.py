@@ -75,6 +75,7 @@ def login_attempt_function():
       # Set session variable back to None so the www to non wwww redirect works when an incorrect email is input first
       session['form_data_login_attempt_email'] = None
       session['form_data_login_attempt_password'] = None
+      session.permanent = True
       return render_template('templates_user_logged_in/loggedin_home_page.html',
                               user_email_from_session_to_html = session['logged_in_user_email'],
                               user_first_name_from_session_to_html = session['logged_in_user_first_name'],

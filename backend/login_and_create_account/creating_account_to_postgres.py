@@ -50,9 +50,10 @@ def creating_account_to_postgres_function():
     if www_start:
       #new_url = remove_www_from_domain_function(request.url)
       # Redirect page to non-www
+      print(' hello hello hello hello hello ------')
       return redirect("https://symbolnews.com/create_account", code=301)
     #==================
-    
+
     # Get and sanitize the user inputs from html form
     user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get("user_first_name"))
     user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get("user_last_name"))

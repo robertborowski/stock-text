@@ -12,6 +12,7 @@ from backend.db.queries.insert_queries.insert_login_information_table_query impo
 from backend.db.queries.select_queries.select_login_information_table_query import select_login_information_table_query_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
+from backend.utils.set_create_account_session_variables_to_none import set_create_account_session_variables_to_none_function
 from backend.utils.constant_run.twilio.send_email_confirm_account import send_email_confirm_account_function
 from backend.login_and_create_account.create_confirm_token import create_confirm_token_function
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
@@ -20,7 +21,6 @@ from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_pho
 from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page_function
 from backend.utils.constant_run.twilio.send_phone_number_confirm_account import send_phone_number_confirm_account_function
 from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_function
-from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
 
 creating_account_to_postgres = Blueprint("creating_account_to_postgres", __name__, static_folder="static", template_folder="templates")
 
@@ -28,13 +28,8 @@ creating_account_to_postgres = Blueprint("creating_account_to_postgres", __name_
 def before_request():
   # Domain Check #1 - Does it start with www.
   www_start = check_if_url_www_function(request.url)
-  print('- - - - - - - - - - -')
-  print(www_start)
-  print('- - - - - - - - - - -')
   if www_start:
-    #new_url = remove_www_from_domain_function(request.url)
     # Redirect page to non-www
-    print(' hello hello hello hello hello ------')
     return redirect("https://symbolnews.com/create_account", code=301)
 
 @creating_account_to_postgres.route("/home/created", methods=["POST", "GET"])
@@ -49,27 +44,46 @@ def creating_account_to_postgres_function():
 
   # If no login session info found
   else:
-    #==================
-    www_start = check_if_url_www_function(request.url)
-    #print('- - - - - - - - - - -')
-    #print(www_start)
-    #print('- - - - - - - - - - -')
-    if www_start:
-      #new_url = remove_www_from_domain_function(request.url)
-      # Redirect page to non-www
-      #print(' hello hello hello hello hello ------')
-      return redirect("https://symbolnews.com/create_account", code=301)
-    #==================
+    # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data - Email
+    if session.get('form_data_create_account_first_name') == None:
+      session['form_data_create_account_first_name'] = request.form.get("user_first_name")
+      if session.get('form_data_create_account_first_name') == None:
+        session['form_data_create_account_first_name'] = "temp"
+
+    # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data - Email
+    if session.get('form_data_create_account_last_name') == None:
+      session['form_data_create_account_last_name'] = request.form.get("user_last_name")
+      if session.get('form_data_create_account_last_name') == None:
+        session['form_data_create_account_last_name'] = "temp"
+    
+    # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data - Email
+    if session.get('form_data_create_account_phone_number') == None:
+      session['form_data_create_account_phone_number'] = request.form.get("phone_number")
+      if session.get('form_data_create_account_phone_number') == None:
+        session['form_data_create_account_phone_number'] = "1234567890"
+
+    # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data - Email
+    if session.get('form_data_create_account_email') == None:
+      session['form_data_create_account_email'] = request.form.get("email")
+      if session.get('form_data_create_account_email') == None:
+        session['form_data_create_account_email'] = "temp_placeholder_email@symbolnews.com"
+    
+    # Save the form inputs as session variables. So you are able to redirect from www to non-www without losing user form data - Password
+    if session.get('form_data_create_account_password') == None:
+      session['form_data_create_account_password'] = request.form.get("psw")
+      if session.get('form_data_create_account_password') == None:
+        session['form_data_create_account_password'] = "Password123!"
 
     # Get and sanitize the user inputs from html form
-    user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get("user_first_name"))
-    user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get("user_last_name"))
-    user_phone_number_from_html_form_sanitized= sanitize_phone_number_input_create_account_function(request.form.get("phone_number"))
-    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get("email"))
-    user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))
+    user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(session.get('form_data_create_account_first_name'))
+    user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(session.get('form_data_create_account_last_name'))
+    user_phone_number_from_html_form_sanitized= sanitize_phone_number_input_create_account_function(session.get('form_data_create_account_phone_number'))
+    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(session.get('form_data_create_account_email'))
+    user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(session.get('form_data_create_account_password'))
 
     # If none for all input variables
     if user_first_name_from_html_form_sanitized == 'none' or user_last_name_from_html_form_sanitized == 'none' or user_phone_number_from_html_form_sanitized == 'none' or user_email_from_html_form_sanitized == 'none' or user_password_from_html_form_sanitized == 'none':
+      set_create_account_session_variables_to_none_function()
       print('FAILED TO CREATE ACCOUNT!')
       return 'FAILED TO CREATE ACCOUNT!'
     
@@ -89,6 +103,7 @@ def creating_account_to_postgres_function():
     
     # If email account already exists in database 
     if email_exists == 'Account already exists':
+      set_create_account_session_variables_to_none_function()
       close_connection_cursor_to_database_function(connection_postgres, cursor)
       return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = email_exists)
     
@@ -114,6 +129,7 @@ def creating_account_to_postgres_function():
       output_message = 'Please confirm email (link sent to email) and phone number (link sent to phone number)'
       
       # Flask session variables
+      set_create_account_session_variables_to_none_function()
       session['logged_in_user_uuid'] = user_uuid_create_account
       session['logged_in_user_email'] = user_email_from_html_form_sanitized
       session['logged_in_user_first_name'] = user_first_name_from_html_form_sanitized
@@ -127,6 +143,8 @@ def creating_account_to_postgres_function():
                               user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                               output_message_to_html = output_message)
     else:
+      set_create_account_session_variables_to_none_function()
       set_session_variables_to_none_logout_function()
       return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = error_message)
+    set_create_account_session_variables_to_none_function()
     return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = error_message)

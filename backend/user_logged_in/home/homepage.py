@@ -7,11 +7,9 @@ from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_fun
 from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
 
 homepage = Blueprint("homepage", __name__, static_folder="static", template_folder="templates")
-@homepage.route("/home", methods=["POST", "GET"])
-def logged_in_home_page_function():
-  """
-  Returns: homepage front end template with user symbol tracking list
-  """
+
+@homepage.before_request
+def before_request():
   # Domain Check #1 - Does it start with www.
   www_start = check_if_url_www_function(request.url)
   if www_start:
@@ -19,6 +17,11 @@ def logged_in_home_page_function():
     # Redirect page to non-www
     return redirect(new_url, code=301)
 
+@homepage.route("/home", methods=["POST", "GET"])
+def logged_in_home_page_function():
+  """
+  Returns: homepage front end template with user symbol tracking list
+  """
   if session['logged_in_user_email'] != 'none':
     # Get user's symbol tracking list from database
     connection_postgres, cursor = connect_to_postgres_function()

@@ -87,11 +87,11 @@ def creating_account_to_postgres_function():
     """
 
     # Get and sanitize the user inputs from html form
-    user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(session.get("user_first_name"))
-    user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(session.get("user_last_name"))
-    user_phone_number_from_html_form_sanitized= sanitize_phone_number_input_create_account_function(session.get("phone_number"))
-    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(session.get("email"))
-    user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(session.get('psw'))
+    user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(session.get('form_data_create_account_first_name'))
+    user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(session.get('form_data_create_account_last_name'))
+    user_phone_number_from_html_form_sanitized= sanitize_phone_number_input_create_account_function(session.get('form_data_create_account_phone_number'))
+    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(session.get('form_data_create_account_email'))
+    user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(session.get('form_data_create_account_password'))
 
     # If none for all input variables
     if user_first_name_from_html_form_sanitized == 'none' or user_last_name_from_html_form_sanitized == 'none' or user_phone_number_from_html_form_sanitized == 'none' or user_email_from_html_form_sanitized == 'none' or user_password_from_html_form_sanitized == 'none':

@@ -12,11 +12,9 @@ from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_fun
 from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
 
 confirm_new_password_set = Blueprint("confirm_new_password_set", __name__, static_folder="static", template_folder="templates")
-@confirm_new_password_set.route("/confirm_new_password_set", methods=["POST", "GET"])
-def confirm_new_password_set_function():
-  """
-  Returns: confirms new password was set
-  """
+
+@confirm_new_password_set.before_request
+def before_request():
   # Domain Check #1 - Does it start with www.
   www_start = check_if_url_www_function(request.url)
   if www_start:
@@ -24,6 +22,11 @@ def confirm_new_password_set_function():
     # Redirect page to non-www
     return redirect(new_url, code=301)
 
+@confirm_new_password_set.route("/confirm_new_password_set", methods=["POST", "GET"])
+def confirm_new_password_set_function():
+  """
+  Returns: confirms new password was set
+  """
   # Sanitize new password
   user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))
   
@@ -41,4 +44,5 @@ def confirm_new_password_set_function():
   update_password_function(connection_postgres, cursor, hashed_user_password_from_html_form_decoded_for_database_insert, session['user_email_to_change_password'])
   close_connection_cursor_to_database_function(connection_postgres, cursor)
   
-  return render_template('templates_login_and_create_account/index.html')
+  return redirect("https://symbolnews.com/home", code=301)
+  #return render_template('templates_login_and_create_account/index.html')

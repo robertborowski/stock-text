@@ -24,12 +24,16 @@ def index_function():
   if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
     session.permanent = True
     print('- - - - - - - - -')
-    print('This is the session email that is saved')
+    print('If session found: This is the session email that is saved')
     print(session.get('logged_in_user_email'))
     print('- - - - - - - - -')
     return redirect("https://symbolnews.com/home", code=301)
   
   # If no session info found
   else:
+    print('- - - - - - - - -')
+    print('Else session found: This is the session email that is saved')
+    print(session.get('logged_in_user_email'))
+    print('- - - - - - - - -')
     set_session_variables_to_none_logout_function()
     return render_template('templates_login_and_create_account/index.html')

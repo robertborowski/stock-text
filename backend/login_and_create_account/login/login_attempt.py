@@ -29,8 +29,7 @@ def login_attempt_function():
   Returns: login attempt on index/login page
   """
   # If user logged in session info found
-  if session and 'logged_in_user_email' in session and (session.get('logged_in_user_email') != 'none' or session.get('logged_in_user_email') != "temp_placeholder_email@symbolnews.com" or session.get('logged_in_user_email') != None):
-  #if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
+  if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
     print('- - - - - - - - -')
     print(session.get('logged_in_user_email'))
     print('- - - - - - - - -')

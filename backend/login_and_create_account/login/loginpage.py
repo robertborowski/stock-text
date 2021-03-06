@@ -21,10 +21,10 @@ def index_function():
   Returns: Renders the login page
   """
   # If session info found
-  #if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
-  if session and 'logged_in_user_email' in session and (session.get('logged_in_user_email') != 'none' or session.get('logged_in_user_email') != "temp_placeholder_email@symbolnews.com" or session.get('logged_in_user_email') != None):
+  if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
     session.permanent = True
     print('- - - - - - - - -')
+    print('This is the session email that is saved')
     print(session.get('logged_in_user_email'))
     print('- - - - - - - - -')
     return redirect("https://symbolnews.com/home", code=301)

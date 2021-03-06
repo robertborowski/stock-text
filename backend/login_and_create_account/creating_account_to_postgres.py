@@ -95,12 +95,14 @@ def creating_account_to_postgres_function():
 
     # If none for all input variables
     if user_first_name_from_html_form_sanitized == 'none' or user_last_name_from_html_form_sanitized == 'none' or user_phone_number_from_html_form_sanitized == 'none' or user_email_from_html_form_sanitized == 'none' or user_password_from_html_form_sanitized == 'none':
-      print('FAILED TO CREATE ACCOUNT!')
+      #========================
       session['form_data_create_account_first_name'] = None
       session['form_data_create_account_last_name'] = None
       session['form_data_create_account_phone_number'] = None
       session['form_data_create_account_email'] = None
       session['form_data_create_account_password'] = None
+      #========================
+      print('FAILED TO CREATE ACCOUNT!')
       return 'FAILED TO CREATE ACCOUNT!'
     
     # Hash the user password from html form
@@ -119,12 +121,14 @@ def creating_account_to_postgres_function():
     
     # If email account already exists in database 
     if email_exists == 'Account already exists':
-      close_connection_cursor_to_database_function(connection_postgres, cursor)
+      #========================
       session['form_data_create_account_first_name'] = None
       session['form_data_create_account_last_name'] = None
       session['form_data_create_account_phone_number'] = None
       session['form_data_create_account_email'] = None
       session['form_data_create_account_password'] = None
+      #========================
+      close_connection_cursor_to_database_function(connection_postgres, cursor)
       return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = email_exists)
     
     # Insert query function to insert new user created data into postgres
@@ -149,17 +153,19 @@ def creating_account_to_postgres_function():
       output_message = 'Please confirm email (link sent to email) and phone number (link sent to phone number)'
       
       # Flask session variables
+      #========================
+      session['form_data_create_account_first_name'] = None
+      session['form_data_create_account_last_name'] = None
+      session['form_data_create_account_phone_number'] = None
+      session['form_data_create_account_email'] = None
+      session['form_data_create_account_password'] = None
+      #========================
       session['logged_in_user_uuid'] = user_uuid_create_account
       session['logged_in_user_email'] = user_email_from_html_form_sanitized
       session['logged_in_user_first_name'] = user_first_name_from_html_form_sanitized
       session['logged_in_user_last_name'] = user_last_name_from_html_form_sanitized
       session['logged_in_user_phone_number'] = user_phone_number_from_html_form_sanitized
       session.permanent = True
-      session['form_data_create_account_first_name'] = None
-      session['form_data_create_account_last_name'] = None
-      session['form_data_create_account_phone_number'] = None
-      session['form_data_create_account_email'] = None
-      session['form_data_create_account_password'] = None
       return render_template('templates_user_logged_in/loggedin_home_page.html',
                               user_email_from_session_to_html = session['logged_in_user_email'],
                               user_first_name_from_session_to_html = session['logged_in_user_first_name'],
@@ -167,16 +173,20 @@ def creating_account_to_postgres_function():
                               user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                               output_message_to_html = output_message)
     else:
-      set_session_variables_to_none_logout_function()
+      #========================
       session['form_data_create_account_first_name'] = None
       session['form_data_create_account_last_name'] = None
       session['form_data_create_account_phone_number'] = None
       session['form_data_create_account_email'] = None
       session['form_data_create_account_password'] = None
+      #========================
+      set_session_variables_to_none_logout_function()
       return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = error_message)
+    #========================
     session['form_data_create_account_first_name'] = None
     session['form_data_create_account_last_name'] = None
     session['form_data_create_account_phone_number'] = None
     session['form_data_create_account_email'] = None
     session['form_data_create_account_password'] = None
+    #========================
     return render_template('templates_login_and_create_account/create_account.html', error_message_from_python_to_html = error_message)

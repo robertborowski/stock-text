@@ -5,7 +5,7 @@ import datetime
 from backend.login_and_create_account.login.loginpage import loginpage
 from backend.login_and_create_account.create_account_render_page import create_account_render_page
 from backend.login_and_create_account.creating_account_to_postgres import creating_account_to_postgres
-from backend.login_and_create_account.login_attempt import login_attempt
+from backend.login_and_create_account.login.login_attempt import login_attempt
 from backend.user_logged_in.home.homepage import homepage
 from backend.user_logged_in.about.aboutpage import aboutpage
 from backend.user_logged_in.account.accountpage import accountpage
@@ -21,8 +21,8 @@ from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
 from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page
 from backend.login_and_create_account.forgot_password.forgot_password_render_page import forgot_password_render_page
 from backend.login_and_create_account.forgot_password.forgot_password_send_token_to_email import forgot_password_send_token_to_email
-from backend.login_and_create_account.set_new_password import set_new_password
-from backend.login_and_create_account.confirm_new_password_set import confirm_new_password_set
+from backend.login_and_create_account.forgot_password.set_new_password import set_new_password
+from backend.login_and_create_account.forgot_password.confirm_new_password_set import confirm_new_password_set
 
 # Set the timezone of the application when user creates account is will be in US/Easterm time
 os.environ['TZ'] = 'US/Eastern'

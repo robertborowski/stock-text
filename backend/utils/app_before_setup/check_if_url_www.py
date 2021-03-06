@@ -10,4 +10,7 @@ def check_if_url_www_function(current_url):
     print(urlparts.netloc)
     print('---------------------------------')
     return True
+  print('---------------------------------')
+  print(urlparts)
+  print('---------------------------------')
   return False

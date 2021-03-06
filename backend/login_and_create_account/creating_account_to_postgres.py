@@ -51,13 +51,13 @@ def creating_account_to_postgres_function():
   else:
     #==================
     www_start = check_if_url_www_function(request.url)
-    print('- - - - - - - - - - -')
-    print(www_start)
-    print('- - - - - - - - - - -')
+    #print('- - - - - - - - - - -')
+    #print(www_start)
+    #print('- - - - - - - - - - -')
     if www_start:
       #new_url = remove_www_from_domain_function(request.url)
       # Redirect page to non-www
-      print(' hello hello hello hello hello ------')
+      #print(' hello hello hello hello hello ------')
       return redirect("https://symbolnews.com/create_account", code=301)
     #==================
 

@@ -29,7 +29,7 @@ def before_request():
   # Domain Check #1 - Does it start with www.
   www_start = check_if_url_www_function(request.url)
   if www_start:
-    new_url = remove_www_from_domain_function(request.url)
+    #new_url = remove_www_from_domain_function(request.url)
     # Redirect page to non-www
     return redirect("https://symbolnews.com/create_account", code=301)
 
@@ -38,6 +38,15 @@ def creating_account_to_postgres_function():
   """
   Returns: Uploads new account info to Postgres database, if it does not already exist.
   """
+
+  www_start = check_if_url_www_function(request.url)
+  if www_start:
+    #new_url = remove_www_from_domain_function(request.url)
+    # Redirect page to non-www
+    return redirect("https://symbolnews.com/create_account", code=301)
+
+
+
   # If session info found
   if session and 'logged_in_user_email' in session and session.get('logged_in_user_email') != 'none':
     session.permanent = True

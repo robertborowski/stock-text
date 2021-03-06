@@ -44,5 +44,4 @@ def confirm_new_password_set_function():
   update_password_function(connection_postgres, cursor, hashed_user_password_from_html_form_decoded_for_database_insert, session['user_email_to_change_password'])
   close_connection_cursor_to_database_function(connection_postgres, cursor)
   
-  return redirect("https://symbolnews.com/home", code=301)
-  #return render_template('templates_login_and_create_account/index.html')
+  return redirect("https://symbolnews.com/", code=301)

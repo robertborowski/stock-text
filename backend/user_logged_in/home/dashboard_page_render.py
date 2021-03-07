@@ -19,13 +19,15 @@ def before_request():
 @dashboard_page_render.route("/dashboard", methods=["POST", "GET"])
 def dashboard_page_render_function():
   """Returns: User dashboard with user symbol tracking list"""
-  if session and (session.get('logged_in_user_email') != 'none' or session.get('logged_in_user_email') != None):
+  if session and session.get('logged_in_user_email') != 'none':
     #================================
+    """
     print('---------------------------------------')
     print(session.get('logged_in_user_email'))
     if session.get('logged_in_user_email') == 'none':
       return redirect("https://symbolnews.com/", code=301)
     print('---------------------------------------')
+    """
     #================================
     # Get info for the page render
     connection_postgres, cursor = connect_to_postgres_function()

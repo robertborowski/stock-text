@@ -20,7 +20,5 @@ def confirm_phone_number_page_function(confirm_phone_number_token_url_variable):
     close_connection_cursor_to_database_function(connection_postgres, cursor)
   except:
     print('the token is expired!')
-    return render_template('templates_user_logged_in/confirmed_phone_number_page.html',
-                          error_message_to_html = 'Verification link has expired.')
-  return render_template('templates_user_logged_in/confirmed_phone_number_page.html',
-                          user_phone_number_confirming_to_html = user_phone_number_confirming)
+    return 'Verification link has expired, account phone number not confirmed!'
+  return 'Account phone number confirmed!'

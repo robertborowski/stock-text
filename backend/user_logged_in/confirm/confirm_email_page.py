@@ -20,7 +20,5 @@ def confirm_email_page_function(confirm_email_token_url_variable):
     close_connection_cursor_to_database_function(connection_postgres, cursor)
   except:
     print('the token is expired!')
-    return render_template('templates_user_logged_in/confirmed_email_page.html',
-                          error_message_to_html = 'Verification link has expired.')
-  return render_template('templates_user_logged_in/confirmed_email_page.html',
-                          user_email_confirming_to_html = user_email_confirming)
+    return 'Verification link has expired, account email not confirmed!'
+  return 'Account email confirmed!'

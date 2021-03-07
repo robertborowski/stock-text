@@ -9,6 +9,8 @@ from backend.db.queries.select_queries.select_password_query import select_passw
 from backend.db.queries.select_queries.select_user_tracking_list import select_user_tracking_list_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 
+login_attempt = Blueprint("login_attempt", __name__, static_folder="static", template_folder="templates")
+@login_attempt.route("/backend_login_attempt")
 def login_attempt_function():
   """Returns: login attempt on the login_page"""
   # Sanitize user inputs

@@ -7,10 +7,10 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_all_pages_default.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/style.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_all_phone_size.css') }}">
-  <title>Create Account Page</title>
+  <title>Login</title>
 </head>
 <body>
-  <form action="{{ url_for('creating_account_to_postgres.creating_account_to_postgres_function') }}" method="post" class="login_and_create_account_form">
+  <form action="{{ url_for('login_attempt.login_attempt_function') }}" method="post" class="login_and_create_account_form">
     <div class="imgcontainer_logo_login_and_create_account">
       <h1>SymbolNews</h1>
     </div>
@@ -18,26 +18,19 @@
       <p><strong>Text messages that save you look up time on the latest stock news.</strong></p>
     </div>
     <div class="container_outer_login_and_create_account">
-      <div class="container_create_account">
-        <label for="user_first_name"><b>First Name</b></label>
-        <input type="text" class="input_type_login_and_create_account" placeholder="Enter First Name" name="user_first_name" pattern="[A-Za-z]{2,20}" required>
-        <label for="user_last_name"><b>Last Name</b></label>
-        <input type="text" class="input_type_login_and_create_account" placeholder="Enter Last Name" name="user_last_name" pattern="[A-Za-z]{2,20}" required>
-        <label for="phone_number"><b>Enter Phone Number</b></label>
-        <input type="tel" class="input_type_login_and_create_account" id="phone_number" name="phone_number" pattern="[0-9]{10}" placeholder="Format: 1234567890" required>
+      <div class="container_login">
         <label for="email"><b>Email</b></label>
         <input type="text" class="input_type_login_and_create_account" placeholder="Enter Email" name="email" pattern="[a-z0-9._-]{1,50}@[a-z0-9._-]{1,30}\.[a-z]{2,3}" required>
         <label for="psw"><b>Password</b></label>
         <input type="password" class="input_type_login_and_create_account" placeholder="Enter Password" name="psw" pattern="(?=^.{8,20}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Minimum 8 charactes, Maximum 20 characters: Uppercase, Lowercase, Number, Special" required>
-        <button type="submit" class="button_login_and_create_account">Create Account</button>
+        <button type="submit" class="button_login_and_create_account">Login</button>
         <div class='logging_in_account_error_message'>
           <p><strong>{{ error_message_from_python_to_html }}</strong></p>
         </div>
+        <span class="psw"><a href="{{ url_for('forgot_password_render_page.forgot_password_render_page_function') }}">Forgot password?</a></span>
       </div>
-      <div class="container_login">
-        <label>
-          <a href="{{ url_for('login_page_render.login_page_render_function') }}">Login to Existing Account</a>
-        </label>
+      <div class="container_create_account">
+        <a href="{{ url_for('create_account_render_page.create_account_function') }}"><button type="button" class="button_login_and_create_account">Create Account</button></a>
       </div>
     </div>
   </form>

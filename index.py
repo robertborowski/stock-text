@@ -4,9 +4,9 @@ import os, time
 import datetime
 # Logging in
 from backend.login_and_create_account.login.login_page_render import login_page_render    #<------- Updated this
+from backend.login_and_create_account.login.login_attempt import login_attempt    #<------- Updated this
 from backend.login_and_create_account.create_account.create_account_page_render import create_account_page_render    #<------- Updated this
 from backend.login_and_create_account.create_account.creating_account_to_postgres import creating_account_to_postgres
-from backend.login_and_create_account.login.login_attempt import login_attempt    #<------- Updated this
 from backend.login_and_create_account.forgot_password.forgot_password_render_page import forgot_password_render_page
 from backend.login_and_create_account.forgot_password.forgot_password_send_token_to_email import forgot_password_send_token_to_email
 from backend.login_and_create_account.forgot_password.set_new_password import set_new_password
@@ -38,12 +38,13 @@ app = Flask(__name__)
 app.secret_key = os.urandom(64)
 # Set session variables to perm so that user can remain signed in
 app.permanent_session_lifetime = datetime.timedelta(days=365)
+
 # Blue prints to run python script from multiple files
 # Logging in
 app.register_blueprint(login_page_render, url_prefix="")    #<------- Updated this
+app.register_blueprint(login_attempt, url_prefix="")    #<------- Updated this
 app.register_blueprint(create_account_page_render, url_prefix="")    #<------- Updated this
 app.register_blueprint(creating_account_to_postgres, url_prefix="")
-app.register_blueprint(login_attempt, url_prefix="")    #<------- Updated this
 app.register_blueprint(forgot_password_render_page, url_prefix="")
 app.register_blueprint(forgot_password_send_token_to_email, url_prefix="")
 app.register_blueprint(set_new_password, url_prefix="")

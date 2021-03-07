@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template, request, session, Blueprint
+from flask import Flask, redirect, request, session, Blueprint
 import bcrypt
 import psycopg2
 from psycopg2 import Error
@@ -6,7 +6,6 @@ from backend.utils.sanitize_user_inputs.sanitize_email_input_create_account impo
 from backend.utils.sanitize_user_inputs.sanitize_password_input_create_account import sanitize_password_input_create_account_function
 from backend.db.connect_to_database import connect_to_postgres_function
 from backend.db.queries.select_queries.select_password_query import select_password_query_function
-from backend.db.queries.select_queries.select_user_tracking_list import select_user_tracking_list_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 
 login_attempt = Blueprint("login_attempt", __name__, static_folder="static", template_folder="templates")

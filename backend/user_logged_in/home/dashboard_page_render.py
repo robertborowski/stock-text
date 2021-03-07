@@ -20,22 +20,13 @@ def before_request():
 def dashboard_page_render_function():
   """Returns: User dashboard with user symbol tracking list"""
   if session and session.get('logged_in_user_email') != 'none':
-    #================================
-    """
-    print('---------------------------------------')
-    print(session.get('logged_in_user_email'))
-    if session.get('logged_in_user_email') == 'none':
-      return redirect("https://symbolnews.com/", code=301)
-    print('---------------------------------------')
-    """
-    #================================
     # Get info for the page render
     connection_postgres, cursor = connect_to_postgres_function()
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
     close_connection_cursor_to_database_function(connection_postgres, cursor)
     
     # Render the page
-    return render_template('templates_user_logged_in/loggedin_home_page.html',
+    return render_template('templates_user_logged_in/loggedin_dashboard_page.html',
                             user_email_from_session_to_html = session['logged_in_user_email'],
                             user_first_name_from_session_to_html = session['logged_in_user_first_name'],
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],

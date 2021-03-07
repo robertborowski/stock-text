@@ -41,4 +41,4 @@ def login_attempt_function():
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                             symbol_tracking_list_from_python_to_html = symbol_tracking_list)"""
-    return redirect("https://symbolnews.com/create_account", code=301)
+    return redirect("https://symbolnews.com/dashboard", code=301)

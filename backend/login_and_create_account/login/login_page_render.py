@@ -15,15 +15,15 @@ def before_request():
 @login_page_render.route("/")
 def login_page_render_function():
   """Returns: Renders the login page"""
+  # When redirected to this page, first check if there is an session error message associated with this redirect
   if session and session.get('login_failed_message') != None:
     try:
       return render_template('templates_login_and_create_account/login_page.html', error_message_from_python_to_html = session['login_failed_message'])
     except:
-      return 'fail'
+      return 'failed'
     finally:
       session['login_failed_message'] = None
-      print('-- - - - - - - - - --')
-      print(session)
-      print('-- - - - - - - - - --')
+  
+  # If no error message than just render as per usual
   else:
     return render_template('templates_login_and_create_account/login_page.html')

@@ -15,4 +15,15 @@ def before_request():
 @login_page_render.route("/")
 def login_page_render_function():
   """Returns: Renders the login page"""
-  return render_template('templates_login_and_create_account/login_page.html')
+  if session['login_failed_message']:
+    try:
+      return render_template('templates_login_and_create_account/login_page.html', error_message_from_python_to_html = session['login_failed_message'])
+    except:
+      return 'fail'
+    finally:
+      session['login_failed_message'] = None
+      print('-- - - - - - - - - --')
+      print(session)
+      print('-- - - - - - - - - --')
+  else:
+    return render_template('templates_login_and_create_account/login_page.html')

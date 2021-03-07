@@ -25,7 +25,7 @@ def login_attempt_function():
   # Login attempt with valid inputs
   connection_postgres, cursor = connect_to_postgres_function()
   session['logged_in_user_uuid'], session['logged_in_user_email'], session['logged_in_user_first_name'], session['logged_in_user_last_name'], session['logged_in_user_phone_number'] = select_password_query_function(connection_postgres, cursor, user_email_from_html_form_sanitized, user_password_from_html_form_sanitized)
-  symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
+  #symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
   close_connection_cursor_to_database_function(connection_postgres, cursor)
   
   # Login attempt fail
@@ -35,10 +35,11 @@ def login_attempt_function():
   
   # Login attempt Success
   else:
-    return render_template('templates_user_logged_in/loggedin_home_page.html',
+    return 'LOGGED IN'
+    """return render_template('templates_user_logged_in/loggedin_home_page.html',
                             user_email_from_session_to_html = session['logged_in_user_email'],
                             user_first_name_from_session_to_html = session['logged_in_user_first_name'],
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
-                            symbol_tracking_list_from_python_to_html = symbol_tracking_list)
+                            symbol_tracking_list_from_python_to_html = symbol_tracking_list)"""
     #return redirect("https://symbolnews.com/home", code=301)

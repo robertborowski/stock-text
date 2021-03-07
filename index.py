@@ -3,7 +3,7 @@ from flask import Flask, session, url_for
 import os, time
 import datetime
 from backend.login_and_create_account.login.login_page_render import login_page_render    #<------- Updated this
-from backend.login_and_create_account.create_account.create_account_render_page import create_account_render_page
+from backend.login_and_create_account.create_account.create_account_page_render import create_account_page_render    #<------- Updated this
 from backend.login_and_create_account.create_account.creating_account_to_postgres import creating_account_to_postgres
 from backend.login_and_create_account.login.login_attempt import login_attempt
 from backend.user_logged_in.home.homepage import homepage
@@ -35,7 +35,7 @@ app.secret_key = os.urandom(64)
 app.permanent_session_lifetime = datetime.timedelta(days=365)
 # Blue prints to run python script from multiple files
 app.register_blueprint(login_page_render, url_prefix="")    #<------- Updated this
-app.register_blueprint(create_account_render_page, url_prefix="")
+app.register_blueprint(create_account_page_render, url_prefix="")    #<------- Updated this
 app.register_blueprint(creating_account_to_postgres, url_prefix="")
 app.register_blueprint(login_attempt, url_prefix="")
 app.register_blueprint(homepage, url_prefix="")

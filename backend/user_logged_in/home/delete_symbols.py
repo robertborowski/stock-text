@@ -27,7 +27,7 @@ def delete_symbols_function():
       delete_from_stock_tracking_table_function(connection_postgres, cursor, session['logged_in_user_uuid'], symbols_arr)
       symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
       close_connection_cursor_to_database_function(connection_postgres, cursor)
-      return jsonify('', render_template('templates_user_logged_in/loggedin_home_page_ajax_model.html',
+      return jsonify('', render_template('templates_user_logged_in/loggedin_dashboard_page_ajax_model.html',
                               user_email_from_session_to_html = session['logged_in_user_email'],
                               user_first_name_from_session_to_html = session['logged_in_user_first_name'],
                               user_last_name_from_session_to_html = session['logged_in_user_last_name'],

@@ -20,6 +20,11 @@ def before_request():
 def dashboard_page_render_function():
   """Returns: User dashboard with user symbol tracking list"""
   if session and (session.get('logged_in_user_email') != 'none' or session.get('logged_in_user_email') != None):
+    #================================
+    print('---------------------------------------')
+    print(session.get('logged_in_user_email'))
+    print('---------------------------------------')
+    #================================
     # Get info for the page render
     connection_postgres, cursor = connect_to_postgres_function()
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])

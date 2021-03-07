@@ -10,11 +10,10 @@ set_new_password = Blueprint("set_new_password", __name__, static_folder="static
 
 @set_new_password.before_request
 def before_request():
-  # Domain Check #1 - Does it start with www.
+  """Returns: The domain should work with both www and non-www domain"""
   www_start = check_if_url_www_function(request.url)
   if www_start:
     new_url = remove_www_from_domain_function(request.url)
-    # Redirect page to non-www
     return redirect(new_url, code=301)
 
 @set_new_password.route("/set_new_password/<confirm_email_token_url_variable>", methods=["POST", "GET"])
@@ -34,6 +33,6 @@ def set_new_password_function(confirm_email_token_url_variable):
   
   # If token does not match the one sent out
   except:
-    print('the token is expired!')
-    return render_template('templates_login_and_create_account/index.html')
-  return render_template('templates_login_and_create_account/index.html')
+    session['login_failed_message'] = 'Token has expired!'
+    return redirect("https://symbolnews.com/", code=301)
+  return redirect("https://symbolnews.com/", code=301)

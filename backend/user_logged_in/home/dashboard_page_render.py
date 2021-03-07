@@ -23,6 +23,8 @@ def dashboard_page_render_function():
     #================================
     print('---------------------------------------')
     print(session.get('logged_in_user_email'))
+    if session.get('logged_in_user_email') == 'none':
+      return redirect("https://symbolnews.com/", code=301)
     print('---------------------------------------')
     #================================
     # Get info for the page render

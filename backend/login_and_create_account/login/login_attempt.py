@@ -30,16 +30,16 @@ def login_attempt_function():
   
   # Login attempt fail
   if session['logged_in_user_email'] == 'none' or session['logged_in_user_first_name'] == 'none' or session['logged_in_user_last_name'] == 'none' or session['logged_in_user_phone_number'] == 'none':
-    return render_template('templates_login_and_create_account/login_page.html')
-    #return redirect("https://symbolnews.com/", code=301)
+    #return render_template('templates_login_and_create_account/login_page.html')
+    return redirect("https://symbolnews.com/", code=301)
   
   # Login attempt Success
   else:
-    return 'LOGGED IN'
+    #return 'LOGGED IN'
     """return render_template('templates_user_logged_in/loggedin_home_page.html',
                             user_email_from_session_to_html = session['logged_in_user_email'],
                             user_first_name_from_session_to_html = session['logged_in_user_first_name'],
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                             symbol_tracking_list_from_python_to_html = symbol_tracking_list)"""
-    #return redirect("https://symbolnews.com/home", code=301)
+    return redirect("https://symbolnews.com/create_account", code=301)

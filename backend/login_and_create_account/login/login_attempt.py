@@ -14,8 +14,8 @@ login_attempt = Blueprint("login_attempt", __name__, static_folder="static", tem
 def login_attempt_function():
   """Returns: login attempt on the login_page"""
   # Sanitize user inputs
-  user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get('form_data_login_attempt_email'))
-  user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('form_data_login_attempt_password'))
+  user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get('email'))
+  user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))
   
   # If postman invalid inputs used
   if user_email_from_html_form_sanitized == 'none' or user_password_from_html_form_sanitized == 'none':

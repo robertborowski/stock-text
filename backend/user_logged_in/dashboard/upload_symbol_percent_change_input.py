@@ -28,7 +28,7 @@ def before_request():
 @upload_symbol_percent_change_input.route("/dashboard/uploaded", methods=["POST", "GET"])
 def upload_symbol_percent_change_input_function():
   """Returns: sanatizes the user input, then uploads it into the database and data table"""
-  if session['logged_in_user_email'] != 'none':
+  if session and session.get('logged_in_user_email') != 'none':
     # Sanitize/confirm user inputs
     user_symbol_from_html_form_sanitized = sanitize_symbol_input_function(request.form.get('track_symbol'))
     does_symbol_exist = yfinance_check_if_symbol_exists_function(user_symbol_from_html_form_sanitized)

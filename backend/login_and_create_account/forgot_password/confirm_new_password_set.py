@@ -24,6 +24,10 @@ def before_request():
 @confirm_new_password_set.route("/confirm_new_password_set", methods=["POST", "GET"])
 def confirm_new_password_set_function():
   """Returns: confirms new password was set"""
+  # Check if user session data is already present/signed in
+  if session and session.get('logged_in_user_email') != 'none':
+    return redirect('https://symbolnews.com/dashboard', code=301)
+    
   # Sanitize new password
   user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))
   

@@ -25,7 +25,11 @@ def before_request():
 
 @forgot_password_send_token_to_email.route("/forgot_password/send_link_attempt", methods=["POST", "GET"])
 def forgot_password_send_token_to_email_function():
-  """Returns: reset link sent"""  
+  """Returns: reset link sent"""
+  # Check if user session data is already present/signed in
+  if session and session.get('logged_in_user_email') != 'none':
+    return redirect('https://symbolnews.com/dashboard', code=301)
+    
   # Sanatize the user email
   user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get('email'))
   

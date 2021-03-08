@@ -15,6 +15,10 @@ def before_request():
 @create_account_page_render.route("/create_account")
 def create_account_page_render_function():
   """Returns: Renders the create account page"""
+  # Check if user session data is already present/signed in
+  if session and session.get('logged_in_user_email') != 'none':
+    return redirect('https://symbolnews.com/dashboard', code=301)
+
   # When redirected to this page, first check if there is an session error message associated with this redirect
   if session and session.get('create_account_failed_message') != None:
     try:

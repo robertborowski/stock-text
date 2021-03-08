@@ -35,6 +35,10 @@ def before_request():
 @creating_account_to_postgres.route("/home/created", methods=["POST", "GET"])
 def creating_account_to_postgres_function():
   """Returns: Uploads new account info to Postgres database, if it does not already exist."""
+  # Check if user session data is already present/signed in
+  if session and session.get('logged_in_user_email') != 'none':
+    return redirect('https://symbolnews.com/dashboard', code=301)
+
   # Get and sanitize the user inputs from html form
   user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get('user_first_name'))
   user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get('user_last_name'))
@@ -64,7 +68,7 @@ def creating_account_to_postgres_function():
     return redirect("https://symbolnews.com/create_account", code=301)
   
   # Add the UUID and timestamp for datetime that the account was created
-  user_uuid_create_account = create_uuid_function("usr_")
+  user_uuid_create_account = create_uuid_function("user_")
   user_create_account_timestamp = create_timestamp_function()
 
   # Insert query function to insert new user created data into postgres
@@ -93,6 +97,7 @@ def creating_account_to_postgres_function():
     session['logged_in_user_first_name'] = user_first_name_from_html_form_sanitized
     session['logged_in_user_last_name'] = user_last_name_from_html_form_sanitized
     session['logged_in_user_phone_number'] = user_phone_number_from_html_form_sanitized
+    session.permanent = True
     return redirect("https://symbolnews.com/dashboard", code=301)
   
   # If above fails at any point redirect back to create account page

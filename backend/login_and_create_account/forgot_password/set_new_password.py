@@ -18,9 +18,11 @@ def before_request():
 
 @set_new_password.route("/set_new_password/<confirm_email_token_url_variable>", methods=["POST", "GET"])
 def set_new_password_function(confirm_email_token_url_variable):
-  """
-  Returns: confirms email token link
-  """
+  """Returns: confirms email token link"""
+  # Check if user session data is already present/signed in
+  if session and session.get('logged_in_user_email') != 'none':
+    return redirect('https://symbolnews.com/dashboard', code=301)
+    
   # Setup token serializer
   serializer_instance = URLSafeTimedSerializer(os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_EMAIL'))
   string_to_salt = os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_EMAIL').encode("utf-8")

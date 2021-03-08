@@ -93,6 +93,7 @@ def creating_account_to_postgres_function():
       send_phone_number_confirm_account_function(user_phone_number_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_phone_number_token)
     except:
       # If user inputs wrong format
+      set_session_variables_to_none_logout_function()
       session['create_account_failed_message'] = 'Unable to send to phone number provided!'
       return redirect("https://symbolnews.com/create_account", code=301)
     

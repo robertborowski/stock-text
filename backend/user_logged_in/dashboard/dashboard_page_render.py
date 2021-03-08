@@ -28,13 +28,18 @@ def dashboard_page_render_function():
     # When redirected to this page, first check if there is an session error message associated with this redirect
     if session and session.get('dashboard_upload_output_message') != None:
       try:
-        return render_template('templates_login_and_create_account/login_page.html', error_message_from_python_to_html = session['dashboard_upload_output_message'])
+        return render_template('templates_user_logged_in/loggedin_dashboard_page.html',
+                            user_email_from_session_to_html = session['logged_in_user_email'],
+                            user_first_name_from_session_to_html = session['logged_in_user_first_name'],
+                            user_last_name_from_session_to_html = session['logged_in_user_last_name'],
+                            user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
+                            symbol_tracking_list_from_python_to_html = symbol_tracking_list)
       except:
         return 'failed'
       finally:
         session['dashboard_upload_output_message'] = None
-
-
+    
+    
     # Render the page
     return render_template('templates_user_logged_in/loggedin_dashboard_page.html',
                             user_email_from_session_to_html = session['logged_in_user_email'],

@@ -39,17 +39,12 @@ def creating_account_to_postgres_function():
   if session and session.get('logged_in_user_email') != 'none':
     return redirect('https://symbolnews.com/dashboard', code=301)
 
-  try:
-    # Get and sanitize the user inputs from html form
-    user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get('user_first_name'))
-    user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get('user_last_name'))
-    user_phone_number_from_html_form_sanitized= sanitize_phone_number_input_create_account_function(request.form.get('phone_number'))
-    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get('email'))
-    user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))
-  except:
-    # If user inputs wrong format
-    session['create_account_failed_message'] = 'Incorrect format!'
-    return redirect("https://symbolnews.com/create_account", code=301)
+  # Get and sanitize the user inputs from html form
+  user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get('user_first_name'))
+  user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get('user_last_name'))
+  user_phone_number_from_html_form_sanitized= sanitize_phone_number_input_create_account_function(request.form.get('phone_number'))
+  user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get('email'))
+  user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))
 
   # If postman invalid inputs used
   if user_first_name_from_html_form_sanitized == 'none' or user_last_name_from_html_form_sanitized == 'none' or user_phone_number_from_html_form_sanitized == 'none' or user_email_from_html_form_sanitized == 'none' or user_password_from_html_form_sanitized == 'none':
@@ -94,7 +89,12 @@ def creating_account_to_postgres_function():
     
     # Send the confirmation email and text links to user
     send_email_confirm_account_function(user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_email_token)
-    send_phone_number_confirm_account_function(user_phone_number_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_phone_number_token)
+    try:
+      send_phone_number_confirm_account_function(user_phone_number_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_phone_number_token)
+    except:
+      # If user inputs wrong format
+      session['create_account_failed_message'] = 'Unable to send to phone number provided!'
+      return redirect("https://symbolnews.com/create_account", code=301)
     
     # Flask set session variables and redirect to dashboard
     session['logged_in_user_uuid'] = user_uuid_create_account

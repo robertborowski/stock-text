@@ -8,16 +8,16 @@ from backend.login_and_create_account.login.login_attempt import login_attempt  
 from backend.login_and_create_account.create_account.create_account_page_render import create_account_page_render    #<------- Updated this
 from backend.login_and_create_account.create_account.creating_account_to_postgres import creating_account_to_postgres    #<------- Updated this
 from backend.login_and_create_account.forgot_password.forgot_password_page_render import forgot_password_page_render    #<------- Updated this
-from backend.login_and_create_account.forgot_password.forgot_password_send_token_to_email import forgot_password_send_token_to_email
-from backend.login_and_create_account.forgot_password.set_new_password import set_new_password
-from backend.login_and_create_account.forgot_password.confirm_new_password_set import confirm_new_password_set
+from backend.login_and_create_account.forgot_password.forgot_password_send_token_to_email import forgot_password_send_token_to_email    #<------- Updated this
+from backend.login_and_create_account.forgot_password.set_new_password import set_new_password    #<------- Updated this
+from backend.login_and_create_account.forgot_password.confirm_new_password_set import confirm_new_password_set    #<------- Updated this
 # Logged in
 #from backend.user_logged_in.home.homepage import homepage    #<------- Updated this
-from backend.user_logged_in.home.dashboard_page_render import dashboard_page_render    #<------- Updated this
+from backend.user_logged_in.dashboard.dashboard_page_render import dashboard_page_render    #<------- Updated this
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
 from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page
-from backend.user_logged_in.home.upload_symbol_percent_change_input import upload_symbol_percent_change_input
-from backend.user_logged_in.home.delete_symbols import delete_symbols
+from backend.user_logged_in.dashboard.upload_symbol_percent_change_input import upload_symbol_percent_change_input
+from backend.user_logged_in.dashboard.delete_symbols import delete_symbols
 from backend.constant_run.background_run_main import pull_and_analyze_all_data_function
 from backend.user_logged_in.about.aboutpage import aboutpage
 from backend.user_logged_in.account.accountpage import accountpage
@@ -46,9 +46,9 @@ app.register_blueprint(login_attempt, url_prefix="")    #<------- Updated this
 app.register_blueprint(create_account_page_render, url_prefix="")    #<------- Updated this
 app.register_blueprint(creating_account_to_postgres, url_prefix="")    #<------- Updated this
 app.register_blueprint(forgot_password_page_render, url_prefix="")    #<------- Updated this
-app.register_blueprint(forgot_password_send_token_to_email, url_prefix="")
-app.register_blueprint(set_new_password, url_prefix="")
-app.register_blueprint(confirm_new_password_set, url_prefix="")
+app.register_blueprint(forgot_password_send_token_to_email, url_prefix="")    #<------- Updated this
+app.register_blueprint(set_new_password, url_prefix="")    #<------- Updated this
+app.register_blueprint(confirm_new_password_set, url_prefix="")    #<------- Updated this
 # Logged in
 #app.register_blueprint(homepage, url_prefix="")    #<------- Updated this
 app.register_blueprint(dashboard_page_render, url_prefix="")    #<------- Updated this

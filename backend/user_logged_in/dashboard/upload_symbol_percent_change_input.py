@@ -16,9 +16,7 @@ from backend.utils.yfinance.get_company_short_name import get_company_short_name
 upload_symbol_percent_change_input = Blueprint("upload_symbol_percent_change_input", __name__, static_folder="static", template_folder="templates")
 @upload_symbol_percent_change_input.route("/home/uploaded", methods=["POST", "GET"])
 def upload_symbol_percent_change_input_function():
-  """
-  Returns: sanatizes the user input, then uploads it into the database
-  """
+  """Returns: sanatizes the user input, then uploads it into the database and data table"""
   if session['logged_in_user_email'] != 'none':
     # Sanitize/confirm user inputs
     user_symbol_from_html_form_sanitized = sanitize_symbol_input_function(request.form.get('track_symbol'))
@@ -34,7 +32,7 @@ def upload_symbol_percent_change_input_function():
                               symbol_tracking_list_from_python_to_html = symbol_tracking_list)
     else:
       # Create uuid and timestamp for insertion
-      user_table_insert_uuid = create_uuid_function("sym_track_")
+      user_table_insert_uuid = create_uuid_function("symt")
       user_track_symbol_timestamp = create_timestamp_function()
       # Database
       connection_postgres, cursor = connect_to_postgres_function()

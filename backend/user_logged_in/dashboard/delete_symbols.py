@@ -10,6 +10,7 @@ from backend.db.queries.delete_queries.delete_from_stock_tracking_table import d
 delete_symbols = Blueprint("delete_symbols", __name__, static_folder="static", template_folder="templates")
 @delete_symbols.route("/delete_symbols", methods=["POST", "GET"])
 def delete_symbols_function():
+  """Returns: Delete symbols from the data table"""
   if session['logged_in_user_email'] != 'none':
     if request.method == 'POST':
       # Get the json symbols from ajax and sanitize/check if they exist

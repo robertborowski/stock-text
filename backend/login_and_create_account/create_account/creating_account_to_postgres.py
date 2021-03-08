@@ -94,7 +94,7 @@ def creating_account_to_postgres_function():
     except:
       # If user inputs wrong format
       set_session_variables_to_none_logout_function()
-      session['create_account_failed_message'] = 'Unable to send to phone number provided!'
+      session['create_account_failed_message'] = 'Unable to create account with the phone number provided!'
       return redirect("https://symbolnews.com/create_account", code=301)
     
     # Flask set session variables and redirect to dashboard

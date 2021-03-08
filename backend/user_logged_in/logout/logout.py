@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, session
+from flask import render_template, Blueprint, session, redirect
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 
 logout = Blueprint("logout", __name__, static_folder="static", template_folder="templates")
@@ -7,9 +7,9 @@ def logout_function():
   """
   Returns: Logs out of account
   """
-  if session['logged_in_user_email'] != 'none':
+  if session and session.get('logged_in_user_email') != 'none':
     set_session_variables_to_none_logout_function()
-    return render_template('templates_login_and_create_account/index.html')
+    return redirect("https://symbolnews.com/", code=301)
   else:
     set_session_variables_to_none_logout_function()
-    return render_template('templates_login_and_create_account/index.html')
+    return redirect("https://symbolnews.com/", code=301)

@@ -16,7 +16,7 @@ from backend.login_and_create_account.forgot_password.confirm_new_password_set i
 from backend.user_logged_in.dashboard.dashboard_page_render import dashboard_page_render    #<------- Updated this
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
 from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page
-from backend.user_logged_in.dashboard.upload_symbol_percent_change_input import upload_symbol_percent_change_input
+from backend.user_logged_in.dashboard.upload_symbol_percent_change_input import upload_symbol_percent_change_input    #<------- Updated this
 from backend.user_logged_in.dashboard.delete_symbols import delete_symbols
 from backend.constant_run.background_run_main import pull_and_analyze_all_data_function
 from backend.user_logged_in.about.aboutpage import aboutpage
@@ -54,7 +54,7 @@ app.register_blueprint(confirm_new_password_set, url_prefix="")    #<------- Upd
 app.register_blueprint(dashboard_page_render, url_prefix="")    #<------- Updated this
 app.register_blueprint(confirm_email_page, url_prefix="")
 app.register_blueprint(confirm_phone_number_page, url_prefix="")
-app.register_blueprint(upload_symbol_percent_change_input, url_prefix="")
+app.register_blueprint(upload_symbol_percent_change_input, url_prefix="")    #<------- Updated this
 app.register_blueprint(delete_symbols, url_prefix="")
 app.register_blueprint(aboutpage, url_prefix="")
 app.register_blueprint(accountpage, url_prefix="")

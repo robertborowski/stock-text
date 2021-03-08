@@ -14,6 +14,11 @@ def before_request():
 
 @login_page_render.route("/")
 def login_page_render_function():  
+  """Returns: The login page"""
+  # Check if user session data is already present/signed in
+  if session and session.get('logged_in_user_email') != 'none':
+    return redirect('https://symbolnews.com/dashboard', code=301)
+  
   # When redirected to this page, first check if there is an session error message associated with this redirect
   if session and session.get('login_failed_message') != None:
     try:

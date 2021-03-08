@@ -13,8 +13,7 @@ def before_request():
     return redirect(new_url, code=301)
 
 @login_page_render.route("/")
-def login_page_render_function():
-  """Returns: Renders the login page"""
+def login_page_render_function():  
   # When redirected to this page, first check if there is an session error message associated with this redirect
   if session and session.get('login_failed_message') != None:
     try:

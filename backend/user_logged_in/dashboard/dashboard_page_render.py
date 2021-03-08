@@ -25,6 +25,16 @@ def dashboard_page_render_function():
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
     close_connection_cursor_to_database_function(connection_postgres, cursor)
     
+    # When redirected to this page, first check if there is an session error message associated with this redirect
+    if session and session.get('dashboard_upload_output_message') != None:
+      try:
+        return render_template('templates_login_and_create_account/login_page.html', error_message_from_python_to_html = session['dashboard_upload_output_message'])
+      except:
+        return 'failed'
+      finally:
+        session['dashboard_upload_output_message'] = None
+
+
     # Render the page
     return render_template('templates_user_logged_in/loggedin_dashboard_page.html',
                             user_email_from_session_to_html = session['logged_in_user_email'],

@@ -32,7 +32,7 @@ def before_request():
     new_url = remove_www_from_domain_function(request.url)
     return redirect(new_url, code=301)
 
-@creating_account_to_postgres.route("/home/created", methods=["POST", "GET"])
+@creating_account_to_postgres.route("/dashboard/created", methods=["POST", "GET"])
 def creating_account_to_postgres_function():
   """Returns: Uploads new account info to Postgres database, if it does not already exist."""
   # Check if user session data is already present/signed in

@@ -33,37 +33,35 @@ def upload_symbol_percent_change_input_function():
     user_symbol_from_html_form_sanitized = sanitize_symbol_input_function(request.form.get('track_symbol'))
     does_symbol_exist = yfinance_check_if_symbol_exists_function(user_symbol_from_html_form_sanitized)
     user_symbol_percent_change_from_html_form_sanitized = sanitize_symbol_percent_change_input_function(request.form.get('track_percent_change'))
+    
+    # If user inputs were invalid
     if user_symbol_from_html_form_sanitized == 'none' or does_symbol_exist == 'none' or user_symbol_percent_change_from_html_form_sanitized == 'none':
-      output_message = 'Stock Symbol must exist and be 1-5 letters long. Minimum % Change must be 7.'
-      connection_postgres, cursor = connect_to_postgres_function()
-      symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
-      close_connection_cursor_to_database_function(connection_postgres, cursor)
-      return render_template('templates_user_logged_in/loggedin_dashboard_page.html',
-                              error_message_from_python_to_html = output_message,
-                              symbol_tracking_list_from_python_to_html = symbol_tracking_list)
+      session['dashboard_upload_output_message'] = 'Stock Symbol must exist and be 1-5 letters long. Minimum % Change must be 7.'
+      return redirect("https://symbolnews.com/dashboard", code=301)
+
+    # If user inputs were valid
     else:
       # Create uuid and timestamp for insertion
       user_table_insert_uuid = create_uuid_function("symt")
       user_track_symbol_timestamp = create_timestamp_function()
-      # Database
+
+      # Database insert
       connection_postgres, cursor = connect_to_postgres_function()
+      # Check if user is already tracking this symbol
       error_message_check_if_exist = select_stock_tracking_table_duplicates_function(connection_postgres, cursor, session['logged_in_user_uuid'], user_symbol_from_html_form_sanitized)
+      
+      # If user is not already tracking this symbol
       if error_message_check_if_exist == 'none':
         company_short_name_without_spaces = get_company_short_name_function(user_symbol_from_html_form_sanitized)
         google_news_url_link = get_google_news_page_function(company_short_name_without_spaces)
-        output_message = insert_stock_tracking_table_function(connection_postgres, cursor, user_table_insert_uuid, user_track_symbol_timestamp, user_symbol_from_html_form_sanitized, user_symbol_percent_change_from_html_form_sanitized, session['logged_in_user_uuid'], google_news_url_link)
+        session['dashboard_upload_output_message'] = insert_stock_tracking_table_function(connection_postgres, cursor, user_table_insert_uuid, user_track_symbol_timestamp, user_symbol_from_html_form_sanitized, user_symbol_percent_change_from_html_form_sanitized, session['logged_in_user_uuid'], google_news_url_link)
+        return redirect("https://symbolnews.com/dashboard", code=301)
+      
+      # If user is already tracking this symbol
       else:
-        output_message = error_message_check_if_exist
-        symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
-        close_connection_cursor_to_database_function(connection_postgres, cursor)
-        return render_template('templates_user_logged_in/loggedin_dashboard_page.html',
-                                error_message_from_python_to_html = output_message,
-                                symbol_tracking_list_from_python_to_html = symbol_tracking_list)
-      symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
-      close_connection_cursor_to_database_function(connection_postgres, cursor)
-      return render_template('templates_user_logged_in/loggedin_dashboard_page.html',
-                              error_message_from_python_to_html = output_message,
-                              symbol_tracking_list_from_python_to_html = symbol_tracking_list)
+        session['dashboard_upload_output_message'] = error_message_check_if_exist
+        return redirect("https://symbolnews.com/dashboard", code=301)
+
   # If no session info found
   else:
     set_session_variables_to_none_logout_function()

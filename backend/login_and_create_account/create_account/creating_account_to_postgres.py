@@ -39,12 +39,17 @@ def creating_account_to_postgres_function():
   if session and session.get('logged_in_user_email') != 'none':
     return redirect('https://symbolnews.com/dashboard', code=301)
 
-  # Get and sanitize the user inputs from html form
-  user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get('user_first_name'))
-  user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get('user_last_name'))
-  user_phone_number_from_html_form_sanitized= sanitize_phone_number_input_create_account_function(request.form.get('phone_number'))
-  user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get('email'))
-  user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))
+  try:
+    # Get and sanitize the user inputs from html form
+    user_first_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get('user_first_name'))
+    user_last_name_from_html_form_sanitized = sanitize_name_input_create_account_function(request.form.get('user_last_name'))
+    user_phone_number_from_html_form_sanitized= sanitize_phone_number_input_create_account_function(request.form.get('phone_number'))
+    user_email_from_html_form_sanitized = sanitize_email_input_create_account_function(request.form.get('email'))
+    user_password_from_html_form_sanitized = sanitize_password_input_create_account_function(request.form.get('psw'))
+  except:
+    # If user inputs wrong format
+    session['create_account_failed_message'] = 'Incorrect format!'
+    return redirect("https://symbolnews.com/create_account", code=301)
 
   # If postman invalid inputs used
   if user_first_name_from_html_form_sanitized == 'none' or user_last_name_from_html_form_sanitized == 'none' or user_phone_number_from_html_form_sanitized == 'none' or user_email_from_html_form_sanitized == 'none' or user_password_from_html_form_sanitized == 'none':

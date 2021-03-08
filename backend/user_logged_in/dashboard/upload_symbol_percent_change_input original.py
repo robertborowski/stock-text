@@ -12,19 +12,8 @@ from backend.db.queries.select_queries.select_user_tracking_list import select_u
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 from backend.utils.google_news.get_google_news_page import get_google_news_page_function
 from backend.utils.yfinance.get_company_short_name import get_company_short_name_function
-from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_function
-from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
 
 upload_symbol_percent_change_input = Blueprint("upload_symbol_percent_change_input", __name__, static_folder="static", template_folder="templates")
-
-@upload_symbol_percent_change_input.before_request
-def before_request():
-  """Returns: The domain should work with both www and non-www domain"""
-  www_start = check_if_url_www_function(request.url)
-  if www_start:
-    new_url = remove_www_from_domain_function(request.url)
-    return redirect(new_url, code=301)
-
 @upload_symbol_percent_change_input.route("/dashboard/uploaded", methods=["POST", "GET"])
 def upload_symbol_percent_change_input_function():
   """Returns: sanatizes the user input, then uploads it into the database and data table"""

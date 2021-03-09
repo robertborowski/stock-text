@@ -21,6 +21,7 @@ from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_pho
 from backend.utils.constant_run.twilio.send_phone_number_confirm_account import send_phone_number_confirm_account_function
 from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_function
 from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
+from backend.db.queries.delete_queries.delete_all_user_login_information_table_data import delete_all_user_login_information_table_data_function
 
 creating_account_to_postgres = Blueprint("creating_account_to_postgres", __name__, static_folder="static", template_folder="templates")
 
@@ -93,6 +94,11 @@ def creating_account_to_postgres_function():
       send_phone_number_confirm_account_function(user_phone_number_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_phone_number_token)
     except:
       # If user inputs wrong format
+      # Delete user that was just input to database
+      connection_postgres, cursor = connect_to_postgres_function()
+      delete_all_user_login_information_table_data_function(connection_postgres, cursor, user_uuid_create_account)
+      close_connection_cursor_to_database_function(connection_postgres, cursor)
+      
       set_session_variables_to_none_logout_function()
       session['create_account_failed_message'] = 'Unable to create account with the phone number provided!'
       return redirect("https://symbolnews.com/create_account", code=301)

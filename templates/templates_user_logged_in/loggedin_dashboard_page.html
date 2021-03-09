@@ -9,7 +9,7 @@
   <!-- Load the function call to display as table -->
   <script src="/static/javascript/user_logged_in/dashboard/stock_track_list_table.js" type="text/javascript" ></script>
   <script src="/static/javascript/user_logged_in/dashboard/get_table_rows_selected.js" type="text/javascript" ></script>
-  <script src="/static/javascript/user_logged_in/dashboard/disable_submit_button_after_clicked.js" type="text/javascript" ></script>
+  <script src="/static/javascript/user_logged_in/dashboard/check_before_submit.js" type="text/javascript" ></script>
   <!-- Load custom DataTable CSS -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_user_logged_in/style_data_tables.css') }}">
 {% endblock %}
@@ -18,7 +18,7 @@
 <div class="backdrop">
   <div class="page_guidelines top_of_page">
     <p>{{ output_message_to_html }}</p>
-    <form action="{{ url_for('upload_symbol_percent_change_input.upload_symbol_percent_change_input_function') }}" method="post" class="input_symbol_and_percent_change_form">
+    <form action="{{ url_for('upload_symbol_percent_change_input.upload_symbol_percent_change_input_function') }}" method="post" class="input_symbol_and_percent_change_form" onsubmit="return checkBeforeSubmit()">
       <label for="track_symbol"><b>Track Symbol</b></label>
       <input type="text" class="input_symbol_and_percent_change" placeholder="TSLA" name="track_symbol" required>
       <label for="track_percent_change"><b>Track Min % Change (Abs +-)</b></label>

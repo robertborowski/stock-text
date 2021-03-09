@@ -12,7 +12,7 @@
   <title>Create Account Page</title>
 </head>
 <body>
-  <form action="{{ url_for('creating_account_to_postgres.creating_account_to_postgres_function') }}" method="post" class="login_and_create_account_form" onsubmit="return checkBeforeSubmit()">
+  <form action="{{ url_for('creating_account_to_postgres.creating_account_to_postgres_function') }}" method="post" class="login_and_create_account_form" onsubmit="checkBeforeSubmit()">
     <div class="imgcontainer_logo_login_and_create_account">
       <h1>SymbolNews</h1>
     </div>

@@ -14,12 +14,12 @@ from backend.login_and_create_account.forgot_password.confirm_new_password_set i
 # Logged in
 #from backend.user_logged_in.home.homepage import homepage    #<------- Updated this
 from backend.user_logged_in.dashboard.dashboard_page_render import dashboard_page_render    #<------- Updated this
-from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
-from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page
+from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page    #<------- Updated this
+from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page    #<------- Updated this
 from backend.user_logged_in.dashboard.upload_symbol_percent_change_input import upload_symbol_percent_change_input    #<------- Updated this
-from backend.user_logged_in.dashboard.delete_symbols import delete_symbols
+from backend.user_logged_in.dashboard.delete_symbols import delete_symbols    #<------- Updated this
 from backend.constant_run.background_run_main import pull_and_analyze_all_data_function
-from backend.user_logged_in.about.aboutpage import aboutpage
+from backend.user_logged_in.about.about_page_render import about_page_render
 from backend.user_logged_in.account.accountpage import accountpage
 from backend.user_logged_in.account.accountpage_edit_information import accountpage_edit_information
 from backend.user_logged_in.account.updating_account_info_postgres import updating_account_info_postgres
@@ -52,11 +52,11 @@ app.register_blueprint(confirm_new_password_set, url_prefix="")    #<------- Upd
 # Logged in
 #app.register_blueprint(homepage, url_prefix="")    #<------- Updated this
 app.register_blueprint(dashboard_page_render, url_prefix="")    #<------- Updated this
-app.register_blueprint(confirm_email_page, url_prefix="")
-app.register_blueprint(confirm_phone_number_page, url_prefix="")
+app.register_blueprint(confirm_email_page, url_prefix="")    #<------- Updated this
+app.register_blueprint(confirm_phone_number_page, url_prefix="")    #<------- Updated this
 app.register_blueprint(upload_symbol_percent_change_input, url_prefix="")    #<------- Updated this
-app.register_blueprint(delete_symbols, url_prefix="")
-app.register_blueprint(aboutpage, url_prefix="")
+app.register_blueprint(delete_symbols, url_prefix="")    #<------- Updated this
+app.register_blueprint(about_page_render, url_prefix="")
 app.register_blueprint(accountpage, url_prefix="")
 app.register_blueprint(accountpage_edit_information, url_prefix="")
 app.register_blueprint(updating_account_info_postgres, url_prefix="")

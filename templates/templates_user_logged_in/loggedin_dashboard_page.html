@@ -17,8 +17,6 @@
 {% block content %} 
 <div class="backdrop">
   <div class="page_guidelines top_of_page">
-    <p>{{ display_output_message_email_to_html }}</p>
-    <p>{{ display_output_message_phone_number_to_html }}</p>
     <form action="{{ url_for('upload_symbol_percent_change_input.upload_symbol_percent_change_input_function') }}" method="post" class="input_symbol_and_percent_change_form" onsubmit="return checkBeforeSubmit()">
       <label for="track_symbol"><b>Track Symbol</b></label>
       <input type="text" class="input_symbol_and_percent_change" placeholder="TSLA" name="track_symbol" required>
@@ -27,6 +25,8 @@
       <button type="submit" class="button_symbol_and_percent_change">Submit</button>
       <div class="error_message_track_symbol">
         <p>{{ error_message_from_python_to_html }}</p>
+        <p>{{ display_output_message_email_to_html }}</p>
+        <p>{{ display_output_message_phone_number_to_html }}</p>
       </div>
     </form>
   </div>

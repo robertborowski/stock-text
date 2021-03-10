@@ -24,25 +24,8 @@ def dashboard_page_render_function():
     # Get info for the page render
     connection_postgres, cursor = connect_to_postgres_function()
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
-    confirmed_email_check, confirmed_phone_number_check = select_user_confirmed_account_status_function(connection_postgres, cursor, session['logged_in_user_uuid'])
+    display_output_message_email, display_output_message_phone_number = select_user_confirmed_account_status_function(connection_postgres, cursor, session['logged_in_user_uuid'])
     close_connection_cursor_to_database_function(connection_postgres, cursor)
-
-    # Check if email has been confirmed for this user
-    if confirmed_email_check == False:
-      display_output_message_email = 'Email not confirmed! Check promotions/spam folder.'
-    else:
-      display_output_message_email = ''
-
-    # Check if phone number has been confirmed for this user
-    if confirmed_phone_number_check == False:
-      display_output_message_phone_number = 'Phone number not confirmed! Check for text message that contains the word "SymbolNews".'
-    else:
-      display_output_message_phone_number = ''
-
-    print('- - - - - - - - - - - - 2. - - - - - - - - - - - - - - ')
-    print(display_output_message_email)
-    print(display_output_message_phone_number)
-    print('- - - - - - - - - - - - 2. - - - - - - - - - - - - - - ')
     # When redirected to this page, first check if there is an session error message associated with this redirect
     if session and session.get('dashboard_upload_output_message') != None:
       try:
@@ -67,7 +50,9 @@ def dashboard_page_render_function():
                             user_first_name_from_session_to_html = session['logged_in_user_first_name'],
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
-                            symbol_tracking_list_from_python_to_html = symbol_tracking_list)
+                            symbol_tracking_list_from_python_to_html = symbol_tracking_list,
+                            display_output_message_email_to_html = display_output_message_email,
+                            display_output_message_phone_number_to_html = display_output_message_phone_number)
 
   # If no session info found
   else:

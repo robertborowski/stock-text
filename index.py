@@ -1,5 +1,5 @@
 # Imports
-from flask import Flask, session, url_for
+from flask import Flask, session, url_for, send_from_directory
 import os, time
 import datetime
 # Logging in
@@ -29,6 +29,10 @@ from backend.user_logged_in.logout.logout import logout
 # For local server testing
 #from backend.constant_run.background_run_main import pull_and_analyze_all_data_function
 
+# Flask favicon
+#@app.route('/favicon.ico')
+#def favicon():
+#    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico',mimetype='image/vnd.microsoft.icon')
 
 # Set the timezone of the application when user creates account is will be in US/Easterm time
 os.environ['TZ'] = 'US/Eastern'

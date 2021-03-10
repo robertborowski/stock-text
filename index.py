@@ -18,7 +18,6 @@ from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
 from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page
 from backend.user_logged_in.dashboard.upload_symbol_percent_change_input import upload_symbol_percent_change_input
 from backend.user_logged_in.dashboard.delete_symbols import delete_symbols
-#from backend.constant_run.background_run_main import pull_and_analyze_all_data_function
 from backend.user_logged_in.about.about_page_render import about_page_render
 from backend.user_logged_in.account.account_page_render import account_page_render
 from backend.user_logged_in.account.account_page_edit_information import account_page_edit_information
@@ -27,6 +26,8 @@ from backend.user_logged_in.account.delete_account_page_render import delete_acc
 from backend.user_logged_in.account.delete_account_perm import delete_account_perm
 # Log out
 from backend.user_logged_in.logout.logout import logout
+# For local server testing
+#from backend.constant_run.background_run_main import pull_and_analyze_all_data_function
 
 
 # Set the timezone of the application when user creates account is will be in US/Easterm time
@@ -64,6 +65,9 @@ app.register_blueprint(delete_account_page_render, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
 # Log out
 app.register_blueprint(logout, url_prefix="")
+
+# For local server testing
+#pull_and_analyze_all_data_function()
 
 
 # Run the main program

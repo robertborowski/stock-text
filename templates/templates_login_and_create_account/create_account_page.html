@@ -7,6 +7,11 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_all_pages_default.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/style.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_all_phone_size.css') }}">
+  <!-- For favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/static/favicon_io/site.webmanifest">
   <!-- Load javascript function -->
   <script src="/static/javascript/user_logged_in/dashboard/check_before_submit.js" type="text/javascript" ></script>
   <title>Create Account Page</title>
@@ -15,6 +20,9 @@
   <form action="{{ url_for('creating_account_to_postgres.creating_account_to_postgres_function') }}" method="post" class="login_and_create_account_form" onsubmit="return checkBeforeSubmit()">
     <div class="imgcontainer_logo_login_and_create_account">
       <h1>SymbolNews</h1>
+      <div class = 'logo'>
+        <img src="/static/images/favicon_1.png" alt="SymbolNews logo">
+      </div>
     </div>
     <div class="about_section_login_and_create_account_page">
       <p><strong>Text messages that save you look up time on the latest stock news.</strong></p>

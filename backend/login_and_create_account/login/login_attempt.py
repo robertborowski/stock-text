@@ -38,4 +38,5 @@ def login_attempt_function():
   # Login attempt Success
   else:
     session.permanent = True
-    return redirect("https://symbolnews.com/dashboard", code=301)
+    return redirect("/dashboard", code=301)
+    #return redirect("https://symbolnews.com/dashboard", code=301)

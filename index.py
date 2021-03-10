@@ -76,10 +76,15 @@ app.register_blueprint(logout, url_prefix="")
 
 # Run the main program
 if __name__ == "__main__":
-  # Run local testing
-  #app.run(debug = True)
-  #app.run(debug = False)
 
-  # port and run for Heroku
-  port = int(os.environ.get('PORT', 5000))
-  app.run(host = '0.0.0.0', port = port)
+  server_env = os.environ.get('TESTING', 'false')
+
+  # if localhost
+  if server_env and server_env == 'true':
+    print('RUNNING ON LOCALHOST')
+    app.run(debug = False)
+  else:
+    # port and run for Heroku
+    print('RUNNING ON PROD')
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host = '0.0.0.0', port = port)

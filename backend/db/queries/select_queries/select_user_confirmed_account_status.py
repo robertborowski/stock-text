@@ -8,6 +8,9 @@ def select_user_confirmed_account_status_function(connection_postgres, cursor, u
   try:
     cursor.execute("SELECT confirmed_email,confirmed_phone_number FROM login_information_table WHERE uuid=%s", [uuid_to_search])
     result_row = cursor.fetchone()
+    print('- - - - - - - - - - - - - - - - - - - - - - - - - - ')
+    print(result_row)
+    print('- - - - - - - - - - - - - - - - - - - - - - - - - - ')
     confirm_status_email = result_row[0]
     confirm_status_phone_number = result_row[1]
     return confirm_status_email, confirm_status_phone_number

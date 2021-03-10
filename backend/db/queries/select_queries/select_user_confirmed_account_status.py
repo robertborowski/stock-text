@@ -18,13 +18,13 @@ def select_user_confirmed_account_status_function(connection_postgres, cursor, u
     if confirm_status_email == False:
       confirm_status_email = 'Email not confirmed! Check promotions/spam folder.'
     else:
-      confirm_status_email = None
+      confirm_status_email = ''
     
     # Phone number - Check if the results are False, if so assign new value
     if confirm_status_phone_number == False:
       confirm_status_phone_number = 'Phone number not confirmed! Check for text message that contains the word "SymbolNews".'
     else:
-      confirm_status_phone_number = None
+      confirm_status_phone_number = ''
     return confirm_status_email, confirm_status_phone_number
 
   # If Error when running the SQL  

@@ -63,6 +63,10 @@ header {
   background-color: #cdffcb;
 }
 
+.error_message_track_symbol {
+  color: red;
+}
+
 .page_guidelines {
   width: 80%;
   margin: 0 auto;

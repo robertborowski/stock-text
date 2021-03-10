@@ -5,6 +5,7 @@ from backend.db.close_connection_cursor_to_database import close_connection_curs
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_function
 from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
+from backend.db.queries.select_queries.select_user_confirmed_account_status import select_user_confirmed_account_status_function
 
 dashboard_page_render = Blueprint("dashboard_page_render", __name__, static_folder="static", template_folder="templates")
 
@@ -23,7 +24,21 @@ def dashboard_page_render_function():
     # Get info for the page render
     connection_postgres, cursor = connect_to_postgres_function()
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
+    confirmed_email_check, confirmed_phone_number_check = select_user_confirmed_account_status_function(connection_postgres, cursor, session['logged_in_user_uuid'])
     close_connection_cursor_to_database_function(connection_postgres, cursor)
+
+    # Check if email has been confirmed for this user
+    if confirmed_email_check == False:
+      display_output_message_email = 'Email not confirmed! Check promotions/spam folder.'
+    else:
+      display_output_message_email = ''
+
+    # Check if phone number has been confirmed for this user
+    if confirmed_phone_number_check == False:
+      display_output_message_phone_number = 'Phone number not confirmed! Check for text message that contains the word "SymbolNews".'
+    else:
+      display_output_message_phone_number = ''
+
     
     # When redirected to this page, first check if there is an session error message associated with this redirect
     if session and session.get('dashboard_upload_output_message') != None:
@@ -34,7 +49,9 @@ def dashboard_page_render_function():
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                             symbol_tracking_list_from_python_to_html = symbol_tracking_list,
-                            error_message_from_python_to_html = session['dashboard_upload_output_message'])
+                            error_message_from_python_to_html = session['dashboard_upload_output_message'],
+                            display_output_message_email_to_html = display_output_message_email,
+                            display_output_message_phone_number_to_html = display_output_message_phone_number)
       except:
         return 'failed'
       finally:

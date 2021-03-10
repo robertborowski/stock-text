@@ -39,7 +39,10 @@ def dashboard_page_render_function():
     else:
       display_output_message_phone_number = ''
 
-    
+    print('- - - - - - - - - - - - 2. - - - - - - - - - - - - - - ')
+    print(display_output_message_email)
+    print(display_output_message_phone_number)
+    print('- - - - - - - - - - - - 2. - - - - - - - - - - - - - - ')
     # When redirected to this page, first check if there is an session error message associated with this redirect
     if session and session.get('dashboard_upload_output_message') != None:
       try:

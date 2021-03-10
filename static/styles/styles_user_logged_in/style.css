@@ -65,6 +65,7 @@ header {
 
 .error_message_track_symbol {
   color: red;
+  font-weight: bold;
 }
 
 .page_guidelines {

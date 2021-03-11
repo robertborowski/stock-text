@@ -11,22 +11,28 @@ from backend.utils.constant_run.create_queue_to_text_out import create_queue_to_
 from backend.utils.constant_run.twilio.send_sms import send_sms_function
 
 def pull_and_analyze_all_data_function():
-  """
-  Return: Should run in the background automatically at intervals
-  """
-  # Get all data from db
+  """Return: Should run in the background automatically at intervals"""
+  # Connect to database
   connection_postgres, cursor = connect_to_postgres_function()
+  # Get all symbol tracking data from db
   all_data_symbol_track_arr_dicts = select_all_stock_tracking_info_function(connection_postgres, cursor)
+  # Get all phone number data from db
   all_data_phone_numbers_arr_dicts = select_all_user_phone_numbers_function(connection_postgres, cursor)
+  # Close connection
   close_connection_cursor_to_database_function(connection_postgres, cursor)
+  
   # Manipulate the pulled data into set & dicts
   unique_stocks_set = get_unique_stocks_set_function(all_data_symbol_track_arr_dicts)
   symbol_news_link_dict = invert_symbol_news_link_dict_function(all_data_symbol_track_arr_dicts)
   user_stocks_tracking_dict = invert_to_user_stocks_dict_function(all_data_symbol_track_arr_dicts)
   user_phone_numbers_dict = invert_to_user_phone_numbers_dict_function(all_data_phone_numbers_arr_dicts)
+  
   # Get yfinance information for the stock symbols as dict
   symbol_percent_changes_dict = get_latest_symbol_info_function(unique_stocks_set)
+  
   # Put all the information together into a queue
   queue_to_text_arr = create_queue_to_text_out_function(user_stocks_tracking_dict, user_phone_numbers_dict, symbol_percent_changes_dict, symbol_news_link_dict)
+  connection_postgres, cursor = connect_to_postgres_function()
   for i in queue_to_text_arr:
-    send_sms_function(i)
+    send_sms_function(connection_postgres, cursor, i)
+  close_connection_cursor_to_database_function(connection_postgres, cursor)

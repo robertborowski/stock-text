@@ -42,7 +42,7 @@ def upload_symbol_percent_change_input_function():
     # If user inputs were valid
     else:
       # Create uuid and timestamp for insertion
-      user_table_insert_uuid = create_uuid_function("symt")
+      user_table_insert_uuid = create_uuid_function("symt_")
       user_track_symbol_timestamp = create_timestamp_function()
 
       # Database insert

@@ -11,9 +11,7 @@ from backend.utils.constant_run.create_queue_to_text_out import create_queue_to_
 from backend.utils.constant_run.twilio.send_sms import send_sms_function
 
 def pull_and_analyze_all_data_function():
-  """
-  Return: Should run in the background automatically at intervals
-  """
+  """Return: Should run in the background automatically at intervals"""
   # Connect to database
   connection_postgres, cursor = connect_to_postgres_function()
   # Get all symbol tracking data from db
@@ -34,8 +32,10 @@ def pull_and_analyze_all_data_function():
   
   # Put all the information together into a queue
   queue_to_text_arr = create_queue_to_text_out_function(user_stocks_tracking_dict, user_phone_numbers_dict, symbol_percent_changes_dict, symbol_news_link_dict)
+  connection_postgres, cursor = connect_to_postgres_function()
   for i in queue_to_text_arr:
-    send_sms_function(i)
+    send_sms_function(connection_postgres, cursor, i)
+  close_connection_cursor_to_database_function(connection_postgres, cursor)
 
 # Run the main program
 if __name__ == "__main__":

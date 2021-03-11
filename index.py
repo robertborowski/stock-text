@@ -27,12 +27,12 @@ from backend.user_logged_in.account.delete_account_perm import delete_account_pe
 # Log out
 from backend.user_logged_in.logout.logout import logout
 # For local server testing
-from backend.constant_run.background_run_main import pull_and_analyze_all_data_function
+#from backend.constant_run.background_run_main import pull_and_analyze_all_data_function
 
 # Flask favicon
 #@app.route('/favicon.ico')
 #def favicon():
-#    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico',mimetype='image/vnd.microsoft.icon')
+# return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico',mimetype='image/vnd.microsoft.icon')
 
 # Set the timezone of the application when user creates account is will be in US/Easterm time
 os.environ['TZ'] = 'US/Eastern'
@@ -71,7 +71,7 @@ app.register_blueprint(delete_account_perm, url_prefix="")
 app.register_blueprint(logout, url_prefix="")
 
 # For local server testing
-pull_and_analyze_all_data_function()
+#pull_and_analyze_all_data_function()
 
 
 # Run the main program

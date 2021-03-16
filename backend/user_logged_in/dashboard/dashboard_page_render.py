@@ -26,6 +26,7 @@ def dashboard_page_render_function():
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
     display_output_message_email, display_output_message_phone_number = select_user_confirmed_account_status_function(connection_postgres, cursor, session['logged_in_user_uuid'])
     close_connection_cursor_to_database_function(connection_postgres, cursor)
+    
     # When redirected to this page, first check if there is an session error message associated with this redirect
     if session and session.get('dashboard_upload_output_message') != None:
       try:

@@ -20,7 +20,7 @@ def before_request():
 @dashboard_page_render.route("/dashboard", methods=["POST", "GET"])
 def dashboard_page_render_function():
   """Returns: User dashboard with user symbol tracking list"""
-  if session and (session.get('logged_in_user_email') != 'none' or session.get('logged_in_user_email') != None):
+  if session and session.get('logged_in_user_email') != 'none' and session.get('logged_in_user_email') != None:
     print('- - - - - - - - - - - - - - -')
     print(session.get('logged_in_user_email'))
     print('- - - - - - - - - - - - - - -')

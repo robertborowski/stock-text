@@ -5,8 +5,8 @@
   <!-- For responsive screen size changes -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_all_pages_default.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/style.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_all_phone_size.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/login_page/style.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_all_phone_size.css') }}">-->
   <!-- For favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png">
@@ -17,32 +17,50 @@
   <title>Login</title>
 </head>
 <body>
-  <form action="{{ url_for('login_attempt.login_attempt_function') }}" method="post" class="login_and_create_account_form" onsubmit="return checkBeforeSubmit()">
-    <div class="imgcontainer_logo_login_and_create_account">
-      <h1>SymbolNews</h1>
-      <!--<div class = 'logo'>
-        <img src="/static/images/favicon_1.png" alt="SymbolNews logo">
-      </div>-->
-    </div>
-    <div class="about_section_login_and_create_account_page">
-      <p><strong>Text messages that save you look up time on the latest stock news.</strong></p>
-    </div>
-    <div class="container_outer_login_and_create_account">
-      <div class="container_login">
-        <label for="email"><b>Email</b></label>
-        <input type="text" class="input_type_login_and_create_account" placeholder="Enter Email" name="email" pattern="[A-Za-z0-9._-]{1,50}@[A-Za-z0-9._-]{1,30}\.[A-Za-z]{2,3}" required>
-        <label for="psw"><b>Password</b></label>
-        <input type="password" class="input_type_login_and_create_account" placeholder="Enter Password" name="psw" pattern="(?=^.{8,20}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Minimum 8 charactes, Maximum 20 characters: Uppercase, Lowercase, Number, Special" required>
-        <button type="submit" class="button_login_and_create_account">Login</button>
-        <div class='logging_in_account_error_message'>
-          <p><strong>{{ error_message_from_python_to_html }}</strong></p>
+  <div class = 'homepage_top_half'>
+    <header class = "homepage_header">
+      <div class = "logo_site_name">
+        <div class = "logo">
+          <img src="/static/images/icon_outline_black.png" alt="SymbolNews logo">
         </div>
+        <div class = "site_name">
+          <h1>SymbolNews</h1>
+        </div>
+      </div>
+    </header>
+    <form action="{{ url_for('login_attempt.login_attempt_function') }}" method="post" class="login_and_create_account_form" onsubmit="return checkBeforeSubmit()">
+      <div class = "site_description_subtitle">
+        <p><strong>Text messages that save you look up time on the latest stock news.</strong></p>
+      </div>
+      <div class = "login_email">
+        <!--<label for="email"><b>Email</b></label>-->
+        <input type="text" class="input_type_login_and_create_account" placeholder="Enter Login Email" name="email" pattern="[A-Za-z0-9._-]{1,50}@[A-Za-z0-9._-]{1,30}\.[A-Za-z]{2,3}" required>
+      </div>
+      <div class = "login_password">
+        <!--<label for="psw"><b>Password</b></label>-->
+        <input type="password" class="input_type_login_and_create_account" placeholder="Enter Login Password" name="psw" pattern="(?=^.{8,20}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Minimum 8 charactes, Maximum 20 characters: Uppercase, Lowercase, Number, Special" required>
+      </div>
+      <div class = "login_button">
+        <button type="submit" class="button_login_and_create_account">Login</button>
+      </div>
+      <div class = "login_forgot_password">
+        <p><strong>{{ error_message_from_python_to_html }}</strong></p>
         <span class="psw"><a href="{{ url_for('forgot_password_page_render.forgot_password_page_render_function') }}">Forgot password?</a></span>
       </div>
-      <div class="container_create_account">
+      <div class = "login_create_account">
         <a href="{{ url_for('create_account_page_render.create_account_page_render_function') }}"><button type="button" class="button_login_and_create_account">Create Account</button></a>
       </div>
+    </form>
+  </div>
+  <div class = 'homepage_bottom_half'>
+    <div class = "symbol_news_steps">
+      <img src="/static/images/all_steps.png" alt="Example of what SymbolNews does">
     </div>
-  </form>
+  </div>
+  <footer>
+    <div class = "footer_items">
+      <p>SymbolNews</p>
+    </div>
+  </footer>
 </body>
 </html>

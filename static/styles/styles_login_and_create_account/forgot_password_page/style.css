@@ -1,0 +1,102 @@
+body {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 10% 80% 10%;
+  grid-template-rows: 600px;
+  background-color: rgb(169, 255, 169);
+}
+
+.page_top_half {
+  grid-column: 1 / 4;
+  grid-row: 1 / 2;
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  grid-template-rows: repeat(5, 1fr);
+}
+
+header[class = page_header] {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  display: grid;
+  justify-content: center;
+}
+
+.logo_site_name {
+  display: grid;
+  grid-template-columns: 75px 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo img {
+  height: 75px;
+  width: 75px;
+}
+
+form[class = login_and_create_account_form] {
+  grid-column: 2 / 3;
+  grid-row: 2 / 6;
+  display: grid;
+  justify-content: center;
+  grid-template-rows: repeat(8, 1fr);
+  gap: 10px;
+}
+
+.site_description_subtitle {
+  grid-row: 1 / 2;
+  display: grid;
+  text-align: center;
+}
+
+.forgot_password_subheader {
+  grid-row: 2 / 3;
+  display: grid;
+  justify-content: center;
+  align-items: end;
+}
+
+.forgot_password_subheader p {
+  font-size: 20px;
+}
+
+.forgot_password_email {
+  grid-row: 3 / 4;
+  display: grid;
+}
+
+.forgot_password_submit_button {
+  grid-row: 4 / 5;
+  display: grid;
+}
+
+.back_to_login {
+  grid-row: 5 / 6;
+  display: grid;
+}
+
+.error_message p {
+  color: red;
+}
+
+input[class=input_type_login_and_create_account] {
+  width: 100%;
+  padding: 5px 20px;
+  margin: 5px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button[class=button_login_and_create_account] {
+  background-color: #3f9a42;
+  color: white;
+  cursor: pointer;
+  border: none;
+  height: 100%;
+  width: 100%;
+  -webkit-appearance: none;
+}
+
+button[class=button_login_and_create_account]:hover {
+  opacity: 0.8;
+}

@@ -22,9 +22,22 @@ def dashboard_page_render_function():
   """Returns: User dashboard with user symbol tracking list"""
   if session and session.get('logged_in_user_email') != 'none' and session.get('logged_in_user_email') != None:
     # Get info for the page render
+    # Connect to database
     connection_postgres, cursor = connect_to_postgres_function()
+    
+    # Pull tracking list from databse
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
+    # Check if email and phone number are verified
     display_output_message_email, display_output_message_phone_number = select_user_confirmed_account_status_function(connection_postgres, cursor, session['logged_in_user_uuid'])
+    # If not verified yet, unhide the resend link text
+    resend_email_confirm_link = ''
+    resend_phone_number_confirm_link = ''
+    if len(display_output_message_email) >= 2:
+      resend_email_confirm_link = 'Resend email confirmation link.'
+    if len(display_output_message_phone_number) >= 2:
+      resend_phone_number_confirm_link = 'Resend phone number confirmation link.'
+
+    # Close the connnection to database
     close_connection_cursor_to_database_function(connection_postgres, cursor)
     
     # When redirected to this page, first check if there is an session error message associated with this redirect
@@ -38,7 +51,9 @@ def dashboard_page_render_function():
                             symbol_tracking_list_from_python_to_html = symbol_tracking_list,
                             error_message_from_python_to_html = session['dashboard_upload_output_message'],
                             display_output_message_email_to_html = display_output_message_email,
-                            display_output_message_phone_number_to_html = display_output_message_phone_number)
+                            display_output_message_phone_number_to_html = display_output_message_phone_number,
+                            resend_email_confirm_link_to_html = resend_email_confirm_link,
+                            resend_phone_number_confirm_link_to_html = resend_phone_number_confirm_link)
       except:
         return 'failed'
       finally:
@@ -53,7 +68,9 @@ def dashboard_page_render_function():
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                             symbol_tracking_list_from_python_to_html = symbol_tracking_list,
                             display_output_message_email_to_html = display_output_message_email,
-                            display_output_message_phone_number_to_html = display_output_message_phone_number)
+                            display_output_message_phone_number_to_html = display_output_message_phone_number,
+                            resend_email_confirm_link_to_html = resend_email_confirm_link,
+                            resend_phone_number_confirm_link_to_html = resend_phone_number_confirm_link)
 
   # If no session info found
   else:

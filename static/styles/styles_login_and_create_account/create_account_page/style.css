@@ -12,6 +12,7 @@ body {
   display: grid;
   grid-template-columns: 10% 80% 10%;
   grid-template-rows: repeat(5, 1fr);
+  justify-content: center;
 }
 
 header[class = page_header] {

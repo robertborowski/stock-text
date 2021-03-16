@@ -21,5 +21,5 @@ def confirm_phone_number_page_function(confirm_phone_number_token_url_variable):
   except:
     print('the token is expired!')
     return 'Verification link has expired, account phone number not confirmed!'
-  session['dashboard_upload_output_message'] = 'Account email confirmed!'
+  session['dashboard_upload_output_message'] = 'Account phone number confirmed!'
   return redirect("https://symbolnews.com/", code=301)

@@ -25,6 +25,11 @@ def resend_phone_confirm_link_function():
   if session and session.get('logged_in_user_email') != 'none' and session.get('logged_in_user_email') != None:
     # Set session variables
     user_phone_number = session.get('logged_in_user_phone_number')
+    print('-------------------1 --------------------')
+    print('-----------1 ------------')
+    print(user_phone_number)
+    print('------------1-----------')
+    print('-------------------------------1--------')
     user_first_name = session.get('logged_in_user_first_name')
 
     # Create tokens for email and phone number verification

@@ -22,7 +22,7 @@ def before_request():
 @resend_phone_confirm_link.route("/resend_phone_confirm_link", methods=["POST", "GET"])
 def resend_phone_confirm_link_function():
   """Returns: Uploads new account info to Postgres database, if it does not already exist."""
-  if session and session.get('logged_in_user_email') != 'none':
+  if session and session.get('logged_in_user_email') != 'none' and session.get('logged_in_user_email') != None:
     # Set session variables
     user_phone_number = session.get('logged_in_user_phone_number')
     user_first_name = session.get('logged_in_user_first_name')

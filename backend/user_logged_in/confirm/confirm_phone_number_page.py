@@ -22,8 +22,11 @@ def confirm_phone_number_page_function(confirm_phone_number_token_url_variable):
     update_to_confirmed_phone_number_function(connection_postgres, cursor, user_phone_number_confirming)
     close_connection_cursor_to_database_function(connection_postgres, cursor)
   except:
-    print('the token is expired!')
-    return 'Verification link has expired, account phone number not confirmed!'
+    # Set the session variables outgoing
+    session['dashboard_upload_output_message'] = 'the token is expired!'
+    
+    # Redirect to page
+    return redirect("https://symbolnews.com/dashboard", code=301)
 
   # Set the session variables outgoing
   session['dashboard_upload_output_message'] = 'Account phone number confirmed!'

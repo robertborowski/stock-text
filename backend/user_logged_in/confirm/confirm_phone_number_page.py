@@ -9,15 +9,19 @@ confirm_phone_number_page = Blueprint("confirm_phone_number_page", __name__, sta
 @confirm_phone_number_page.route("/confirm/phone/<confirm_phone_number_token_url_variable>", methods=["POST", "GET"])
 def confirm_phone_number_page_function(confirm_phone_number_token_url_variable):
   """Returns: confirms email token link"""
+  print('-------------------1 --------------------')
+  print('-----------1 ------------')
   serializer_instance = URLSafeTimedSerializer(os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_PHONE'))
   string_to_salt = os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_PHONE').encode("utf-8")
+  print('------------1-----------')
+  print('-------------------------------1--------')
   try:
     user_phone_number_confirming = serializer_instance.loads(confirm_phone_number_token_url_variable, salt=string_to_salt, max_age=3600)
-    print('---------------------------------------')
-    print('-----------------------')
+    print('------------2---------------------------')
+    print('-------------2----------')
     print(user_phone_number_confirming)
-    print('-----------------------')
-    print('---------------------------------------')
+    print('-------------2----------')
+    print('--------------2-------------------------')
     connection_postgres, cursor = connect_to_postgres_function()
     update_to_confirmed_phone_number_function(connection_postgres, cursor, user_phone_number_confirming)
     close_connection_cursor_to_database_function(connection_postgres, cursor)

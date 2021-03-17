@@ -13,6 +13,8 @@ def confirm_phone_number_page_function(confirm_phone_number_token_url_variable):
   print('-----------1 ------------')
   serializer_instance = URLSafeTimedSerializer(os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_PHONE'))
   string_to_salt = os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_PHONE').encode("utf-8")
+  print(serializer_instance)
+  print(string_to_salt)
   print('------------1-----------')
   print('-------------------------------1--------')
   try:

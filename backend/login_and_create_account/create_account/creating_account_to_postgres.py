@@ -64,8 +64,14 @@ def creating_account_to_postgres_function():
   
   # If email account already exists in database 
   if email_exists == 'Account already exists':
+    # Close connection to database
     close_connection_cursor_to_database_function(connection_postgres, cursor)
+    
+    # Set outgoing session messages
     session['create_account_failed_message'] = 'Account already exists'
+    session['login_failed_message'] = 'Account already exists'
+    
+    # Redirect to page
     return redirect("https://symbolnews.com/create_account", code=301)
   
   # Add the UUID and timestamp for datetime that the account was created

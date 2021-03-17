@@ -25,8 +25,11 @@ def login_page_render_function():
   
   # When redirected to this page, first check if there is an session error message associated with this redirect
   if session and session.get('login_failed_message') != None:
+    # Set the variables based on session inputs
+    login_page_message = session['login_failed_message']
+    
     try:
-      return render_template('templates_login_and_create_account/login_page.html', error_message_from_python_to_html = session['login_failed_message'], css_cache_busting_variable_to_html = css_cache_busting_variable)
+      return render_template('templates_login_and_create_account/login_page.html', error_message_from_python_to_html = login_page_message, css_cache_busting_variable_to_html = css_cache_busting_variable)
     except:
       return 'failed'
     finally:

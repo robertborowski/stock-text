@@ -19,5 +19,10 @@ def confirm_email_page_function(confirm_email_token_url_variable):
   except:
     print('the token is expired!')
     return 'Verification link has expired, account email not confirmed!'
+
+  # Set the session variables outgoing
   session['dashboard_upload_output_message'] = 'Account email confirmed!'
+  session['login_failed_message'] = 'Account email confirmed!'
+
+  # Redirect to page
   return redirect("https://symbolnews.com/", code=301)

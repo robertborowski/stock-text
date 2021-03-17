@@ -24,6 +24,7 @@ def confirm_phone_number_page_function(confirm_phone_number_token_url_variable):
   except:
     # Set the session variables outgoing
     session['dashboard_upload_output_message'] = 'the token is expired!'
+    session['login_failed_message'] = 'the token is expired!'
     
     # Redirect to page
     return redirect("https://symbolnews.com/dashboard", code=301)

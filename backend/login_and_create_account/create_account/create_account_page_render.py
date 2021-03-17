@@ -20,7 +20,7 @@ def create_account_page_render_function():
   css_cache_busting_variable = create_uuid_function('css_')
 
   # Check if user session data is already present/signed in
-  if session and session.get('logged_in_user_email') != 'none':
+  if session and session.get('logged_in_user_email') != 'none' and session.get('logged_in_user_email') != None:
     return redirect('https://symbolnews.com/dashboard', code=301)
 
   # When redirected to this page, first check if there is an session error message associated with this redirect

@@ -24,6 +24,7 @@ from backend.user_logged_in.account.updating_account_info_postgres import updati
 from backend.user_logged_in.account.delete_account_page_render import delete_account_page_render
 from backend.user_logged_in.account.delete_account_perm import delete_account_perm
 from backend.user_logged_in.dashboard.resend_email_confirm_link import resend_email_confirm_link
+from backend.user_logged_in.dashboard.resend_phone_confirm_link import resend_phone_confirm_link
 # Log out
 from backend.user_logged_in.logout.logout import logout
 
@@ -63,6 +64,7 @@ app.register_blueprint(updating_account_info_postgres, url_prefix="")
 app.register_blueprint(delete_account_page_render, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
 app.register_blueprint(resend_email_confirm_link, url_prefix="")
+app.register_blueprint(resend_phone_confirm_link, url_prefix="")
 # Log out
 app.register_blueprint(logout, url_prefix="")
 

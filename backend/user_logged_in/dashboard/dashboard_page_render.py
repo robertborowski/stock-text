@@ -29,12 +29,16 @@ def dashboard_page_render_function():
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
     # Check if email and phone number are verified
     display_output_message_email, display_output_message_phone_number = select_user_confirmed_account_status_function(connection_postgres, cursor, session['logged_in_user_uuid'])
+    # Check if None
+
     # If not verified yet, unhide the resend link text
     resend_email_confirm_link = ''
     resend_phone_number_confirm_link = ''
-    if len(display_output_message_email) >= 2:
+
+    # Add the resend link text words to html file if they are not blank/None
+    if display_output_message_email != None and len(display_output_message_email) >= 2:
       resend_email_confirm_link = 'Resend email confirmation link.'
-    if len(display_output_message_phone_number) >= 2:
+    if display_output_message_phone_number != None and len(display_output_message_phone_number) >= 2:
       resend_phone_number_confirm_link = 'Resend phone number confirmation link.'
 
     # Close the connnection to database

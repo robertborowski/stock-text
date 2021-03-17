@@ -12,7 +12,6 @@ from backend.login_and_create_account.forgot_password.forgot_password_send_token
 from backend.login_and_create_account.forgot_password.set_new_password import set_new_password
 from backend.login_and_create_account.forgot_password.confirm_new_password_set import confirm_new_password_set
 # Logged in
-#from backend.user_logged_in.home.homepage import homepage
 from backend.user_logged_in.dashboard.dashboard_page_render import dashboard_page_render
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
 from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page
@@ -24,15 +23,12 @@ from backend.user_logged_in.account.account_page_edit_information import account
 from backend.user_logged_in.account.updating_account_info_postgres import updating_account_info_postgres
 from backend.user_logged_in.account.delete_account_page_render import delete_account_page_render
 from backend.user_logged_in.account.delete_account_perm import delete_account_perm
+from backend.user_logged_in.dashboard.resend_email_confirm_link import resend_email_confirm_link
 # Log out
 from backend.user_logged_in.logout.logout import logout
+
 # For local server testing
 #from backend.constant_run.background_run_main import pull_and_analyze_all_data_function
-
-# Flask favicon
-#@app.route('/favicon.ico')
-#def favicon():
-# return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico',mimetype='image/vnd.microsoft.icon')
 
 # Set the timezone of the application when user creates account is will be in US/Easterm time
 os.environ['TZ'] = 'US/Eastern'
@@ -55,7 +51,6 @@ app.register_blueprint(forgot_password_send_token_to_email, url_prefix="")
 app.register_blueprint(set_new_password, url_prefix="")
 app.register_blueprint(confirm_new_password_set, url_prefix="")
 # Logged in
-#app.register_blueprint(homepage, url_prefix="")
 app.register_blueprint(dashboard_page_render, url_prefix="")
 app.register_blueprint(confirm_email_page, url_prefix="")
 app.register_blueprint(confirm_phone_number_page, url_prefix="")
@@ -67,6 +62,7 @@ app.register_blueprint(account_page_edit_information, url_prefix="")
 app.register_blueprint(updating_account_info_postgres, url_prefix="")
 app.register_blueprint(delete_account_page_render, url_prefix="")
 app.register_blueprint(delete_account_perm, url_prefix="")
+app.register_blueprint(resend_email_confirm_link, url_prefix="")
 # Log out
 app.register_blueprint(logout, url_prefix="")
 

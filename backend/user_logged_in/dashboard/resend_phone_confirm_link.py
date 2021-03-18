@@ -6,7 +6,6 @@ from backend.utils.app_before_setup.remove_www_from_domain import remove_www_fro
 from backend.login_and_create_account.create_confirm_token import create_confirm_token_function
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page_function
-from backend.utils.constant_run.twilio.send_email_confirm_account import send_email_confirm_account_function
 from backend.utils.constant_run.twilio.send_phone_number_confirm_account import send_phone_number_confirm_account_function
 
 resend_phone_confirm_link = Blueprint("resend_phone_confirm_link", __name__, static_folder="static", template_folder="templates")
@@ -25,15 +24,10 @@ def resend_phone_confirm_link_function():
   if session and session.get('logged_in_user_email') != 'none' and session.get('logged_in_user_email') != None:
     # Set session variables
     user_phone_number = session.get('logged_in_user_phone_number')
-    print('-------------------1 --------------------')
-    print('-----------1 ------------')
-    print(user_phone_number)
-    print('------------1-----------')
-    print('-------------------------------1--------')
     user_first_name = session.get('logged_in_user_first_name')
 
     # Create tokens for email and phone number verification
-    confirm_phone_number_token = create_confirm_token_function(user_phone_number, os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_EMAIL'), os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_EMAIL'))
+    confirm_phone_number_token = create_confirm_token_function(user_phone_number, os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_PHONE'), os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_PHONE'))
     
     # Create the URL links for email and phone number verification
     url_for('confirm_phone_number_page.confirm_phone_number_page_function', confirm_phone_number_token_url_variable = confirm_phone_number_token)

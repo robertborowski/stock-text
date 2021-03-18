@@ -17,8 +17,12 @@ def confirm_email_page_function(confirm_email_token_url_variable):
     update_to_confirmed_email_function(connection_postgres, cursor, user_email_confirming)
     close_connection_cursor_to_database_function(connection_postgres, cursor)
   except:
-    print('the token is expired!')
-    return 'Verification link has expired, account email not confirmed!'
+    # Set the session variables outgoing
+    session['dashboard_upload_output_message'] = 'the phone number token has expired!'
+    session['login_failed_message'] = 'the phone number token has expired!'
+    
+    # Redirect to page
+    return redirect("https://symbolnews.com/dashboard", code=301)
 
   # Set the session variables outgoing
   session['dashboard_upload_output_message'] = 'Account email confirmed!'

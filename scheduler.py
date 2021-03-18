@@ -11,6 +11,15 @@ from backend.utils.constant_run.create_queue_to_text_out import create_queue_to_
 from backend.utils.constant_run.twilio.send_sms import send_sms_function
 from backend.utils.constant_run.twilio.send_sms_number_of_failed_texts import send_sms_number_of_failed_texts_function
 
+def pretty(d, indent=0):
+  for key, value in d.items():
+    print('\t' * indent + str(key))
+    if isinstance(value, dict):
+      pretty(value, indent+1)
+    else:
+      print('\t' * (indent+1) + str(value))
+
+
 def pull_and_analyze_all_data_function():
   """Return: Should run in the background automatically at intervals"""
   # Connect to database
@@ -30,6 +39,9 @@ def pull_and_analyze_all_data_function():
   
   # Get yfinance information for the stock symbols as dict
   symbol_percent_changes_dict = get_latest_symbol_info_function(unique_stocks_set)
+  print('- - - - - - - - - - -')
+  #pretty(symbol_percent_changes_dict)
+  print('- - - - - - - - - - -')
   
   # Put all the information together into a queue
   queue_to_text_arr = create_queue_to_text_out_function(user_stocks_tracking_dict, user_phone_numbers_dict, symbol_percent_changes_dict, symbol_news_link_dict)

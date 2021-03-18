@@ -40,7 +40,9 @@ def pull_and_analyze_all_data_function():
   # Get yfinance information for the stock symbols as dict
   symbol_percent_changes_dict = get_latest_symbol_info_function(unique_stocks_set)
   print('- - - - - - - - - - -')
-  #pretty(symbol_percent_changes_dict)
+  print('- - - - - - - - - - -')
+  pretty(symbol_percent_changes_dict)
+  print('- - - - - - - - - - -')
   print('- - - - - - - - - - -')
   
   # Put all the information together into a queue
@@ -62,8 +64,8 @@ def pull_and_analyze_all_data_function():
   """
   if num_texts_failed_to_send != 0:
     send_sms_number_of_failed_texts_function(connection_postgres, cursor, num_texts_failed_to_send)
+  #send_sms_number_of_failed_texts_function(connection_postgres, cursor, num_texts_failed_to_send)
   """
-  send_sms_number_of_failed_texts_function(connection_postgres, cursor, num_texts_failed_to_send)
 
   # Close connection to database
   close_connection_cursor_to_database_function(connection_postgres, cursor)

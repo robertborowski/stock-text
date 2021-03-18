@@ -9,6 +9,7 @@ from backend.db.queries.select_queries.select_all_user_phone_numbers import sele
 from backend.utils.constant_run.invert_to_user_phone_numbers_dict import invert_to_user_phone_numbers_dict_function
 from backend.utils.constant_run.create_queue_to_text_out import create_queue_to_text_out_function
 from backend.utils.constant_run.twilio.send_sms import send_sms_function
+from backend.utils.constant_run.twilio.send_sms_number_of_failed_texts import send_sms_number_of_failed_texts_function
 
 def pull_and_analyze_all_data_function():
   """Return: Should run in the background automatically at intervals"""
@@ -32,9 +33,27 @@ def pull_and_analyze_all_data_function():
   
   # Put all the information together into a queue
   queue_to_text_arr = create_queue_to_text_out_function(user_stocks_tracking_dict, user_phone_numbers_dict, symbol_percent_changes_dict, symbol_news_link_dict)
+
+  # Set variables for sending texts
+  num_texts_failed_to_send = 0
+
+  # Open connection to database
   connection_postgres, cursor = connect_to_postgres_function()
   for i in queue_to_text_arr:
-    send_sms_function(connection_postgres, cursor, i)
+    try:
+      send_sms_function(connection_postgres, cursor, i)
+    except:
+      num_texts_failed_to_send += 1
+      pass
+
+  # If any texts failed to send
+  """
+  if num_texts_failed_to_send != 0:
+    send_sms_number_of_failed_texts_function(connection_postgres, cursor, num_texts_failed_to_send)
+  """
+  send_sms_number_of_failed_texts_function(connection_postgres, cursor, num_texts_failed_to_send)
+
+  # Close connection to database
   close_connection_cursor_to_database_function(connection_postgres, cursor)
 
 # Run the main program

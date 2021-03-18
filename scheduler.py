@@ -64,8 +64,11 @@ def pull_and_analyze_all_data_function():
   """
   if num_texts_failed_to_send != 0:
     send_sms_number_of_failed_texts_function(connection_postgres, cursor, num_texts_failed_to_send)
-  #send_sms_number_of_failed_texts_function(connection_postgres, cursor, num_texts_failed_to_send)
   """
+  try:
+    send_sms_number_of_failed_texts_function(connection_postgres, cursor, num_texts_failed_to_send)
+  except:
+    pass
 
   # Close connection to database
   close_connection_cursor_to_database_function(connection_postgres, cursor)

@@ -16,7 +16,7 @@ def send_sms_number_of_failed_texts_function(connection_postgres, cursor, num_te
   auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
   client = Client(account_sid, auth_token)
 
-  message = client.messages.create(num_texts_failed_to_send + ' texts failed to send today.',
+  message = client.messages.create(str(num_texts_failed_to_send) + ' texts failed to send today.',
                                   from_=os.environ.get('TWILIO_PHONE_NUMBER'),
                                   to=phone_number)
   print(message.sid)

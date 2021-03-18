@@ -9,16 +9,7 @@ from backend.db.queries.select_queries.select_all_user_phone_numbers import sele
 from backend.utils.constant_run.invert_to_user_phone_numbers_dict import invert_to_user_phone_numbers_dict_function
 from backend.utils.constant_run.create_queue_to_text_out import create_queue_to_text_out_function
 from backend.utils.constant_run.twilio.send_sms import send_sms_function
-from backend.utils.constant_run.twilio.send_sms_number_of_failed_texts import send_sms_number_of_failed_texts_function
-
-def pretty(d, indent=0):
-  for key, value in d.items():
-    print('\t' * indent + str(key))
-    if isinstance(value, dict):
-      pretty(value, indent+1)
-    else:
-      print('\t' * (indent+1) + str(value))
-
+from backend.utils.constant_run.twilio.send_summary_sms_text import send_summary_sms_text_function
 
 def pull_and_analyze_all_data_function():
   """Return: Should run in the background automatically at intervals"""
@@ -39,16 +30,12 @@ def pull_and_analyze_all_data_function():
   
   # Get yfinance information for the stock symbols as dict
   symbol_percent_changes_dict = get_latest_symbol_info_function(unique_stocks_set)
-  print('- - - - - - - - - - -')
-  print('- - - - - - - - - - -')
-  pretty(symbol_percent_changes_dict)
-  print('- - - - - - - - - - -')
-  print('- - - - - - - - - - -')
   
   # Put all the information together into a queue
   queue_to_text_arr = create_queue_to_text_out_function(user_stocks_tracking_dict, user_phone_numbers_dict, symbol_percent_changes_dict, symbol_news_link_dict)
 
-  # Set variables for sending texts
+  # Set variables for sending summary text to myself
+  num_texts_to_send_out = len(queue_to_text_arr)
   num_texts_failed_to_send = 0
 
   # Open connection to database
@@ -60,13 +47,9 @@ def pull_and_analyze_all_data_function():
       num_texts_failed_to_send += 1
       pass
 
-  # If any texts failed to send
-  """
-  if num_texts_failed_to_send != 0:
-    send_sms_number_of_failed_texts_function(connection_postgres, cursor, num_texts_failed_to_send)
-  """
+  # Send summary text to myself
   try:
-    send_sms_number_of_failed_texts_function(connection_postgres, cursor, num_texts_failed_to_send)
+    send_summary_sms_text_function(connection_postgres, cursor, num_texts_failed_to_send, num_texts_to_send_out)
   except:
     pass
 

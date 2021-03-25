@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SymbolNews</title>
+  
+  <!-- Connect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  
+  <!-- For responsive screen size changes -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Connect to the style pages -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/landing_page/style_all_parts.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/landing_page/style_header.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/landing_page/style_main.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/landing_page/style_step1_container.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/landing_page/style_step2_container.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/landing_page/style_footer.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/static/favicon_io/site.webmanifest">
+  
+  <!-- Load javascript function(s) -->
+  <script src="/static/javascript/user_logged_in/dashboard/check_before_submit.js" type="text/javascript" ></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class = "site_name_and_logo">
+        <a href="{{ url_for('landing_page_render.landing_page_render_function') }}"><img src="/static/images/icon_outline_white.png" alt="SymbolNews icon"></a>
+        <a href="{{ url_for('landing_page_render.landing_page_render_function') }}"><h1>SymbolNews</h1></a>
+      </div>
+      <ul>
+        <li><a href="{{ url_for('login_page_render.login_page_render_function') }}"><button class = "button_login"><strong>Login</strong></button></a></li>
+        <li><a href="{{ url_for('create_account_page_render.create_account_page_render_function') }}"><button class = "button_create_account"><strong>Create Account</strong></button></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class = "step1_containter">
+      <div class = "step1_instuctions">
+        <p><strong>{{ error_message_from_python_to_html }}</strong></p>
+        <p>1. Add public company symbols and % change thresholds to your tracker.</p>
+      </div>
+      <div class = "images_and_thresholds">
+        <div class = "box logo1"><img src="/static/images/amazon_logo.png" alt="Amazon logo"></div>
+        <div class = "box threshold1"><p>7%</p></div>
+
+        <div class = "box logo2"><img src="/static/images/square_logo.png" alt="Square logo"></div>
+        <div class = "box threshold2"><p>10%</p></div>
+
+        <div class = "box logo3"><img src="/static/images/shopify_logo.png" alt="Shopify logo"></div>
+        <div class = "box threshold3"><p>8%</p></div>
+
+        <div class = "box logo4"><img src="/static/images/tesla_logo.png" alt="Tesla logo"></div>
+        <div class = "box threshold4"><p>7%</p></div>
+
+        <div class = "box logo5"><img src="/static/images/peloton_logo.png" alt="Peloton logo"></div>
+        <div class = "box threshold5"><p>9%</p></div>
+
+        <div class = "box logo6"><img src="/static/images/salesforce_logo.png" alt="Salesforce logo"></div>
+        <div class = "box threshold6"><p>7%</p></div>
+      </div>
+    </div>
+
+    <div class = "step2_background">
+    </div>
+
+    <div class = "step2_containter">
+      <div class = "step_get_text">
+        <p>2. Recieve text when symbol closes past set notification threshold. Click link for latest company news articles.</p>
+        <img src="/static/images/step 2 with companies3.png" alt="Example text from SymbolNews">
+      </div>
+      <div class = "step_open_news">
+        <p>3. Now you are up to date on the latest news for the companies you care about!</p>
+        <img src="/static/images/step 3 open news.png" alt="Example news link from SymbolNews">
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <ul>
+      <li><a href="#">About</a></li>
+      <li><a href="{{ url_for('landing_page_render.landing_page_render_function') }}"><img src="/static/images/icon_outline_white.png" alt="SymbolNews icon"></a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </footer>
+</body>
+</html>

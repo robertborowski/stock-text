@@ -1,67 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
+  <title>SymbolNews - Login</title>
+  
+  <!-- Connect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  
   <!-- For responsive screen size changes -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_all_pages_default.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/create_account_page/style.css') }}?v={{ css_cache_busting_variable_to_html }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_all_phone_size.css') }}">
-  <!-- For favicon -->
+  
+  <!-- Connect to the style pages -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/create_account_page/style_all_parts.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/create_account_page/style_header.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/create_account_page/style_main.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/create_account_page/form_container.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/create_account_page/style_footer.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon_io/favicon-16x16.png">
   <link rel="manifest" href="/static/favicon_io/site.webmanifest">
-  <!-- Load javascript function -->
+  
+  <!-- Load javascript function(s) -->
   <script src="/static/javascript/user_logged_in/dashboard/check_before_submit.js" type="text/javascript" ></script>
-  <title>SymbolNews - Create Account Page</title>
 </head>
+
 <body>
-  <div class = 'page_top_half'>
-    <header class = "page_header">
-      <div class = "logo_site_name">
-        <div class = "logo">
-          <img src="/static/images/icon_outline_black.png" alt="SymbolNews logo">
-        </div>
-        <div class = "site_name">
-          <h1>SymbolNews</h1>
-        </div>
+  <header>
+    <nav>
+      <div class = "site_name_and_logo">
+        <a href="{{ url_for('landing_page_render.landing_page_render_function') }}"><img src="/static/images/icon_outline_white.png" alt="SymbolNews icon"></a>
+        <a href="{{ url_for('landing_page_render.landing_page_render_function') }}"><h1>SymbolNews</h1></a>
       </div>
-    </header>
+      <ul>
+        <li><a href="{{ url_for('login_page_render.login_page_render_function') }}"><button class = "button_login"><strong>Login</strong></button></a></li>
+        <!--<li><a href="{{ url_for('create_account_page_render.create_account_page_render_function') }}"><button class = "button_create_account"><strong>Create Account</strong></button></a></li>-->
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class = "behind_form_background">
+
+    </div>
     <form action="{{ url_for('creating_account_to_postgres.creating_account_to_postgres_function') }}" method="post" class="login_and_create_account_form" onsubmit="return checkBeforeSubmit()">
-      <div class = "site_description_subtitle">
-        <p><strong>Text messages that save you look up time on the latest stock news.</strong></p>
-      </div>
-      <div class = "create_account_first_name">
-        <label for="user_first_name"><b>First Name</b></label>
-        <input type="text" class="input_type_login_and_create_account" placeholder="Enter First Name" name="user_first_name" pattern="[A-Za-z]{2,20}" required>
-      </div>
-      <div class = "create_account_last_name">
-        <label for="user_last_name"><b>Last Name</b></label>
-        <input type="text" class="input_type_login_and_create_account" placeholder="Enter Last Name" name="user_last_name" pattern="[A-Za-z]{2,20}" required>
-      </div>
-      <div class = "create_account_phone_number">
-        <label for="phone_number"><b>Enter Phone Number</b></label>
-        <input type="tel" class="input_type_login_and_create_account" id="phone_number" name="phone_number" pattern="[0-9]{10}" placeholder="Format: 1234567890" required>
-      </div>
-      <div class = "create_account_email">
-        <label for="email"><b>Email</b></label>
-        <input type="text" class="input_type_login_and_create_account" placeholder="Enter Email" name="email" pattern="[A-Za-z0-9._-]{1,50}@[A-Za-z0-9._-]{1,30}\.[A-Za-z]{2,3}" required>
-      </div>
-      <div class = "create_account_password">
-        <label for="psw"><b>Password</b></label>
-        <input type="password" class="input_type_login_and_create_account" placeholder="Enter Password" name="psw" pattern="(?=^.{8,20}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Minimum 8 charactes, Maximum 20 characters: Uppercase, Lowercase, Number, Special" required>
-      </div>
-      <div class = "create_account_button">
-        <button type="submit" class="button_login_and_create_account">Create Account</button>
-      </div>
-      <div class="create_account_login_existing">
-        <p><strong>{{ error_message_from_python_to_html }}</strong></p>
-        <label>
-          <a href="{{ url_for('login_page_render.login_page_render_function') }}">Login to Existing Account</a>
-        </label>
+      <div class = "create_account_inputs">
+        <div class = "output_message">
+          <p><strong>{{ error_message_from_python_to_html }}</strong></p>
+        </div>
+        <div class = "subheader">
+          <p><strong>Create Account</strong></p>
+        </div>
+        <div class = "create_account_first_name">
+          <label for="user_first_name"><b>First Name</b></label>
+          <input type="text" class="input_type_login_and_create_account" placeholder="Enter First Name" name="user_first_name" pattern="[A-Za-z]{2,20}" required>
+        </div>
+        <div class = "create_account_last_name">
+          <label for="user_last_name"><b>Last Name</b></label>
+          <input type="text" class="input_type_login_and_create_account" placeholder="Enter Last Name" name="user_last_name" pattern="[A-Za-z]{2,20}" required>
+        </div>
+        <div class = "create_account_phone_number">
+          <label for="phone_number"><b>Phone Number</b></label>
+          <input type="tel" class="input_type_login_and_create_account" id="phone_number" name="phone_number" pattern="[0-9]{10}" placeholder="Format: 1234567890" required>
+        </div>
+        <div class = "create_account_email">
+          <label for="email"><b>Email</b></label>
+          <input type="text" class="input_type_login_and_create_account" placeholder="Enter Email" name="email" pattern="[A-Za-z0-9._-]{1,50}@[A-Za-z0-9._-]{1,30}\.[A-Za-z]{2,3}" required>
+        </div>
+        <div class = "create_account_password">
+          <label for="psw"><b>Password</b></label>
+          <input type="password" class="input_type_login_and_create_account" placeholder="Enter Password" name="psw" pattern="(?=^.{8,20}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Minimum 8 charactes, Maximum 20 characters: Uppercase, Lowercase, Number, Special" required>
+        </div>
+        <div class = "create_account_button">
+          <button type="submit" class="button_login_and_create_account">Create Account</button>
+        </div>
       </div>
     </form>
-  </div>
+  </main>
+
+  <footer>
+    <ul>
+      <li><a href="#">About</a></li>
+      <li><a href="{{ url_for('landing_page_render.landing_page_render_function') }}"><img src="/static/images/icon_outline_white.png" alt="SymbolNews icon"></a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </footer>
 </body>
 </html>

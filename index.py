@@ -3,6 +3,7 @@ from flask import Flask, session, url_for, send_from_directory
 import os, time
 import datetime
 # Logging in
+from backend.login_and_create_account.landing.landing_page_render import landing_page_render
 from backend.login_and_create_account.login.login_page_render import login_page_render
 from backend.login_and_create_account.login.login_attempt import login_attempt
 from backend.login_and_create_account.create_account.create_account_page_render import create_account_page_render
@@ -43,6 +44,7 @@ app.permanent_session_lifetime = datetime.timedelta(days=365)
 
 # Blue prints to run python script from multiple files
 # Logging in
+app.register_blueprint(landing_page_render, url_prefix="")
 app.register_blueprint(login_page_render, url_prefix="")
 app.register_blueprint(login_attempt, url_prefix="")
 app.register_blueprint(create_account_page_render, url_prefix="")

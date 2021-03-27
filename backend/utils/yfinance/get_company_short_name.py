@@ -12,6 +12,14 @@ def get_company_short_name_function(input_symbol):
 
   try:
     company_short_name_without_spaces = ticker.info['shortName'].replace(" ", "_")
+    try:
+      company_short_name_without_spaces = company_short_name_without_spaces.replace("(", "")
+      try:
+        company_short_name_without_spaces = company_short_name_without_spaces.replace(")", "")
+      except:
+        pass
+    except:
+      pass
   except:
     company_short_name_without_spaces = str(input_symbol) + '_stock'
   return company_short_name_without_spaces

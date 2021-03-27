@@ -14,8 +14,8 @@ def jobs_queues_function():
   # get_company_short_name job
   print('==============================================================')
   print('- - - - - - - - TESTING JOB START - - - - - - - - - -')
-  
-  symbols_to_get_company_short_name_arr = select_job_get_company_short_name_function('get_company_short_name')
+
+  symbols_to_get_company_short_name_arr = select_job_get_company_short_name_function(connection_postgres, cursor, 'get_company_short_name')
 
   for sym in symbols_to_get_company_short_name_arr:
     # Search yfinance for company short name

@@ -58,7 +58,8 @@ def upload_symbol_percent_change_input_function():
         session['dashboard_upload_output_message'] = insert_stock_tracking_table_function(connection_postgres, cursor, user_table_insert_uuid, user_track_symbol_timestamp, user_symbol_from_html_form_sanitized, user_symbol_percent_change_from_html_form_sanitized, session['logged_in_user_uuid'])
 
         # Get google news link for the symbol not company short name yet, a job will get the short name in order to save wait time for user
-        google_news_url_link = get_google_news_page_function(user_symbol_from_html_form_sanitized)
+        temporary_google_search_input = user_symbol_from_html_form_sanitized + '_stock'
+        google_news_url_link = get_google_news_page_function(temporary_google_search_input)
 
         # Insert into the new stock_news_links_table the 1.symbol and 2.google_link(symbol search)
         try:

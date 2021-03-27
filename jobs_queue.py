@@ -25,7 +25,7 @@ def jobs_queues_function():
       sym_company_short_name = get_company_short_name_function(sym)
     # If company short name not found
     except:
-      print('Company short name cannot be found, or it took too long to find')
+      print(sym + ' : Company short name cannot be found, or it took too long to find')
       sym_company_short_name = 'none'
       pass
     # If company short name found/asigned

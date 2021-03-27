@@ -1,11 +1,11 @@
 import psycopg2
 from psycopg2 import Error
 
-def insert_stock_tracking_table_function(connection_postgres, cursor, uuid, submission_timestamp, stock_symbol, percent_change_to_notify, fk_user_uuid):
+def insert_stock_news_links_table_function(connection_postgres, cursor, stock_symbol, google_news_url_link):
   """Returns: inserts into database table when user submits stock to track"""
 
-  postgres_insert_created_account_query = """INSERT INTO stock_tracking_table (uuid, tracking_submission_date, symbol, percent_change_to_notify, fk_user_uuid) VALUES (%s, %s, %s, %s, %s)"""
-  record_to_insert = (uuid, submission_timestamp, stock_symbol, percent_change_to_notify, fk_user_uuid)
+  postgres_insert_created_account_query = """INSERT INTO stock_news_links_table (pk_symbol, google_news_link) VALUES (%s, %s)"""
+  record_to_insert = (stock_symbol, google_news_url_link)
   
   try:
     cursor.execute(postgres_insert_created_account_query, record_to_insert)

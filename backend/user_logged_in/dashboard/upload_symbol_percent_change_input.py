@@ -3,6 +3,8 @@ from backend.utils.sanitize_user_inputs.sanitize_symbol_input import sanitize_sy
 from backend.utils.sanitize_user_inputs.sanitize_symbol_percent_change_input import sanitize_symbol_percent_change_input_function
 from backend.db.connect_to_database import connect_to_postgres_function
 from backend.db.queries.insert_queries.insert_stock_tracking_table import insert_stock_tracking_table_function
+from backend.db.queries.insert_queries.insert_stock_news_links_table import insert_stock_news_links_table_function
+from backend.db.queries.insert_queries.insert_jobs_queues_table import insert_jobs_queues_table_function
 from backend.utils.create_uuid import create_uuid_function
 from backend.utils.create_timestamp import create_timestamp_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
@@ -52,10 +54,40 @@ def upload_symbol_percent_change_input_function():
       
       # If user is not already tracking this symbol
       if error_message_check_if_exist == 'none':
+        #---------------------------START--------------------------------
+        # Step 1 
+        # Insert the same information into the stock_tracking_table, just without the google_news_link column
+        session['dashboard_upload_output_message'] = insert_stock_tracking_table_function(connection_postgres, cursor, user_table_insert_uuid, user_track_symbol_timestamp, user_symbol_from_html_form_sanitized, user_symbol_percent_change_from_html_form_sanitized, session['logged_in_user_uuid'])
+
+        # Step 2
+        # Get google news link for the symbol not company short name yet
+        google_news_url_link = get_google_news_page_function(user_symbol_from_html_form_sanitized)
+
+        # Step 3
+        # Insert into the new stock_news_links_table the 1.symbol and 2.google_link(symbol search)
+        # Try except because the symbol may already be in that table from another user originally tracking that symbol
+        try:
+          output_message_news_link_upload = insert_stock_news_links_table_function(connection_postgres, cursor, user_symbol_from_html_form_sanitized, google_news_url_link)
+        except:
+          print('Already tacking this symbol in the Stock News Links Table Tracker')
+          pass
+
+        # Step 4
+        # Insert/Update column of the jobs_table with the symbol information. So every 10 min the job knows what symbols are in the queue to lookup company short name
+        try:
+          job_queue_name = 'get_company_short_name'
+          output_message_job_upload = insert_jobs_queues_table_function(connection_postgres, cursor, job_queue_name, user_symbol_from_html_form_sanitized)
+        except:
+          print('Already tacking this symbol in the Stock News Links Table Tracker')
+          pass
+        return redirect("https://symbolnews.com/dashboard", code=301)
+        #---------------------------END----------------------------------
+        """
         company_short_name_without_spaces = get_company_short_name_function(user_symbol_from_html_form_sanitized)
         google_news_url_link = get_google_news_page_function(company_short_name_without_spaces)
         session['dashboard_upload_output_message'] = insert_stock_tracking_table_function(connection_postgres, cursor, user_table_insert_uuid, user_track_symbol_timestamp, user_symbol_from_html_form_sanitized, user_symbol_percent_change_from_html_form_sanitized, session['logged_in_user_uuid'], google_news_url_link)
         return redirect("https://symbolnews.com/dashboard", code=301)
+        """
       
       # If user is already tracking this symbol
       else:

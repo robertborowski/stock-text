@@ -11,9 +11,18 @@ from backend.utils.constant_run.twilio.send_sms import send_sms_function
 from backend.utils.constant_run.twilio.send_summary_sms_text import send_summary_sms_text_function
 from backend.db.queries.select_queries.select_all_google_news_links import select_all_google_news_links_function
 from backend.utils.constant_run.create_news_links_dict import create_news_links_dict_function
+import datetime
 
 def pull_and_analyze_all_data_function():
   """Return: Should run in the background automatically at intervals"""
+
+  # First check the day
+  num_day_of_week = datetime.datetime.today().weekday()
+  print(num_day_of_week)
+  if num_day_of_week == 5 or num_day_of_week == 6:
+    print('It is the weekend. The market is closed so texts do not go out on weekend!')
+    return True
+
   # Connect to database
   connection_postgres, cursor = connect_to_postgres_function()
 

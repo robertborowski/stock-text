@@ -20,6 +20,9 @@ def jobs_queues_function():
   symbols_to_get_company_short_name_arr = select_job_get_company_short_name_function(connection_postgres, cursor, job_name)
 
   for sym in symbols_to_get_company_short_name_arr:
+    print('- - - -')
+    print(sym)
+    print('- - - -')
     # Search yfinance for company short name
     try:
       sym_company_short_name = get_company_short_name_function(sym)

@@ -18,6 +18,9 @@ def jobs_queues_function():
 
   job_name = 'get_company_short_name'
   symbols_to_get_company_short_name_arr = select_job_get_company_short_name_function(connection_postgres, cursor, job_name)
+  print('- - - -')
+  print(symbols_to_get_company_short_name_arr)
+  print('- - - -')
 
   for sym in symbols_to_get_company_short_name_arr:
     print('- - - -')

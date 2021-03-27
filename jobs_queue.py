@@ -5,6 +5,7 @@ from backend.utils.yfinance.get_company_short_name import get_company_short_name
 from backend.db.queries.insert_queries.insert_stock_news_links_table_company_short_name import insert_stock_news_links_table_company_short_name_function
 from backend.utils.google_news.get_google_news_page import get_google_news_page_function
 from backend.db.queries.update_queries.update_stock_news_links_table_company_short_name import update_stock_news_links_table_company_short_name_function
+from backend.db.queries.delete_queries.delete_job_company_short_name import delete_job_company_short_name_function
 
 def jobs_queues_function():
   """Return: Should run in the background automatically at intervals"""
@@ -15,7 +16,8 @@ def jobs_queues_function():
   print('==============================================================')
   print('- - - - - - - - TESTING JOB START - - - - - - - - - -')
 
-  symbols_to_get_company_short_name_arr = select_job_get_company_short_name_function(connection_postgres, cursor, 'get_company_short_name')
+  job_name = 'get_company_short_name'
+  symbols_to_get_company_short_name_arr = select_job_get_company_short_name_function(connection_postgres, cursor, job_name)
 
   for sym in symbols_to_get_company_short_name_arr:
     # Search yfinance for company short name
@@ -37,9 +39,15 @@ def jobs_queues_function():
           pass
         if google_news_link_with_company_short_name != 'none':
           try:
-            update_stock_news_links_table_company_short_name_function(google_news_link_with_company_short_name)
+            update_stock_news_links_table_company_short_name_function(connection_postgres, cursor, google_news_link_with_company_short_name)
           except:
             pass
+      except:
+        pass
+
+      # Finally delete the symbol from the job table
+      try:
+        delete_job_company_short_name_function(connection_postgres, cursor, job_name, sym_company_short_name)
       except:
         pass
 

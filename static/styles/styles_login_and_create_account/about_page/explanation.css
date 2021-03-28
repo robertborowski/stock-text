@@ -46,12 +46,17 @@ ul li {
     margin-top: 15px;
   }
 
+  .about_sections {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
   .explanation {
     margin-left: 10px;
     margin-right: 10px;
   }
 
-  p {
+  .explanation p {
     font-size: 13px;
   }
 

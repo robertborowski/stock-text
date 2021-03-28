@@ -16,22 +16,25 @@ nav {
 
 nav .site_name_and_logo {
   margin-top: 10px;
-  margin-left: 10px;
   grid-area: 1 / 2 / 2 / 3;
   overflow: auto;
+  justify-content: center;
 }
 
 .site_name_and_logo h1 {
   color: white;
   font-size: 40px;
-  float: left;
+  display: inline;
+}
+
+.site_name_and_logo a {
+  text-decoration: none;
 }
 
 .site_name_and_logo img {
   height: 50px;
   width: 50px;
-  float: left;
-  margin-left: 10%;
+  margin-bottom: -10px;
 }
 
 button {

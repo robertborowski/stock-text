@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SymbolNews - About</title>
+  
+  <!-- Connect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  
+  <!-- For responsive screen size changes -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Connect to the style pages -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/about_page/style_all_parts.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/about_page/style_header.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/about_page/style_main.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/about_page/explanation.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login_and_create_account/about_page/style_footer.css') }}?v={{ css_cache_busting_variable_to_html }}">
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/static/favicon_io/site.webmanifest">
+  
+  <!-- Load javascript function(s) -->
+  <script src="/static/javascript/user_logged_in/dashboard/check_before_submit.js" type="text/javascript" ></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class = "site_name_and_logo">
+        <a href="{{ url_for('landing_page_render.landing_page_render_function') }}"><img src="/static/images/icon_outline_white.png" alt="SymbolNews icon"></a>
+        <a href="{{ url_for('landing_page_render.landing_page_render_function') }}"><h1>SymbolNews</h1></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class = "behind_about_background">
+
+    </div>
+    <div class = "main_about_page">
+      <div class = "subheader">
+        <p>About</p>
+      </div>
+      <div class = "explanation">
+        <div class = "about_sections">
+          <p><strong>Purpose:</strong> SymbolNews saves you look up time and keeps you up to date on the latest news for the companies you care about.</p>
+        </div>
+        <div class = "about_sections">
+          <p><strong>Problem:</strong> My day job keeps me busy and I rarely have time to look at the latest news for the companies I follow. I often find out major company news early the following day, days after the event occurs, or never at all.</p>
+          <p>Examples of news I have missed in the past:</p>
+          <ul>
+            <li><p>A new person was added to the company board and the stock price went up +5%.</p></li>
+            <li><p>The company had a major recall and stock went down -7%.</p></li>
+            <li><p>The CEO was involved in a scandal, stock down -8%.</p></li>
+          </ul>
+          <p>SymbolNews solves this problem.</p>
+        </div>
+        <div class = "about_sections">
+          <p>Created by: Robert Borowski</p>
+          <a href="https://github.com/robertborowski/stock-text"><p>Github</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <ul>
+      <li><a href="{{ url_for('about_page_render.about_page_render_function') }}">About</a></li>
+      <li><a href="{{ url_for('landing_page_render.landing_page_render_function') }}"><img src="/static/images/icon_outline_white.png" alt="SymbolNews icon"></a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </footer>
+</body>
+</html>

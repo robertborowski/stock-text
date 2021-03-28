@@ -1,0 +1,58 @@
+/* --------------------------------- FORM CONTAINER */
+.behind_about_background {
+  grid-area: 1 / 1 / 2 / 4;
+  background-image: linear-gradient(rgb(147, 255, 143) , rgb(255, 249, 193));
+}
+
+.main_about_page {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.subheader {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 30px;
+}
+
+ul li {
+  margin-left: 50px;
+}
+
+.about_sections {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.explanation strong {
+  font-size: 20px;
+}
+
+.explanation p {
+  margin: 5px;
+}
+
+
+/* --------------------------------- FORM CONTAINER - Smaller Screen */
+@media (max-width: 1000px) {
+  .behind_form_background {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .main_about_page {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .subheader {
+    margin-top: 15px;
+  }
+
+  .explanation {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  p {
+    font-size: 13px;
+  }
+
+}

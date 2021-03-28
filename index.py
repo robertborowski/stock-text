@@ -12,13 +12,13 @@ from backend.login_and_create_account.forgot_password.forgot_password_page_rende
 from backend.login_and_create_account.forgot_password.forgot_password_send_token_to_email import forgot_password_send_token_to_email
 from backend.login_and_create_account.forgot_password.set_new_password import set_new_password
 from backend.login_and_create_account.forgot_password.confirm_new_password_set import confirm_new_password_set
+from backend.login_and_create_account.about.about_page_render import about_page_render
 # Logged in
 from backend.user_logged_in.dashboard.dashboard_page_render import dashboard_page_render
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
 from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page
 from backend.user_logged_in.dashboard.upload_symbol_percent_change_input import upload_symbol_percent_change_input
 from backend.user_logged_in.dashboard.delete_symbols import delete_symbols
-from backend.user_logged_in.about.about_page_render import about_page_render
 from backend.user_logged_in.account.account_page_render import account_page_render
 from backend.user_logged_in.account.account_page_edit_information import account_page_edit_information
 from backend.user_logged_in.account.updating_account_info_postgres import updating_account_info_postgres
@@ -53,13 +53,13 @@ app.register_blueprint(forgot_password_page_render, url_prefix="")
 app.register_blueprint(forgot_password_send_token_to_email, url_prefix="")
 app.register_blueprint(set_new_password, url_prefix="")
 app.register_blueprint(confirm_new_password_set, url_prefix="")
+app.register_blueprint(about_page_render, url_prefix="")
 # Logged in
 app.register_blueprint(dashboard_page_render, url_prefix="")
 app.register_blueprint(confirm_email_page, url_prefix="")
 app.register_blueprint(confirm_phone_number_page, url_prefix="")
 app.register_blueprint(upload_symbol_percent_change_input, url_prefix="")
 app.register_blueprint(delete_symbols, url_prefix="")
-app.register_blueprint(about_page_render, url_prefix="")
 app.register_blueprint(account_page_render, url_prefix="")
 app.register_blueprint(account_page_edit_information, url_prefix="")
 app.register_blueprint(updating_account_info_postgres, url_prefix="")

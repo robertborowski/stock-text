@@ -12,6 +12,6 @@ main {
     padding-top: 0px;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 500px;
+    grid-template-rows: 550px;
   }
 }

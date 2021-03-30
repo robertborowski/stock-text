@@ -57,11 +57,12 @@
             <li><p>The company had a major recall and stock went down -7%.</p></li>
             <li><p>The CEO was involved in a scandal, stock down -8%.</p></li>
           </ul>
-          <p>SymbolNews solves this problem.</p>
+          <p>SymbolNews solves this problem so that you never lag behind on major company news.</p>
         </div>
         <div class = "about_sections">
           <p>Created by: Robert Borowski</p>
-          <a href="https://github.com/robertborowski/stock-text"><p>Github</p></a>
+          <a href="https://github.com/robertborowski/stock-text"><p>GitHub</p></a>
+          <a href="https://twitter.com/robertjborowski"><p>Twitter</p></a>
           <a href="https://www.linkedin.com/in/robert-borowski/"><p>LinkedIn</p></a>
         </div>
       </div>
@@ -72,7 +73,7 @@
     <ul>
       <li><a href="{{ url_for('about_page_render.about_page_render_function') }}">About</a></li>
       <li><a href="{{ url_for('landing_page_render.landing_page_render_function') }}"><img src="/static/images/icon_outline_white.png" alt="SymbolNews icon"></a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="{{ url_for('contact_render.contact_render_function') }}">Contact</a></li>
     </ul>
   </footer>
 </body>

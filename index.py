@@ -13,6 +13,7 @@ from backend.login_and_create_account.forgot_password.forgot_password_send_token
 from backend.login_and_create_account.forgot_password.set_new_password import set_new_password
 from backend.login_and_create_account.forgot_password.confirm_new_password_set import confirm_new_password_set
 from backend.login_and_create_account.about.about_page_render import about_page_render
+from backend.login_and_create_account.contact.contact_render import contact_render
 # Logged in
 from backend.user_logged_in.dashboard.dashboard_page_render import dashboard_page_render
 from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
@@ -54,6 +55,7 @@ app.register_blueprint(forgot_password_send_token_to_email, url_prefix="")
 app.register_blueprint(set_new_password, url_prefix="")
 app.register_blueprint(confirm_new_password_set, url_prefix="")
 app.register_blueprint(about_page_render, url_prefix="")
+app.register_blueprint(contact_render, url_prefix="")
 # Logged in
 app.register_blueprint(dashboard_page_render, url_prefix="")
 app.register_blueprint(confirm_email_page, url_prefix="")

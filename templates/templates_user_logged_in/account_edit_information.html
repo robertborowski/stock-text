@@ -2,24 +2,39 @@
 {% block title %}
   <title>Account</title>
   <script src="https://kit.fontawesome.com/f23f12952c.js" crossorigin="anonymous"></script>
+  <!-- Load additional css files for this page -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_user_logged_in/account_specific_page/style_main_account_edit.css') }}?v={{ css_cache_busting_variable_to_html }}">
 {% endblock %}
 {% block content %}
-<div class="page_guidelines top_of_page">
-  <div class="account_page_title">
-    <h1>Account</h1>
-  </div>
-  <div class="account_page_session_info">
-    <form action="{{ url_for('updating_account_info_postgres.updating_account_info_postgres_function') }}" method="post">
-      <p><label for="email">Email:</label>
-      <input type="text" class="input_type_login_and_create_account" value="{{ user_email_from_session_to_html }}" name="email" pattern="[a-z0-9._-]{1,50}@[a-z0-9._-]{1,30}\.[a-z]{2,3}" required></p>
-      <p><label for="user_first_name">First Name:</label>
-      <input type="text" class="input_type_login_and_create_account" value="{{ user_first_name_from_session_to_html }}" name="user_first_name" pattern="[A-Za-z]{2,20}" required></p>
-      <p><label for="user_last_name">Last Name:</label>
-      <input type="text" class="input_type_login_and_create_account" value="{{ user_last_name_from_session_to_html }}" name="user_last_name" pattern="[A-Za-z]{2,20}" required></p>
-      <p><label for="phone_number">Phone Number:</label>
-      <input type="tel" class="input_type_login_and_create_account" id="phone_number" name="phone_number" pattern="[0-9]{10}" value="{{ user_phone_number_from_session_to_html }}" required></p>
-      <button type="submit" class="button_login_and_create_account">Submit Changes</button>
-    </form>
-  </div>
+<div class = "background">
 </div>
+<form action="{{ url_for('updating_account_info_postgres.updating_account_info_postgres_function') }}" method="post">
+  <div class="subheader">
+    <p>Account - Edit</p>
+  </div>
+  <div class = "session_info">
+    <div class="account_edit_email">
+      <label for="email"><p>Email:</p></label>
+      <input type="text" class="input_type_login_and_create_account" value="{{ user_email_from_session_to_html }}" name="email" pattern="[a-z0-9._-]{1,50}@[a-z0-9._-]{1,30}\.[a-z]{2,3}" required>
+    </div>
+    <div class="account_edit_first_name">
+      <label for="user_first_name"><p>First Name:</p></label>
+      <input type="text" class="input_type_login_and_create_account" value="{{ user_first_name_from_session_to_html }}" name="user_first_name" pattern="[A-Za-z]{2,20}" required>
+    </div>
+    <div class="account_edit_last_name">
+      <label for="user_last_name"><p>Last Name:</p></label>
+      <input type="text" class="input_type_login_and_create_account" value="{{ user_last_name_from_session_to_html }}" name="user_last_name" pattern="[A-Za-z]{2,20}" required>
+    </div>
+    <div class="account_edit_phone_number">
+      <label for="phone_number"><p>Phone Number:</p></label>
+      <input type="tel" class="input_type_login_and_create_account" id="phone_number" name="phone_number" pattern="[0-9]{10}" value="{{ user_phone_number_from_session_to_html }}" required>
+    </div>
+    <div class="account_edit_submit">
+      <a href="{{ url_for('updating_account_info_postgres.updating_account_info_postgres_function') }}"><button>Submit Changes</button></a>
+    </div>
+    <div class="account_edit_cancel">
+      <a href="{{ url_for('account_page_render.account_page_render_function') }}"><button>Cancel</button></a>
+    </div>
+  </div>
+</form>
 {% endblock %}

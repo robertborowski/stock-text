@@ -1,0 +1,118 @@
+/* --------------------------------- MAIN */
+main {
+  padding-top: 70px;
+  display: grid;
+  grid-template-columns: 5% 90% 5%;
+  grid-template-rows: 500px;
+}
+
+.background {
+  grid-area: 1 / 1 / 2 / 4;
+  background-image: linear-gradient(rgb(147, 255, 143) , rgb(255, 249, 193));
+}
+
+.account_section {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.subheader {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.session_info {
+  width: 40%;
+  margin: auto;
+}
+
+.email_session_info, .first_name_session_info, .last_name_session_info, .phone_number_session_info {
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  width: 100%;
+  color: rgb(0, 0, 0);
+  border: none;
+  outline: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+  opacity: 60%;
+  background-color: rgb(255, 255, 255);
+}
+
+.delete_button {
+  opacity: 20%;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 100%;
+  transition-duration: 0.4s;
+  border: 1px rgb(0, 0, 0) solid;
+}
+
+.edit_account_button:hover, .logout_button:hover {
+  background-color: rgb(60, 255, 0);
+}
+
+.delete_button:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Main - smaller screens */
+@media (max-width: 1000px) {
+  main {
+    padding-top: 0px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 500px;
+  }
+
+  .background {
+    width: 100%;
+    background-image: linear-gradient(rgb(147, 255, 143) , rgb(255, 249, 193));
+  }
+
+  .account_section {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .session_info {
+    width: 90%;
+    margin: auto;
+  }
+
+  button {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    width: 100%;
+    color: rgb(0, 0, 0);
+    border: none;
+    outline: none;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+    opacity: 100%;
+    background-color: rgb(163, 255, 135);
+  }
+
+  .delete_button {
+    background-color: rgb(255, 126, 126);
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

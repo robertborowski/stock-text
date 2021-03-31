@@ -6,7 +6,6 @@ from backend.utils.set_session_variables_to_none_logout import set_session_varia
 from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_function
 from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
 from backend.db.queries.select_queries.select_user_confirmed_account_status import select_user_confirmed_account_status_function
-from backend.utils.create_uuid import create_uuid_function
 
 dashboard_page_render = Blueprint("dashboard_page_render", __name__, static_folder="static", template_folder="templates")
 
@@ -21,9 +20,6 @@ def before_request():
 @dashboard_page_render.route("/dashboard", methods=["POST", "GET"])
 def dashboard_page_render_function():
   """Returns: User dashboard with user symbol tracking list"""
-  # Need to create a css unique key so that cache busting can be done
-  css_cache_busting_variable = create_uuid_function('css_')
-
   if session and session.get('logged_in_user_email') != 'none' and session.get('logged_in_user_email') != None:
     # Get info for the page render
     # Connect to database
@@ -33,6 +29,7 @@ def dashboard_page_render_function():
     symbol_tracking_list = select_user_tracking_list_function(connection_postgres, cursor, session['logged_in_user_uuid'])
     # Check if email and phone number are verified
     display_output_message_email, display_output_message_phone_number = select_user_confirmed_account_status_function(connection_postgres, cursor, session['logged_in_user_uuid'])
+    # Check if None
 
     # If not verified yet, unhide the resend link text
     resend_email_confirm_link = ''
@@ -60,8 +57,7 @@ def dashboard_page_render_function():
                             display_output_message_email_to_html = display_output_message_email,
                             display_output_message_phone_number_to_html = display_output_message_phone_number,
                             resend_email_confirm_link_to_html = resend_email_confirm_link,
-                            resend_phone_number_confirm_link_to_html = resend_phone_number_confirm_link,
-                            css_cache_busting_variable_to_html = css_cache_busting_variable)
+                            resend_phone_number_confirm_link_to_html = resend_phone_number_confirm_link)
       except:
         return 'failed'
       finally:
@@ -78,8 +74,7 @@ def dashboard_page_render_function():
                             display_output_message_email_to_html = display_output_message_email,
                             display_output_message_phone_number_to_html = display_output_message_phone_number,
                             resend_email_confirm_link_to_html = resend_email_confirm_link,
-                            resend_phone_number_confirm_link_to_html = resend_phone_number_confirm_link,
-                            css_cache_busting_variable_to_html = css_cache_busting_variable)
+                            resend_phone_number_confirm_link_to_html = resend_phone_number_confirm_link)
 
   # If no session info found
   else:

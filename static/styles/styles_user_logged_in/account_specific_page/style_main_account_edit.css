@@ -1,0 +1,102 @@
+/* --------------------------------- MAIN */
+main {
+  padding-top: 70px;
+  display: grid;
+  grid-template-columns: 5% 90% 5%;
+  grid-template-rows: 550px;
+}
+
+.background {
+  grid-area: 1 / 1 / 2 / 4;
+  background-image: linear-gradient(rgb(147, 255, 143) , rgb(255, 249, 193));
+}
+
+form {
+  grid-area: 1 / 2 / 2 / 3;
+  text-align: center;
+}
+
+.subheader {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+label {
+  display: block;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 25px;
+}
+
+input {
+  width: 30%;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  border-radius: 25px;
+  text-decoration: none;
+  border: rgb(202, 202, 202) 2px solid;
+  outline: none;
+}
+
+input:focus {
+  border: black 2px solid;
+}
+
+button {
+  margin-top: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 30%;
+  background-color: rgb(229, 229, 229);
+  color: rgb(0, 0, 0);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  opacity: 60%;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 100%;
+  transition-duration: 0.4s;
+  border: 1px rgb(0, 0, 0) solid;
+  background-color: rgb(60, 255, 80);
+}
+
+
+/* Main - smaller screens */
+@media (max-width: 1000px) {
+  main {
+    padding-top: 0px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 700px;
+  }
+
+  .background {
+    width: 100%;
+    background-image: linear-gradient(rgb(147, 255, 143) , rgb(255, 249, 193));
+  }
+
+  form {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  input {
+    width: 70%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  button {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 70%;
+    background-color: rgb(60, 255, 80);
+  }
+
+}

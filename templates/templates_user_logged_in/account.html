@@ -1,14 +1,19 @@
 {% extends "templates_user_logged_in/loggedin_blueprint_page.html" %}
 {% block title %}
-  <title>Account</title>
+  <title>SymbolNews - Account</title>
   <script src="https://kit.fontawesome.com/f23f12952c.js" crossorigin="anonymous"></script>
+  <!-- Load additional css files for this page -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_user_logged_in/account_specific_page/style_main_account.css') }}?v={{ css_cache_busting_variable_to_html }}">
 {% endblock %}
-{% block content %}
-<div class="page_guidelines top_of_page">
-  <div class="account_page_title">
-    <h1>Account</h1>
+
+{% block content %} 
+<div class = "background">
+</div>
+<div class = "account_section">
+  <div class = "subheader">
+    <p><strong>Account</strong></p>
   </div>
-  <div class="account_page_session_info">
+  <div class = "session_info">
     <div class="email_session_info">
       <p>Email: {{ user_email_from_session_to_html }}</p>
     </div>
@@ -21,15 +26,14 @@
     <div class="phone_number_session_info">
       <p>Phone Number: {{ user_phone_number_from_session_to_html }}</p>
     </div>
-    <!--
     <div class="edit_account_info">
-      <a href="{{ url_for('account_page_edit_information.account_page_edit_information_function') }}"><button type="submit" class="button_symbol_and_percent_change">Edit Account</button></a>
+      <a href="{{ url_for('account_page_edit_information.account_page_edit_information_function') }}"><button class = "edit_account_button">Edit Account</button></a>
     </div>
-    -->
-    <div class="account_output_message">
+    <div class="account_logout">
+      <a href="{{ url_for('logout.logout_function') }}"><button class = "logout_button">Logout</button></a>
     </div>
     <div class="account_delete_account">
-      <a href="{{ url_for('delete_account_page_render.delete_account_page_render_function') }}"><button type="submit" class="button_symbol_and_percent_change delete_button">Delete Account</button></a>
+      <a href="{{ url_for('delete_account_page_render.delete_account_page_render_function') }}"><button class = "delete_button">Delete Account</button></a>
     </div>
   </div>
 </div>

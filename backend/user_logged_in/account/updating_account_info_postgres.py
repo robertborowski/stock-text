@@ -11,6 +11,14 @@ from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_fun
 from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
 from backend.db.queries.select_queries.select_login_information_table_query import select_login_information_table_query_function
 from backend.db.queries.select_queries.select_login_information_table_query_phone_number import select_login_information_table_query_phone_number_function
+from backend.login_and_create_account.create_confirm_token import create_confirm_token_function
+import os
+from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page
+from backend.user_logged_in.confirm.confirm_email_page import confirm_email_page_function
+from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page
+from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page_function
+from backend.utils.constant_run.twilio.send_email_confirm_account import send_email_confirm_account_function
+from backend.utils.constant_run.twilio.send_phone_number_confirm_account import send_phone_number_confirm_account_function
 
 updating_account_info_postgres = Blueprint("updating_account_info_postgres", __name__, static_folder="static", template_folder="templates")
 
@@ -73,8 +81,20 @@ def updating_account_info_postgres_function():
 
     # Update user info
     update_user_info_function(connection_postgres, cursor, user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, user_last_name_from_html_form_sanitized, user_phone_number_from_html_form_sanitized, session['logged_in_user_uuid'])
-    # Set email and phone number to not verified and resend the verification links
+    
+    # Set email and phone number to not verified
     update_user_verified_false_function(connection_postgres, cursor, session['logged_in_user_uuid'])
+
+    # Resend the verification links
+    # Create tokens for email and phone number verification
+    confirm_email_token = create_confirm_token_function(user_email_from_html_form_sanitized, os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_EMAIL'), os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_EMAIL'))
+    confirm_phone_number_token = create_confirm_token_function(user_phone_number_from_html_form_sanitized, os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_PHONE'), os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_PHONE'))
+    # Create the URL links for email and phone number verification
+    url_for('confirm_email_page.confirm_email_page_function', confirm_email_token_url_variable = confirm_email_token)
+    url_for('confirm_phone_number_page.confirm_phone_number_page_function', confirm_phone_number_token_url_variable = confirm_phone_number_token)
+    # Send the confirmation email and text links to user
+    send_email_confirm_account_function(user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_email_token)
+    send_phone_number_confirm_account_function(user_phone_number_from_html_form_sanitized, user_first_name_from_html_form_sanitized, confirm_phone_number_token)
 
     # Close connection to database
     close_connection_cursor_to_database_function(connection_postgres, cursor)

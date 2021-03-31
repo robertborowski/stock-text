@@ -2,17 +2,22 @@
 {% block title %}
   <title>Account</title>
   <script src="https://kit.fontawesome.com/f23f12952c.js" crossorigin="anonymous"></script>
+  <!-- Load additional css files for this page -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_user_logged_in/account_specific_page/style_main_delete_account.css') }}?v={{ css_cache_busting_variable_to_html }}">
 {% endblock %}
 {% block content %}
-<div class="page_guidelines top_of_page">
-  <div class="account_page_title">
-    <h1>Delete Account</h1>
+<div class = "background">
+</div>
+<div class = "delete_section">
+  <div class = "subheader">
+    <p><strong>Delete Account?</strong></p>
   </div>
-  <div class="account_page_session_info">
-    <div class="email_session_info">
-      <p>Are you sure you want to permanently delete your account?</p>
-      <a href="{{ url_for('dashboard_page_render.dashboard_page_render_function') }}"><p>No</p></a>
-      <a href="{{ url_for('delete_account_perm.delete_account_perm_function') }}"><p>Yes</p></a>
-    </div>
+  <div class="message">
+    <p>Are you sure you want to permanently delete your account?</p>
   </div>
+  <div class="choices">
+    <a href="{{ url_for('dashboard_page_render.dashboard_page_render_function') }}"><button class = "no_delete">No</button></a>
+    <a href="{{ url_for('delete_account_perm.delete_account_perm_function') }}"><button class = "yes_delete">Yes</button></a>
+  </div>
+</div>
 {% endblock %}

@@ -39,6 +39,6 @@ def set_new_password_function(confirm_email_token_url_variable):
   
   # If token does not match the one sent out
   except:
-    session['login_failed_message'] = 'Token has expired!'
+    session['output_message_landind_page_session'] = 'Token has expired!'
     return redirect("https://symbolnews.com/", code=301)
   return redirect("https://symbolnews.com/", code=301)

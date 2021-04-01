@@ -11,6 +11,11 @@
   text-align: center;
 } /* 100px - 100/300 */
 
+.output_message {
+  font-size: 10px;
+  color: red;
+}
+
 .images_and_thresholds {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

@@ -68,8 +68,7 @@ def creating_account_to_postgres_function():
     close_connection_cursor_to_database_function(connection_postgres, cursor)
     
     # Set outgoing session messages
-    session['create_account_failed_message'] = 'Account already exists'
-    session['login_failed_message'] = 'Account already exists'
+    session['output_message_create_account_page_session'] = 'Account already exists'
     
     # Redirect to page
     return redirect("https://symbolnews.com/create_account", code=301)
@@ -106,7 +105,7 @@ def creating_account_to_postgres_function():
       close_connection_cursor_to_database_function(connection_postgres, cursor)
       
       set_session_variables_to_none_logout_function()
-      session['create_account_failed_message'] = 'Unable to create account with the phone number provided!'
+      session['output_message_create_account_page_session'] = 'Unable to create account with the phone number provided!'
       return redirect("https://symbolnews.com/create_account", code=301)
     
     # Flask set session variables and redirect to dashboard

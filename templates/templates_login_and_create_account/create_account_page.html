@@ -48,7 +48,7 @@
     <form action="{{ url_for('creating_account_to_postgres.creating_account_to_postgres_function') }}" method="post" class="login_and_create_account_form" onsubmit="return checkBeforeSubmit()">
       <div class = "create_account_inputs">
         <div class = "output_message">
-          <p><strong>{{ error_message_from_python_to_html }}</strong></p>
+          <p><strong>{{ output_message_from_python_to_html }}</strong></p>
         </div>
         <div class = "subheader">
           <p><strong>Create Account</strong></p>

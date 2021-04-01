@@ -44,7 +44,7 @@ def delete_account_perm_function():
     set_session_variables_to_none_logout_function()
     
     # Set outgoing session variables
-    session['login_failed_message'] = 'Account deleted!'
+    session['output_message_landind_page_session'] = 'Account deleted!'
     
     # Redirect to landing page
     return redirect("https://symbolnews.com/", code=301)

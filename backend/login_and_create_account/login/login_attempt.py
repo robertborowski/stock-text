@@ -32,8 +32,8 @@ def login_attempt_function():
   
   # Login attempt fail
   if session['logged_in_user_email'] == 'none' or session['logged_in_user_first_name'] == 'none' or session['logged_in_user_last_name'] == 'none' or session['logged_in_user_phone_number'] == 'none':
-    session['login_failed_message'] = 'Email/Password not found!'
-    return redirect("https://symbolnews.com/", code=301)
+    session['output_message_login_page_session'] = 'Email/Password not found!'
+    return redirect("https://symbolnews.com/login", code=301)
   
   # Login attempt Success
   else:

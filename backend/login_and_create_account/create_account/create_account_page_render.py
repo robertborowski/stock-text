@@ -24,13 +24,13 @@ def create_account_page_render_function():
     return redirect('https://symbolnews.com/dashboard', code=301)
 
   # When redirected to this page, first check if there is an session error message associated with this redirect
-  if session and session.get('create_account_failed_message') != None:
+  if session and session.get('output_message_create_account_page_session') != None:
     try:
-      return render_template('templates_login_and_create_account/create_account_page.html', error_message_from_python_to_html = session['create_account_failed_message'], css_cache_busting_variable_to_html = css_cache_busting_variable)
+      return render_template('templates_login_and_create_account/create_account_page.html', output_message_from_python_to_html = session['output_message_create_account_page_session'], css_cache_busting_variable_to_html = css_cache_busting_variable)
     except:
       return 'failed'
     finally:
-      session['create_account_failed_message'] = None
+      session['output_message_create_account_page_session'] = None
   
   # If no error message than just render as per usual
   else:

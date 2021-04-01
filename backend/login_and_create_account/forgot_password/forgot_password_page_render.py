@@ -24,13 +24,13 @@ def forgot_password_page_render_function():
     return redirect('https://symbolnews.com/dashboard', code=301)
     
   # When redirected to this page, first check if there is an session error message associated with this redirect
-  if session and session.get('forgot_password_sent_message') != None:
+  if session and session.get('output_message_forgot_password_page_session') != None:
     try:
-      return render_template('templates_login_and_create_account/forgot_password_page.html', message_from_python_to_html = session['forgot_password_sent_message'], css_cache_busting_variable_to_html = css_cache_busting_variable)
+      return render_template('templates_login_and_create_account/forgot_password_page.html', output_message_from_python_to_html = session['output_message_forgot_password_page_session'], css_cache_busting_variable_to_html = css_cache_busting_variable)
     except:
       return 'failed'
     finally:
-      session['forgot_password_sent_message'] = None
+      session['output_message_forgot_password_page_session'] = None
   
   # If no error message than just render as per usual
   else:

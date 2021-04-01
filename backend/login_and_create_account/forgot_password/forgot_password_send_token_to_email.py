@@ -52,11 +52,11 @@ def forgot_password_send_token_to_email_function():
     # Send the confirmation email link to user
     send_email_new_password_function(user_email_from_html_form_sanitized, confirm_email_token)
     
-    session['forgot_password_sent_message'] = 'Email sent! Please check your email for the password reset link.'
+    session['output_message_forgot_password_page_session'] = 'Email sent! Please check your email for the password reset link.'
     return redirect("https://symbolnews.com/forgot_password", code=301)
   
   # If email does not exist, just say you sent it anyway
   else:    
     # Return the same output message so that hackers do not know if or if not email exists in database
-    session['forgot_password_sent_message'] = 'Email sent! Please check your email for the password reset link.'
+    session['output_message_forgot_password_page_session'] = 'Email sent! Please check your email for the password reset link.'
     return redirect("https://symbolnews.com/forgot_password", code=301)

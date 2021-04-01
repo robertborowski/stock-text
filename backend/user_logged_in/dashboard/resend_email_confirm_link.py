@@ -36,7 +36,7 @@ def resend_email_confirm_link_function():
     send_email_confirm_account_function(user_email, user_first_name, confirm_email_token)
 
     # Set output message for dashboard
-    session['dashboard_upload_output_message'] = "Email confirm link resent! Check your promotions/spam folders."
+    session['output_message_dashboard_page_session'] = "Email confirm link resent! Check your promotions/spam folders."
 
     # Redirect to page
     return redirect("https://symbolnews.com/dashboard", code=301)

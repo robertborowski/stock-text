@@ -24,16 +24,16 @@ def landing_page_render_function():
     return redirect('https://symbolnews.com/dashboard', code=301)
   
   # When redirected to this page, first check if there is an session error message associated with this redirect
-  if session and session.get('output_message_landind_page_session') != None:
+  if session and session.get('output_message_landing_page_session') != None:
     # Set the variables based on session inputs
-    output_message_landing_page = session['output_message_landind_page_session']
+    output_message_landing_page = session['output_message_landing_page_session']
     
     try:
       return render_template('templates_login_and_create_account/landing_page.html', output_message_from_python_to_html = output_message_landing_page, css_cache_busting_variable_to_html = css_cache_busting_variable)
     except:
       return 'failed'
     finally:
-      session['output_message_landind_page_session'] = None
+      session['output_message_landing_page_session'] = None
   
   # If no error message than just render as per usual
   else:

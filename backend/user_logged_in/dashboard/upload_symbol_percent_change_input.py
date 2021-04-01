@@ -38,7 +38,7 @@ def upload_symbol_percent_change_input_function():
     
     # If user inputs were invalid
     if user_symbol_from_html_form_sanitized == 'none' or does_symbol_exist == 'none' or user_symbol_percent_change_from_html_form_sanitized == 'none':
-      session['dashboard_upload_output_message'] = 'Stock Symbol must exist and be 1-5 letters long. Minimum % Change must be 7.'
+      session['output_message_dashboard_page_session'] = 'Stock Symbol must exist and be 1-5 letters long. Minimum % Change must be 7.'
       return redirect("https://symbolnews.com/dashboard", code=301)
 
     # If user inputs were valid
@@ -55,7 +55,7 @@ def upload_symbol_percent_change_input_function():
       # If user is not already tracking this symbol
       if error_message_check_if_exist == 'none':
         # Insert stock tracking information into the stock_tracking_table
-        session['dashboard_upload_output_message'] = insert_stock_tracking_table_function(connection_postgres, cursor, user_table_insert_uuid, user_track_symbol_timestamp, user_symbol_from_html_form_sanitized, user_symbol_percent_change_from_html_form_sanitized, session['logged_in_user_uuid'])
+        session['output_message_dashboard_page_session'] = insert_stock_tracking_table_function(connection_postgres, cursor, user_table_insert_uuid, user_track_symbol_timestamp, user_symbol_from_html_form_sanitized, user_symbol_percent_change_from_html_form_sanitized, session['logged_in_user_uuid'])
 
         # Get google news link for the symbol not company short name yet, a job will get the short name in order to save wait time for user
         temporary_google_search_input = user_symbol_from_html_form_sanitized + '_stock'
@@ -77,7 +77,7 @@ def upload_symbol_percent_change_input_function():
       
       # If user is already tracking this symbol
       else:
-        session['dashboard_upload_output_message'] = error_message_check_if_exist
+        session['output_message_dashboard_page_session'] = error_message_check_if_exist
         return redirect("https://symbolnews.com/dashboard", code=301)
 
   # If no session info found

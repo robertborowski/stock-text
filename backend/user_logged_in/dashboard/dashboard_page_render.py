@@ -48,7 +48,7 @@ def dashboard_page_render_function():
     close_connection_cursor_to_database_function(connection_postgres, cursor)
     
     # When redirected to this page, first check if there is an session error message associated with this redirect
-    if session and session.get('dashboard_upload_output_message') != None:
+    if session and session.get('output_message_dashboard_page_session') != None:
       try:
         return render_template('templates_user_logged_in/loggedin_dashboard_page.html',
                             user_email_from_session_to_html = session['logged_in_user_email'],
@@ -56,7 +56,7 @@ def dashboard_page_render_function():
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                             symbol_tracking_list_from_python_to_html = symbol_tracking_list,
-                            error_message_from_python_to_html = session['dashboard_upload_output_message'],
+                            output_message_from_python_to_html = session['output_message_dashboard_page_session'],
                             display_output_message_email_to_html = display_output_message_email,
                             display_output_message_phone_number_to_html = display_output_message_phone_number,
                             resend_email_confirm_link_to_html = resend_email_confirm_link,
@@ -65,7 +65,7 @@ def dashboard_page_render_function():
       except:
         return 'failed'
       finally:
-        session['dashboard_upload_output_message'] = None
+        session['output_message_dashboard_page_session'] = None
     
 
     # Render the page

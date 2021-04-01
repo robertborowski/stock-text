@@ -9,6 +9,7 @@ def logout_function():
   """
   if session and session.get('logged_in_user_email') != 'none':
     set_session_variables_to_none_logout_function()
+    session['output_message_landing_page_session'] = 'Logged out'
     return redirect("https://symbolnews.com/", code=301)
   else:
     set_session_variables_to_none_logout_function()

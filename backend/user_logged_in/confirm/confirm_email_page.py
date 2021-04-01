@@ -18,14 +18,15 @@ def confirm_email_page_function(confirm_email_token_url_variable):
     close_connection_cursor_to_database_function(connection_postgres, cursor)
   except:
     # Set the session variables outgoing
-    session['output_message_landind_page_session'] = 'the email token has expired!'
+    session['dashboard_upload_output_message'] = 'the email token has expired!'
+    session['output_message_landing_page_session'] = 'the email token has expired!'
     
     # Redirect to page
     return redirect("https://symbolnews.com/dashboard", code=301)
 
   # Set the session variables outgoing
   session['dashboard_upload_output_message'] = 'Account email confirmed!'
-  session['output_message_landind_page_session'] = 'Account email confirmed!'
+  session['output_message_landing_page_session'] = 'Account email confirmed!'
 
   # Redirect to page
   return redirect("https://symbolnews.com/", code=301)

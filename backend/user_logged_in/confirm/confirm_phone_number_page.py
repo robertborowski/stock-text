@@ -18,7 +18,6 @@ def confirm_phone_number_page_function(confirm_phone_number_token_url_variable):
     close_connection_cursor_to_database_function(connection_postgres, cursor)
   except:
     # Set the session variables outgoing
-    session['dashboard_upload_output_message'] = 'the phone number token has expired!'
     session['output_message_landind_page_session'] = 'the phone number token has expired!'
     
     # Redirect to page

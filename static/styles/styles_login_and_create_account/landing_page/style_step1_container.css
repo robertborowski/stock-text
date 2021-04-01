@@ -2,21 +2,20 @@
 .step1_containter {
   grid-area: 1 / 2 / 2 / 3;
   background-color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+.output_message p strong {
+  font-size: 15px;
+  color: red;
 }
 
 .step1_instuctions p {
   font-size: 20px;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 35px;
+  margin-bottom: 35px;
   text-align: center;
 } /* 100px - 100/300 */
-
-.output_message p strong {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: 5px;
-  color: red;
-}
 
 .images_and_thresholds {
   display: grid;
@@ -92,21 +91,6 @@
 @media (max-width: 1000px) {
   .step1_containter {
     grid-area: 1 / 1 / 2 / 2;
-    background-color: rgb(255, 255, 255);
-  }
-
-  .step1_instuctions p {
-    font-size: 20px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    text-align: center;
-  } /* Total: 40px */
-
-  .output_message p strong {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: 5px;
-    color: red;
   }
 
   .images_and_thresholds {

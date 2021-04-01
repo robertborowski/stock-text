@@ -73,6 +73,8 @@ def updating_account_info_postgres_function():
     
     # Update user first name and last name
     update_user_names_function(connection_postgres, cursor, user_first_name_from_html_form_sanitized, user_last_name_from_html_form_sanitized, session['logged_in_user_uuid'])
+    session['logged_in_user_first_name'] = user_first_name_from_html_form_sanitized
+    session['logged_in_user_last_name'] = user_last_name_from_html_form_sanitized
 
     # Check if email and phone number already exist in the database
     does_email_exist = select_login_information_table_query_function(connection_postgres, cursor, user_email_from_html_form_sanitized)

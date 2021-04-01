@@ -102,6 +102,13 @@
     text-align: center;
   } /* Total: 40px */
 
+  .output_message {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 5px;
+    color: red;
+  }
+
   .images_and_thresholds {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

@@ -85,6 +85,9 @@ def updating_account_info_postgres_function():
       output_message = 'Cannot use that email/phone number combination'
       return redirect("https://symbolnews.com/account", code=301)
 
+    print('- - - - - - - - - - - - ')
+    print(user_phone_number_from_html_form_sanitized)
+    print('- - - - - - - - - - - - ')
     # Update user info
     update_user_info_function(connection_postgres, cursor, user_email_from_html_form_sanitized, user_first_name_from_html_form_sanitized, user_last_name_from_html_form_sanitized, user_phone_number_from_html_form_sanitized, session['logged_in_user_uuid'])
     

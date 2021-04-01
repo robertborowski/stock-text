@@ -10,6 +10,7 @@ from backend.utils.create_timestamp import create_timestamp_function
 from backend.db.connect_to_database import connect_to_postgres_function
 from backend.db.queries.insert_queries.insert_login_information_table_query import insert_login_information_table_query_function
 from backend.db.queries.select_queries.select_login_information_table_query import select_login_information_table_query_function
+from backend.db.queries.select_queries.select_login_information_table_query_phone_number import select_login_information_table_query_phone_number_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 from backend.utils.constant_run.twilio.send_email_confirm_account import send_email_confirm_account_function
@@ -61,9 +62,10 @@ def creating_account_to_postgres_function():
   
   # Search query if email is already in database
   email_exists = select_login_information_table_query_function(connection_postgres, cursor, user_email_from_html_form_sanitized)
+  phone_exists = select_login_information_table_query_phone_number_function(connection_postgres, cursor, user_phone_number_from_html_form_sanitized)
   
   # If email account already exists in database 
-  if email_exists == 'Account already exists':
+  if email_exists == 'Account already exists' or phone_exists == 'Account already exists':
     # Close connection to database
     close_connection_cursor_to_database_function(connection_postgres, cursor)
     

@@ -18,6 +18,11 @@ form {
   margin-right: 35%;
 }
 
+.output_message {
+  text-align: center;
+  color: red;
+}
+
 .subheader {
   text-align: center;
   margin-bottom: 30px;

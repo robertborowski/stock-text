@@ -19,6 +19,7 @@ from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_pho
 from backend.user_logged_in.confirm.confirm_phone_number_page import confirm_phone_number_page_function
 from backend.utils.constant_run.twilio.send_email_confirm_account import send_email_confirm_account_function
 from backend.utils.constant_run.twilio.send_phone_number_confirm_account import send_phone_number_confirm_account_function
+from backend.db.queries.update_queries.update_user_names import update_user_names_function
 
 updating_account_info_postgres = Blueprint("updating_account_info_postgres", __name__, static_folder="static", template_folder="templates")
 
@@ -70,6 +71,9 @@ def updating_account_info_postgres_function():
     # Connect to Database
     connection_postgres, cursor = connect_to_postgres_function()
     
+    # Update user first name and last name
+    update_user_names_function(connection_postgres, cursor, user_first_name_from_html_form_sanitized, user_last_name_from_html_form_sanitized, session['logged_in_user_uuid'])
+
     # Check if email and phone number already exist in the database
     does_email_exist = select_login_information_table_query_function(connection_postgres, cursor, user_email_from_html_form_sanitized)
     does_phone_number_exist = select_login_information_table_query_phone_number_function(connection_postgres, cursor, user_phone_number_from_html_form_sanitized)

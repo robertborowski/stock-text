@@ -2,7 +2,7 @@ import psycopg2
 import psycopg2.extras
 from psycopg2 import Error
 
-def update_user_last_function(connection_postgres, cursor, user_last_name, user_uuid):
+def update_user_last_name_function(connection_postgres, cursor, user_last_name, user_uuid):
   """Returns: Updates the data in user database"""
   try:
     cursor.execute("UPDATE login_information_table SET last_name=%s WHERE uuid=%s", [user_last_name, user_uuid])

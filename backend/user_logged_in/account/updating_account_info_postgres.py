@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, session, redirect, request
+from flask import render_template, Blueprint, session, redirect, request, url_for
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 from backend.utils.sanitize_user_inputs.sanitize_email_input_create_account import sanitize_email_input_create_account_function
 from backend.utils.sanitize_user_inputs.sanitize_name_input_create_account import sanitize_name_input_create_account_function

@@ -1,6 +1,15 @@
 {% extends "templates_user_logged_in/loggedin_blueprint_page.html" %}
 {% block title %}
   <title>About</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CGVQW85840"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-CGVQW85840');
+  </script>
 {% endblock %}
 {% block content %}
 <div class="page_guidelines top_of_page">

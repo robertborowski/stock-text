@@ -4,6 +4,16 @@
   <script src="https://kit.fontawesome.com/f23f12952c.js" crossorigin="anonymous"></script>
   <!-- Load additional css files for this page -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_user_logged_in/account_specific_page/style_main_delete_account.css') }}?v={{ css_cache_busting_variable_to_html }}">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CGVQW85840"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-CGVQW85840');
+  </script>
 {% endblock %}
 {% block content %}
 <div class = "background">

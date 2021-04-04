@@ -11,7 +11,7 @@ def get_company_short_name_function(input_symbol):
     print('yfinance cannot find company short name')
 
   try:
-    company_short_name_without_spaces = ticker.info['shortName'].replace(" ", "_")
+    company_short_name_without_spaces = ticker.info['shortName'].replace(" ", "%20")
     try:
       company_short_name_without_spaces = company_short_name_without_spaces.replace("(", "")
       try:

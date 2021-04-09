@@ -77,6 +77,11 @@ input:focus {
   margin-top: 20px;
 }
 
+.create_account_password p, .create_account_phone_number p {
+  font-size: 10px;
+  text-align: center;
+}
+
 /* --------------------------------- FORM CONTAINER - Smaller Screen */
 @media (max-width: 1000px) {
   .behind_form_background {

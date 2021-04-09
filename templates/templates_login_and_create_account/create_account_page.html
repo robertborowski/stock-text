@@ -77,14 +77,15 @@
         </div>
         <div class = "create_account_first_name">
           <label for="user_first_name"><b>First Name</b></label>
-          <input type="text" class="input_type_login_and_create_account" placeholder="Enter First Name" name="user_first_name" pattern="[A-Za-z]{2,20}" required>
+          <input type="text" class="input_type_login_and_create_account" placeholder="Enter First Name" name="user_first_name" pattern="[A-Za-z]{1,20}" required>
         </div>
         <div class = "create_account_last_name">
           <label for="user_last_name"><b>Last Name</b></label>
-          <input type="text" class="input_type_login_and_create_account" placeholder="Enter Last Name" name="user_last_name" pattern="[A-Za-z]{2,20}" required>
+          <input type="text" class="input_type_login_and_create_account" placeholder="Enter Last Name" name="user_last_name" pattern="[A-Za-z]{1,20}" required>
         </div>
         <div class = "create_account_phone_number">
-          <label for="phone_number"><b>Phone Number (U.S./Canada Only)</b></label>
+          <label for="phone_number"><b>Phone Number</b></label>
+          <p>(U.S./Canada Only)</p>
           <input type="tel" class="input_type_login_and_create_account" id="phone_number" name="phone_number" pattern="[0-9]{10}" placeholder="Format: 1234567890" required>
         </div>
         <div class = "create_account_email">
@@ -93,6 +94,7 @@
         </div>
         <div class = "create_account_password">
           <label for="psw"><b>Password</b></label>
+          <p>Format: 8-20 chars, at least 1 [uppercase, lowercase, number, special]</p>
           <input type="password" class="input_type_login_and_create_account" placeholder="Enter Password" name="psw" pattern="(?=^.{8,20}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Minimum 8 charactes, Maximum 20 characters: Uppercase, Lowercase, Number, Special" required>
         </div>
         <div class = "create_account_button">

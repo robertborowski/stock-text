@@ -1,0 +1,89 @@
+{% extends "templates_user_logged_in/loggedin_blueprint_page.html" %}
+{% block title %}
+  <title>SymbolNews</title>
+  <!-- load jQuery/ajax from Google CDN servers  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+  
+  <!-- Load DataTables.net CDN css and js -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/b-1.6.5/sl-1.3.1/datatables.min.css"/>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/b-1.6.5/sl-1.3.1/datatables.min.js"></script>
+  
+  <!-- Load the function call to display as table -->
+  <script src="/static/javascript/user_logged_in/dashboard/stock_track_list_table.js" type="text/javascript" ></script>
+  <script src="/static/javascript/user_logged_in/dashboard/get_table_rows_selected.js" type="text/javascript" ></script>
+  <script src="/static/javascript/user_logged_in/dashboard/check_before_submit.js" type="text/javascript" ></script>
+  <script src="/static/javascript/user_logged_in/dashboard/modal_verify.js" type="text/javascript" ></script>
+  
+  <!-- Load custom DataTable CSS -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_user_logged_in/style_data_tables.css') }}">
+  
+  <!-- Load additional css files for this page -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_user_logged_in/dashboard_specific_page/style_main_dashboard.css') }}?v={{ css_cache_busting_variable_to_html }}">
+{% endblock %}
+
+{% block content %} 
+<div class = "background">
+</div>
+<form action="{{ url_for('upload_symbol_percent_change_input.upload_symbol_percent_change_input_function') }}" method="post" class="input_symbol_and_percent_change_form" onsubmit="return checkBeforeSubmit()">
+  <div class = "subheader">
+    <p><strong>Add Symbols to Tracker</strong></p>
+  </div>
+  <div class = "add_to_list_symbol">
+    <label for="track_symbol"><b>Track Symbol</b></label>
+    <input type="text" class="input_symbol_and_percent_change" placeholder="TSLA" name="track_symbol" required>
+  </div>
+  <div class = "add_to_list_threshold">
+    <label for="track_percent_change"><b>Track Min % Change (Abs +-)</b></label>
+    <input type="text" class="input_symbol_and_percent_change" value=7 name="track_percent_change" pattern="[0-9.]{1,4}" min="7" required>
+  </div>
+  <div class = "add_to_list_button">
+    <!-- =================== START ============================ -->
+    <button type="submit" id="myBtn">Submit</button>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+      </div>
+    </div>
+    <!-- =================== END ============================ -->
+  </div>
+  <div class="error_message_track_symbol">
+    <p>{{ output_message_from_python_to_html }}</p>
+  </div>
+  <div class = "resend_confirmation_links">
+    <p>{{ display_output_message_email_to_html }}</p>
+    <a href="{{ url_for('resend_email_confirm_link.resend_email_confirm_link_function') }}"><p>{{ resend_email_confirm_link_to_html }}</p></a>
+    <p>{{ display_output_message_phone_number_to_html }}</p>
+    <a href="{{ url_for('resend_phone_confirm_link.resend_phone_confirm_link_function') }}"><p>{{ resend_phone_number_confirm_link_to_html }}</p></a>
+  </div>
+</form>
+
+<div class="page_bottom">
+  <div class="subheader">
+    <p><strong>My Symbol Tracking List</strong></p>
+  </div>
+  <div id="symbol_tracking_list_section">
+    <table id="table_user_stock_list" class="compact row-border hover">
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Min % Change</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in symbol_tracking_list_from_python_to_html %}
+          <tr> 
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }} %</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="div_button_delete">
+    <button type="submit" class="button_delete_selection" onclick="getSelectedDataFunction();" method="post">Delete Selected</button>
+  </div>
+</div>
+{% endblock %}

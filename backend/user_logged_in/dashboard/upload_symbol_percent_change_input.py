@@ -73,12 +73,14 @@ def upload_symbol_percent_change_input_function():
           output_message_job_upload = insert_jobs_queues_table_function(connection_postgres, cursor, job_queue_name, user_symbol_from_html_form_sanitized)
         except:
           pass
-        return redirect("https://symbolnews.com/dashboard", code=301)
+        return redirect("/dashboard", code=301)
+        #return redirect("https://symbolnews.com/dashboard", code=301)
       
       # If user is already tracking this symbol
       else:
         session['output_message_dashboard_page_session'] = error_message_check_if_exist
-        return redirect("https://symbolnews.com/dashboard", code=301)
+        return redirect("/dashboard", code=301)
+        #return redirect("https://symbolnews.com/dashboard", code=301)
 
   # If no session info found
   else:

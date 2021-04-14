@@ -12,6 +12,7 @@
   <script src="/static/javascript/user_logged_in/dashboard/stock_track_list_table.js" type="text/javascript" ></script>
   <script src="/static/javascript/user_logged_in/dashboard/get_table_rows_selected.js" type="text/javascript" ></script>
   <script src="/static/javascript/user_logged_in/dashboard/check_before_submit.js" type="text/javascript" ></script>
+  <script src="/static/javascript/user_logged_in/dashboard/if_not_verified_element.js" type="text/javascript" ></script>
   
   <!-- Load custom DataTable CSS -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_user_logged_in/style_data_tables.css') }}">
@@ -32,24 +33,35 @@
     <input type="text" class="input_symbol_and_percent_change" placeholder="TSLA" name="track_symbol" required>
   </div>
   <div class = "add_to_list_threshold">
-    <label for="track_percent_change"><b>Track Min % Change (Abs +-)</b></label>
+    <label for="track_percent_change"><b>News Alert Min % Change (Abs +-)</b></label>
     <input type="text" class="input_symbol_and_percent_change" value=7 name="track_percent_change" pattern="[0-9.]{1,4}" min="7" required>
   </div>
   <div class = "add_to_list_button">
-    <button type="submit" class="button_symbol_and_percent_change">Submit</button>
+    <button type="submit" id="myBtn">Submit</button>
   </div>
   <div class="error_message_track_symbol">
     <p>{{ output_message_from_python_to_html }}</p>
   </div>
-  <div class = "resend_confirmation_links">
-    <p>{{ display_output_message_email_to_html }}</p>
-    <a href="{{ url_for('resend_email_confirm_link.resend_email_confirm_link_function') }}"><p>{{ resend_email_confirm_link_to_html }}</p></a>
-    <p>{{ display_output_message_phone_number_to_html }}</p>
-    <a href="{{ url_for('resend_phone_confirm_link.resend_phone_confirm_link_function') }}"><p>{{ resend_phone_number_confirm_link_to_html }}</p></a>
-  </div>
 </form>
-
 <div class="page_bottom">
+  <!-- The Modal -->
+  <button id="modalBtn" class="button">VERIFY ACCOUNT!</button>
+  <div id="simpleModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="closeBtn">&times;</span>
+        <h2>Account Not Yet Verified</h2>
+      </div>
+      <div class="modal-body">
+        <p>You will not receive SymbolNews notifications until <strong><em><ins>both</ins></em></strong> your <strong><em><ins>email</ins></em></strong> and <strong><em><ins>phone number</ins></em></strong> are verified!</p>
+        <a href="{{ url_for('resend_email_confirm_link.resend_email_confirm_link_function') }}"><p id = "email_verify_check">{{ resend_email_confirm_link_to_html }}</p></a>
+        <a href="{{ url_for('resend_phone_confirm_link.resend_phone_confirm_link_function') }}"><p id = "phone_verify_check">{{ resend_phone_number_confirm_link_to_html }}</p></a>
+      </div>
+      <div class="modal-footer">
+        <h3>SymbolNews</h3>
+      </div>
+    </div>
+  </div>
   <div class="subheader">
     <p><strong>My Symbol Tracking List</strong></p>
   </div>
@@ -75,4 +87,5 @@
     <button type="submit" class="button_delete_selection" onclick="getSelectedDataFunction();" method="post">Delete Selected</button>
   </div>
 </div>
+<script src="/static/javascript/user_logged_in/dashboard/modal_verify.js" type="text/javascript" ></script>
 {% endblock %}

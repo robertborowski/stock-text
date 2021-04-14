@@ -57,8 +57,6 @@ def dashboard_page_render_function():
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                             symbol_tracking_list_from_python_to_html = symbol_tracking_list,
                             output_message_from_python_to_html = session['output_message_dashboard_page_session'],
-                            display_output_message_email_to_html = display_output_message_email,
-                            display_output_message_phone_number_to_html = display_output_message_phone_number,
                             resend_email_confirm_link_to_html = resend_email_confirm_link,
                             resend_phone_number_confirm_link_to_html = resend_phone_number_confirm_link,
                             css_cache_busting_variable_to_html = css_cache_busting_variable)
@@ -75,8 +73,6 @@ def dashboard_page_render_function():
                             user_last_name_from_session_to_html = session['logged_in_user_last_name'],
                             user_phone_number_from_session_to_html = session['logged_in_user_phone_number'],
                             symbol_tracking_list_from_python_to_html = symbol_tracking_list,
-                            display_output_message_email_to_html = display_output_message_email,
-                            display_output_message_phone_number_to_html = display_output_message_phone_number,
                             resend_email_confirm_link_to_html = resend_email_confirm_link,
                             resend_phone_number_confirm_link_to_html = resend_phone_number_confirm_link,
                             css_cache_busting_variable_to_html = css_cache_busting_variable)

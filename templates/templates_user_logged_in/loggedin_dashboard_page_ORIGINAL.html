@@ -12,7 +12,6 @@
   <script src="/static/javascript/user_logged_in/dashboard/stock_track_list_table.js" type="text/javascript" ></script>
   <script src="/static/javascript/user_logged_in/dashboard/get_table_rows_selected.js" type="text/javascript" ></script>
   <script src="/static/javascript/user_logged_in/dashboard/check_before_submit.js" type="text/javascript" ></script>
-  <script src="/static/javascript/user_logged_in/dashboard/modal_verify.js" type="text/javascript" ></script>
   
   <!-- Load custom DataTable CSS -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_user_logged_in/style_data_tables.css') }}">
@@ -37,17 +36,7 @@
     <input type="text" class="input_symbol_and_percent_change" value=7 name="track_percent_change" pattern="[0-9.]{1,4}" min="7" required>
   </div>
   <div class = "add_to_list_button">
-    <!-- =================== START ============================ -->
-    <button type="submit" id="myBtn">Submit</button>
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
-      </div>
-    </div>
-    <!-- =================== END ============================ -->
+    <button type="submit" class="button_symbol_and_percent_change">Submit</button>
   </div>
   <div class="error_message_track_symbol">
     <p>{{ output_message_from_python_to_html }}</p>

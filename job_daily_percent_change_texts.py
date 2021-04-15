@@ -18,7 +18,6 @@ def pull_and_analyze_all_data_function():
 
   # First check the day
   num_day_of_week = datetime.datetime.today().weekday()
-  print(num_day_of_week)
   if num_day_of_week == 5 or num_day_of_week == 6:
     print('It is the weekend. The market is closed so texts do not go out on weekend!')
     return True

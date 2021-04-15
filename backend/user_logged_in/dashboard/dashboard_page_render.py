@@ -40,9 +40,9 @@ def dashboard_page_render_function():
 
     # Add the resend link text words to html file if they are not blank/None
     if display_output_message_email != None and len(display_output_message_email) >= 2:
-      resend_email_confirm_link = 'Resend email confirmation link.'
+      resend_email_confirm_link = 'Click to resend email confirmation link.'
     if display_output_message_phone_number != None and len(display_output_message_phone_number) >= 2:
-      resend_phone_number_confirm_link = 'Resend phone number confirmation link.'
+      resend_phone_number_confirm_link = 'Click to resend phone number confirmation link.'
 
     # Close the connnection to database
     close_connection_cursor_to_database_function(connection_postgres, cursor)

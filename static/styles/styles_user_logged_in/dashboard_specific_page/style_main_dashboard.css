@@ -93,21 +93,21 @@ input:focus {
   padding-bottom: 30px;
   margin-top: 20px;
   width: 30%;
-  background-color: rgb(255, 242, 0);
-  color: rgb(255, 0, 0);
   font-size: 15px;
-  border: red 2px solid;
   outline: none;
   display: block;
   margin-right: auto;
   margin-left: auto;
   border-radius: 10px;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
 }
 
 #modalBtn:hover {
   cursor: pointer;
   transition-duration: 0.4s;
-  border: 4px red solid;
+  border: 2px red solid;
 }
 
 .modal {

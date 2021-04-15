@@ -53,7 +53,8 @@
         <h2>Account Not Yet Verified</h2>
       </div>
       <div class="modal-body">
-        <p>You will not receive SymbolNews notifications until <strong><em><ins>both</ins></em></strong> your <strong><em><ins>email</ins></em></strong> and <strong><em><ins>phone number</ins></em></strong> are verified!</p>
+        <p>You will not receive SymbolNews notifications until <strong><em><ins>both</ins></em></strong> your <strong><em><ins>email</ins></em></strong> and <strong><em><ins>phone number</ins></em></strong> are verified.</p>
+        <p class = "email_folders">(For email verification please make sure to check your promotions/spam folders)</p>
         <a href="{{ url_for('resend_email_confirm_link.resend_email_confirm_link_function') }}"><p id = "email_verify_check">{{ resend_email_confirm_link_to_html }}</p></a>
         <a href="{{ url_for('resend_phone_confirm_link.resend_phone_confirm_link_function') }}"><p id = "phone_verify_check">{{ resend_phone_number_confirm_link_to_html }}</p></a>
       </div>

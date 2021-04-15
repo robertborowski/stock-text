@@ -145,6 +145,11 @@ input:focus {
   padding: 10px 20px;
 }
 
+.email_folders {
+  color: rgb(54, 54, 54);
+  font-size: 12px;
+}
+
 .modal-body p {
   margin-top: 10px;
   margin-bottom: 10px;

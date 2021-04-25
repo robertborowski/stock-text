@@ -1,0 +1,40 @@
+.part-d-description {
+  text-align: center;
+  padding-top: 8rem;
+  padding-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: bolder;
+}
+
+.part-d-simple-text {
+  /* border: 1px solid red; */
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+}
+
+img.part-d-simple-text-example {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+/* Smaller devices */
+@media (max-width: 1100px) {
+  .part-d-description {
+    padding-top: 5rem;
+    width: 90%;
+    margin: auto;
+  }
+
+  .part-d-simple-text {
+    /* border: 1px solid red; */
+    margin-left: 0%;
+    margin-right: 0%;
+    height: 100%;
+  }
+
+}

@@ -1,0 +1,62 @@
+.part-c-description {
+  text-align: center;
+  padding-top: 8rem;
+  padding-bottom: 3rem;
+  font-size: 1.3rem;
+  font-weight: bolder;
+}
+
+.part-c-chart-percent-change-examples {
+  /* border: 1px solid red; */
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 100%;
+}
+
+.part-c-left-chart-percent-change-example {
+  grid-area: 1 / 1 / span 1 / span 1;
+  margin-right: 25px;
+}
+
+.part-c-right-chart-percent-change-example {
+  grid-area: 1 / 2 / span 1 / span 1;
+  margin-left: 25px;
+}
+
+img.part-c-left-chart-example, img.part-c-right-chart-example {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+/* Smaller devices */
+@media (max-width: 1100px) {
+  .part-c-description {
+    width: 90%;
+    margin: auto;
+  }
+
+  .part-c-chart-percent-change-examples {
+    /* border: 1px solid red; */
+    margin-left: 3%;
+    margin-right: 3%;
+    height: 500px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .part-c-left-chart-percent-change-example {
+    grid-area: 1 / 1 / span 1 / span 1;
+    margin-right: 0px;
+  }
+
+  .part-c-right-chart-percent-change-example {
+    grid-area: 2 / 1 / span 1 / span 1;
+    margin-left: 0px;
+  }
+
+}

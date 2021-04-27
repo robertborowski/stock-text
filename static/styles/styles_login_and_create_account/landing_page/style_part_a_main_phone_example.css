@@ -45,6 +45,7 @@ main {
 .part-a-right-side-background-image-inner {
   grid-area: 2 / 1 / span 1 / span 1;
   background-color: green;
+  border-radius: 25px;
 }
 
 .part-a-right-side-example-text {
@@ -96,5 +97,9 @@ main {
 
   .part-a-left-side-big-title {
     font-size: 1.25rem;
+  }
+
+  .part-a-right-side-background-image-inner {
+    border-radius: 0px;
   }
 }

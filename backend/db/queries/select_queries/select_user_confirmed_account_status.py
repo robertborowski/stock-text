@@ -7,7 +7,7 @@ def select_user_confirmed_account_status_function(connection_postgres, cursor, u
   """
   try:
     # Run SQL
-    cursor.execute("SELECT confirmed_email,confirmed_phone_number FROM login_information_table WHERE uuid=%s", [uuid_to_search])
+    cursor.execute("SELECT confirmed_email,confirmed_phone_number FROM login_information_table WHERE uuid=%s AND delete_account_requested=FALSE", [uuid_to_search])
     
     # Results from SQL query
     result_row = cursor.fetchone()

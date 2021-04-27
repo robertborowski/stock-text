@@ -9,7 +9,7 @@ def select_all_user_phone_numbers_function(connection_postgres, cursor):
   try:
     # Add this to connection in order to pull data from postgres as a dictionary instead of tuple
     cursor = connection_postgres.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cursor.execute("SELECT uuid, phone_number FROM login_information_table WHERE confirmed_email=TRUE AND confirmed_phone_number=TRUE")
+    cursor.execute("SELECT uuid,phone_number FROM login_information_table WHERE confirmed_email=TRUE AND confirmed_phone_number=TRUE AND delete_account_requested=FALSE")
     result_arr = cursor.fetchall()
     result_arr_dicts = []
     for row in result_arr:

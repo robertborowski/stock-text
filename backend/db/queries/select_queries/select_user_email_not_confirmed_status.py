@@ -5,7 +5,7 @@ def select_user_email_not_confirmed_status_function(connection_postgres, cursor)
   """Returns: Pulls all users who do not have confirmed emails"""
   try:
     # Run SQL
-    cursor.execute("SELECT email,first_name, uuid FROM login_information_table WHERE confirmed_email=FALSE")
+    cursor.execute("SELECT email,first_name, uuid FROM login_information_table WHERE confirmed_email=FALSE AND delete_account_requested=FALSE")
     
     # Results from SQL query
     result_arr = cursor.fetchall()

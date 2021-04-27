@@ -7,7 +7,7 @@ def update_to_confirmed_phone_number_function(connection_postgres, cursor, user_
   Returns: Updates the data in user database
   """
   try:
-    cursor.execute("UPDATE login_information_table SET confirmed_phone_number=TRUE WHERE phone_number=%s", [user_phone_number])
+    cursor.execute("UPDATE login_information_table SET confirmed_phone_number=TRUE WHERE phone_number=%s AND delete_account_requested=FALSE", [user_phone_number])
     connection_postgres.commit()
     print('Updated Information')
     #return 'Updated Information'

@@ -5,7 +5,7 @@ from psycopg2 import Error
 def update_user_email_function(connection_postgres, cursor, email_input, user_uuid):
   """Returns: Updates the data in user database"""
   try:
-    cursor.execute("UPDATE login_information_table SET email=%s WHERE uuid=%s", [email_input, user_uuid])
+    cursor.execute("UPDATE login_information_table SET email=%s WHERE uuid=%s AND delete_account_requested=FALSE", [email_input, user_uuid])
     connection_postgres.commit()
     print('Updated Information')
     #return 'Updated Information'

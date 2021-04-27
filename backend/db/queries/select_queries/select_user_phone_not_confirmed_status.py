@@ -5,7 +5,7 @@ def select_user_phone_not_confirmed_status_function(connection_postgres, cursor)
   """Returns: Pulls all users who do not have confirmed phone numbers"""
   try:
     # Run SQL
-    cursor.execute("SELECT phone_number,first_name,uuid FROM login_information_table WHERE confirmed_phone_number=FALSE")
+    cursor.execute("SELECT phone_number,first_name,uuid FROM login_information_table WHERE confirmed_phone_number=FALSE AND delete_account_requested=FALSE")
     
     # Results from SQL query
     result_arr = cursor.fetchall()

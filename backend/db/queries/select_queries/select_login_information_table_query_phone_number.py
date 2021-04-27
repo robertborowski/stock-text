@@ -4,7 +4,7 @@ from psycopg2 import Error
 def select_login_information_table_query_phone_number_function(connection_postgres, cursor, phone_to_search):
   """Returns: if the email account already exists in database or not"""
   try:
-    cursor.execute("SELECT phone_number FROM login_information_table WHERE phone_number=%s", [phone_to_search])
+    cursor.execute("SELECT phone_number FROM login_information_table WHERE phone_number=%s AND delete_account_requested=FALSE", [phone_to_search])
     result_row = cursor.fetchone()
     result_email = result_row[0]
     if result_email == phone_to_search:

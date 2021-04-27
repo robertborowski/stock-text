@@ -5,7 +5,7 @@ from psycopg2 import Error
 def update_user_phone_function(connection_postgres, cursor, phone_input, user_uuid):
   """Returns: Updates the data in user database"""
   try:
-    cursor.execute("UPDATE login_information_table SET phone_number=%s WHERE uuid=%s", [phone_input, user_uuid])
+    cursor.execute("UPDATE login_information_table SET phone_number=%s WHERE uuid=%s AND delete_account_requested=FALSE", [phone_input, user_uuid])
     connection_postgres.commit()
     print('Updated Information')
     #return 'Updated Information'

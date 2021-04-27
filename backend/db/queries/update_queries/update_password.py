@@ -7,7 +7,7 @@ def update_password_function(connection_postgres, cursor, user_password, user_em
   Returns: Updates the data in user database
   """
   try:
-    cursor.execute("UPDATE login_information_table SET password=%s WHERE email=%s", [user_password, user_email])
+    cursor.execute("UPDATE login_information_table SET password=%s WHERE email=%s AND delete_account_requested=FALSE", [user_password, user_email])
     connection_postgres.commit()
     print('Updated Information')
     #return 'Updated Information'

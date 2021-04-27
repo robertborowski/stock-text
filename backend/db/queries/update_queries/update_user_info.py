@@ -7,7 +7,7 @@ def update_user_info_function(connection_postgres, cursor, user_email, user_firs
   Returns: Updates the data in user database
   """
   try:
-    cursor.execute("UPDATE login_information_table SET email=%s, first_name=%s, last_name=%s, phone_number=%s WHERE uuid=%s", [user_email, user_first_name, user_last_name, user_phone_number, user_uuid])
+    cursor.execute("UPDATE login_information_table SET email=%s, first_name=%s, last_name=%s, phone_number=%s WHERE uuid=%s AND delete_account_requested=FALSE", [user_email, user_first_name, user_last_name, user_phone_number, user_uuid])
     connection_postgres.commit()
     print('Updated Information')
     #return 'Updated Information'

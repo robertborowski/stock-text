@@ -2,11 +2,10 @@ from flask import render_template, Blueprint, session, redirect, request
 from backend.utils.set_session_variables_to_none_logout import set_session_variables_to_none_logout_function
 from backend.db.connect_to_database import connect_to_postgres_function
 from backend.db.close_connection_cursor_to_database import close_connection_cursor_to_database_function
-from backend.db.queries.delete_queries.delete_all_user_symbol_tracking_table_data import delete_all_user_symbol_tracking_table_data_function
-from backend.db.queries.delete_queries.delete_all_user_login_information_table_data import delete_all_user_login_information_table_data_function
 from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_function
 from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
 from backend.utils.constant_run.twilio.send_email_account_deleted import send_email_account_deleted_function
+from backend.db.queries.update_queries.update_user_delete_account_requested_true import update_user_delete_account_requested_true_function
 
 delete_account_perm = Blueprint("delete_account_perm", __name__, static_folder="static", template_folder="templates")
 
@@ -29,10 +28,8 @@ def delete_account_perm_function():
     # Connect to database
     connection_postgres, cursor = connect_to_postgres_function()
     
-    # Delete all symbols for user
-    delete_all_user_symbol_tracking_table_data_function(connection_postgres, cursor, session['logged_in_user_uuid'])
-    # Delete all user login information
-    delete_all_user_login_information_table_data_function(connection_postgres, cursor, session['logged_in_user_uuid'])
+    # Mark account for deletion
+    update_user_delete_account_requested_true_function(connection_postgres, cursor, session['logged_in_user_uuid'])
 
     # Send account deleted email
     send_email_account_deleted_function(user_email, user_first_name)

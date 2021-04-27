@@ -2,6 +2,12 @@ main {
   padding-top: 150px;
 }
 
+.output-message {
+  text-align: center;
+  font-size: 15px;
+  color: red;
+}
+
 .part-a-subtitle-example-texts {
   /* border: red 2px solid; */
   display: grid;

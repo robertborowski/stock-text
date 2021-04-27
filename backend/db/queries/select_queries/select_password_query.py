@@ -7,7 +7,7 @@ def select_password_query_function(connection_postgres, cursor, email_to_search,
   Returns: login attempt if user name password match
   """
   try:
-    cursor.execute("SELECT password, first_name, last_name, phone_number, uuid FROM login_information_table WHERE email=%s", [email_to_search])
+    cursor.execute("SELECT password, first_name, last_name, phone_number, uuid FROM login_information_table WHERE email=%s AND delete_account_requested == FALSE", [email_to_search])
     # Results as array
     result_row = cursor.fetchone()
     # Results assigned

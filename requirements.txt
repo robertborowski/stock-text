@@ -8,3 +8,4 @@ pyshorteners
 twilio
 sendgrid
 itsdangerous
+boto3

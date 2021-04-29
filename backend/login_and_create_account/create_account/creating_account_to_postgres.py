@@ -23,6 +23,7 @@ from backend.utils.constant_run.twilio.send_phone_number_confirm_account import 
 from backend.utils.app_before_setup.check_if_url_www import check_if_url_www_function
 from backend.utils.app_before_setup.remove_www_from_domain import remove_www_from_domain_function
 from backend.db.queries.delete_queries.delete_all_user_login_information_table_data import delete_all_user_login_information_table_data_function
+from backend.utils.constant_run.twilio.send_admin_email_account_created import send_admin_email_account_created_function
 
 creating_account_to_postgres = Blueprint("creating_account_to_postgres", __name__, static_folder="static", template_folder="templates")
 
@@ -110,6 +111,12 @@ def creating_account_to_postgres_function():
       session['output_message_create_account_page_session'] = 'Unable to create account with the phone number provided!'
       return redirect("https://symbolnews.com/create_account", code=301)
     
+    # Send admin email that account was created
+    try:
+      send_admin_email_account_created_function(user_first_name_from_html_form_sanitized, user_last_name_from_html_form_sanitized, user_email_from_html_form_sanitized, user_create_account_timestamp)
+    except:
+      print('did not send email to admin')
+
     # Flask set session variables and redirect to dashboard
     session['logged_in_user_uuid'] = user_uuid_create_account
     session['logged_in_user_email'] = user_email_from_html_form_sanitized

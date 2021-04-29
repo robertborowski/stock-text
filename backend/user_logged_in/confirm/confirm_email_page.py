@@ -12,7 +12,7 @@ def confirm_email_page_function(confirm_email_token_url_variable):
   serializer_instance = URLSafeTimedSerializer(os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_EMAIL'))
   string_to_salt = os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_EMAIL').encode("utf-8")
   try:
-    user_email_confirming = serializer_instance.loads(confirm_email_token_url_variable, salt=string_to_salt, max_age=3600)
+    user_email_confirming = serializer_instance.loads(confirm_email_token_url_variable, salt=string_to_salt, max_age=86400)
     connection_postgres, cursor = connect_to_postgres_function()
     update_to_confirmed_email_function(connection_postgres, cursor, user_email_confirming)
     close_connection_cursor_to_database_function(connection_postgres, cursor)

@@ -12,7 +12,7 @@ def confirm_phone_number_page_function(confirm_phone_number_token_url_variable):
   serializer_instance = URLSafeTimedSerializer(os.environ.get('URL_SAFE_SERIALIZER_SECRET_KEY_PHONE'))
   string_to_salt = os.environ.get('URL_SAFE_SERIALIZER_SECRET_SALT_PHONE').encode("utf-8")
   try:
-    user_phone_number_confirming = serializer_instance.loads(confirm_phone_number_token_url_variable, salt=string_to_salt, max_age=3600)
+    user_phone_number_confirming = serializer_instance.loads(confirm_phone_number_token_url_variable, salt=string_to_salt, max_age=86400)
     connection_postgres, cursor = connect_to_postgres_function()
     update_to_confirmed_phone_number_function(connection_postgres, cursor, user_phone_number_confirming)
     close_connection_cursor_to_database_function(connection_postgres, cursor)

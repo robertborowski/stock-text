@@ -72,4 +72,6 @@ def pull_and_analyze_all_data_function():
 
 # Run the main program
 if __name__ == "__main__":
+  print('= = = = = = = = = = = = = = = = = JOB START (pull_and_analyze_all_data_function) = = = = = = = = = = = = = = = = =')
   pull_and_analyze_all_data_function()
+  print('= = = = = = = = = = = = = = = = = JOB END (pull_and_analyze_all_data_function) = = = = = = = = = = = = = = = = =')

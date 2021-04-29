@@ -59,4 +59,6 @@ def jobs_queues_function():
 
 # Run the main program
 if __name__ == "__main__":
+  print('= = = = = = = = = = = = = = = = = JOB START (jobs_queues_function) = = = = = = = = = = = = = = = = =')
   jobs_queues_function()
+  print('= = = = = = = = = = = = = = = = = JOB END (jobs_queues_function) = = = = = = = = = = = = = = = = =')

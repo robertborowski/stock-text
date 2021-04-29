@@ -17,4 +17,6 @@ def run():
 
 # Run the main program
 if __name__ == "__main__":
+  print('= = = = = = = = = = = = = = = = = JOB START (run) = = = = = = = = = = = = = = = = =')
   run()
+  print('= = = = = = = = = = = = = = = = = JOB END (run) = = = = = = = = = = = = = = = = =')

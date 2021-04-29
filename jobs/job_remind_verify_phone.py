@@ -51,4 +51,6 @@ def job_remind_verify_phone_function():
 
 # Run the main program
 if __name__ == "__main__":
+  print('= = = = = = = = = = = = = = = = = JOB START (job_remind_verify_phone_function) = = = = = = = = = = = = = = = = =')
   job_remind_verify_phone_function()
+  print('= = = = = = = = = = = = = = = = = JOB END (job_remind_verify_phone_function) = = = = = = = = = = = = = = = = =')

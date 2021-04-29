@@ -19,7 +19,7 @@ def send_sms_function(connection_postgres, cursor, input_arr):
   auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
   client = Client(account_sid, auth_token)
 
-  message = client.messages.create(body=symbol + ' ' + percent_change + ' from previous close.\nLatest news articles for ' + symbol + ' here:\n' + google_link + '\n\nSymbolNews',
+  message = client.messages.create(body=symbol + ' ' + percent_change + ' from previous close.\nLatest news articles for ' + symbol + ' here:\n' + google_link + '\n\nAdd symbols to news watchlist:\nSymbolNews.com',
                                   from_=os.environ.get('TWILIO_PHONE_NUMBER'),
                                   to=phone_number)
   print(message.sid)

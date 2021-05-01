@@ -39,6 +39,7 @@ def job_end_of_week_email_recap_function():
     for k, v in texts_this_week_dict.items():
       # Arr of symbols for user this week
       symbols_sent_arr = []
+      master_string = ''
       # Loop through each person email
       for symbol, v2 in v['symbols'].items():
         # Add symbol to arr

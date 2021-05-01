@@ -36,7 +36,7 @@ def resend_phone_confirm_link_function():
     send_phone_number_confirm_account_function(user_phone_number, user_first_name, confirm_phone_number_token)
 
     # Set output message for dashboard
-    session['output_message_dashboard_page_session'] = "Phone confirm link resent! Search for word SymbolNews."
+    session['output_message_dashboard_page_session'] = "Phone confirm link resent!"
 
     # Redirect to page
     return redirect("https://symbolnews.com/dashboard", code=301)

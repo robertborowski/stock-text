@@ -4,10 +4,10 @@ from sendgrid.helpers.mail import Mail, Email, To, Content
 
 def send_email_new_password_function(to_email_address_outgoing, confirm_email_token):
   sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
-  from_email = Email("noreply@symbolnews.com")  # Change to your verified sender
+  from_email = Email(email = "robert@symbolnews.com", name = "Symbol News")  # Change to your verified sender
   to_email = To(to_email_address_outgoing)  # Change to your recipient
-  subject = "SymbolNews - Forgot Password - New Password Link"
-  content = Content("text/plain", "Hi " + to_email_address_outgoing + ",\n\n" + "Password reset link:\n" + "https://symbolnews.com/set_new_password/" + confirm_email_token + "\n\nBest,\nRob from SymbolNews")
+  subject = "Symbol News - Forgot Password - New Password Link"
+  content = Content("text/plain", "Hi " + to_email_address_outgoing + ",\n\n" + "Password reset link:\n" + "https://symbolnews.com/set_new_password/" + confirm_email_token + "\n\nBest,\nRob from Symbol News")
   mail = Mail(from_email, to_email, subject, content)
 
   # Get a JSON-ready representation of the Mail object

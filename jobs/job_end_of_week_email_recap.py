@@ -24,23 +24,33 @@ def job_end_of_week_email_recap_function():
     # Pull just the symbols for users who received texts this week
     texts_this_week_symbols_only_arr = select_users_received_text_this_week_symbols_only_function(connection_postgres, cursor)
 
-    # Close connection
-    close_connection_cursor_to_database_function(connection_postgres, cursor)
-
     # Tuen the symbols only array into dictionary with weekly thresholds per symbol
     texts_this_week_symbols_only_dict = convert_arr_dict_symbols_this_week_with_change_function(texts_this_week_symbols_only_arr)
 
     # Turn the user data into a nested dict that included weekly thresholds per symbol
     texts_this_week_dict = convert_arr_dict_texts_this_week_function(texts_this_week_arr, texts_this_week_symbols_only_dict)
 
+    # Get today's date for the email send subject
+    todays_date = datetime.datetime.today()
+    email_send_date = todays_date.strftime("%m/%d/%y")
+
     # Loop through nested dictionary and email each person the highlights for the week
     master_string = ''
     for k, v in texts_this_week_dict.items():
+      # Arr of symbols for user this week
+      symbols_sent_arr = []
+      # Loop through each person email
       for symbol, v2 in v['symbols'].items():
+        # Add symbol to arr
+        symbols_sent_arr.append(symbol)
+        # Create a long string for the body of the email
         string = symbol + ", " + v2['total_percent_change_this_week'] + ", " + v2['google_news_link'] + " \n\n\n"
         master_string += string
-
-      send_email_weekly_recap_sym_thresholds_function(k, v, master_string)
+      # Send the email to the person
+      send_email_weekly_recap_sym_thresholds_function(k, v, master_string, email_send_date, connection_postgres, cursor, symbols_sent_arr)
+    
+    # Close connection
+    close_connection_cursor_to_database_function(connection_postgres, cursor)
   
 
 # Run the main program

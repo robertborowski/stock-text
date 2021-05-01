@@ -6,6 +6,7 @@ def convert_arr_dict_texts_this_week_function(input_arr, sym_week_threshold_dict
     # If email not in dict
     if i[1] not in dict:
       dict[i[1]] = {}
+      dict[i[1]]['uuid'] = i[5]
       dict[i[1]]['first_name'] = i[2]
       dict[i[1]]['total_texts_this_week'] = 1
       dict[i[1]]['symbols'] = {}
